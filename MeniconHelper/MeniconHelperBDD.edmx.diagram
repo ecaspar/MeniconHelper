@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="937d7debd465495e8f30269510a6fa80" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="MeniconHelperModel.area" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.document" Width="1.5" PointX="9.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.engine" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.incident" Width="1.5" PointX="7.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.person" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.role" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.statut" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.task" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.type_incident" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="MeniconHelperModel.incident_area3_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.document_incident_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.incident_engine2_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.incident_person_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.incident_statut1_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.incident_type_incident0_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.task_incident_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.person_role_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.supervise" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
