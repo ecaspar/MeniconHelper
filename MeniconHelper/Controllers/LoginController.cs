@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -21,14 +23,27 @@ namespace MeniconHelper.Controllers
             
             foreach(person p in meniconHelperEntities.person)
             {
-                if (p.username == loginPerson.username && p.password_default == loginPerson.password_default)
+                if (p.username == loginPerson.username)
                 {
-                    return View();
+                    if(GenerateMD5(loginPerson.password_default) == p.password_default)
+                    {
+                        return View();
+                    }
+                    else
+                    { 
+                        ViewBag.Message = "Incorrect password";
+
+                        return View("Index");
+                    }    
                 }
             }
+            ViewBag.Message = "Incorrect username";
 
-            return RedirectToAction("Index");
-
+            return View("Index");
+        }
+        public string GenerateMD5(string rawString)
+        {
+            return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(rawString)).Select(s => s.ToString("x2")));
         }
     }
 }
