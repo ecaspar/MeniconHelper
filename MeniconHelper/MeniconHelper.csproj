@@ -152,16 +152,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\LocalizationAttribute .cs" />
-    <Compile Include="App_LocalResources\GlobalRes.en.Designer.cs">
+    <Content Include="App_Code\GlobalHelper.cs" />
+    <Compile Include="App_LocalResources\GlobalRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalRes.en.resx</DependentUpon>
+      <DependentUpon>GlobalRes.resx</DependentUpon>
+      <LastGenOutput>GlobalRes.en-US.Designer.Designer.cs</LastGenOutput>
     </Compile>
-    <Compile Include="App_LocalResources\GlobalRes.fr.Designer.cs">
+    <Compile Include="App_LocalResources\GlobalRes.fr-FR.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GlobalRes.fr.resx</DependentUpon>
+      <DependentUpon>GlobalRes.fr-FR.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -265,15 +266,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_LocalResources\GlobalRes.en.resx">
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GlobalRes.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>GlobalRes.fr-FR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="App_LocalResources\GlobalRes.fr.resx">
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GlobalRes.fr.Designer.cs</LastGenOutput>
+      <LastGenOutput>GlobalRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

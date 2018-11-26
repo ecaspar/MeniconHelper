@@ -15,9 +15,20 @@ namespace MeniconHelper.Controllers
         }
 
         [HttpPost]
-        public ActionResult Verify(person person)
+        public ActionResult Verify(person loginPerson)
         {
-            return View();
+            MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities();
+            
+            foreach(person p in meniconHelperEntities.person)
+            {
+                if (p.username == loginPerson.username && p.password_default == loginPerson.password_default)
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Index");
+
         }
     }
 }
