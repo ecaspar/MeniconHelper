@@ -1,0 +1,42 @@
+﻿* {
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    height: 50px;
+    background: #cecece;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header img {
+    max-width: 100%;
+}
+
+header ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+header h1 {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+table {
+    width: 100%;
+}
+
+table thead th {
+    background: #353535;
+    color: #ffffff;
+}

@@ -8,11 +8,38 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Home</title>
+    @Styles.Render("~/Content/Styles/home.css")
 </head>
 <body>
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div><h1>Menicon Helper</h1></div>
+        <div class="menu">
+            <ul>
+                <li>Home</li>
+                <li>Mon compte</li>
+                <li>Déconnexion</li>
+            </ul>
+        </div>
+    </header>
     <div> 
-        @ViewBag.name
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Photo</th>
+                    <th>Description</th>
+                    <th>Cause</th>
+                    <th>Superviseur</th>
+                    <th>Date</th>
+                    <th>Déclarant</th>
+                    <th>Type</th>
+                    <th>Ligne</th>
+                    <th>Machine</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </body>
 </html>
