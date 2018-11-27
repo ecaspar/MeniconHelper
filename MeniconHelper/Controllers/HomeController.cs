@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MeniconHelper.Models;
 
 namespace MeniconHelper.Controllers
@@ -41,8 +37,8 @@ namespace MeniconHelper.Controllers
                 listIncident.Type = i.statut.label;
                 listIncident.Area = i.area.name;
                 listIncident.Engine = i.engine.name;
+
             }
-            meniconHelperEntities.Dispose();
             return listIncident;
         }
     }
