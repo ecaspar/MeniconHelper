@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    @Styles.Render("~/Content/Styles/ticket.css")
+    <script>
+        $(document).ready(function () {
+            $(window).on('resize', function () {
+                var windowHeight = $(window).height() - $('header').height();
+                var informationsHeight = windowHeight * 0.70;
+                var commentsHeight = windowHeight * 0.30 - 1;
+                $('.ticket').css({ 'height': windowHeight });
+                $('.informations').css({ 'height': informationsHeight });
+                $('.comments').css({ 'height': commentsHeight });
+            }).resize();
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div><h1>Menicon Helper</h1></div>
+        <div class="menu">
+            <ul>
+                <li>Home</li>
+                <li>Mes tickets</li>
+                <li>Mon compte</li>
+                <li>Déconnexion</li>
+            </ul>
+        </div>
+    </header>
+    <div class="ticket">
+        <div class="left-panel">
+            <div class="informations">
+
+            </div>
+            <div class="comments">
+
+            </div>
+        </div>
+        <div class="right-panel">
+            <h2>@GlobalRes.history</h2>
+        </div>
+    </div>
+</body>
+</html>

@@ -79,6 +79,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à History.
+        /// </summary>
+        public static string history {
+            get {
+                return ResourceManager.GetString("history", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à You entered an incorrect password.
         /// </summary>
         public static string incorrectPassword {

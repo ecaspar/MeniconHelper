@@ -1,0 +1,46 @@
+﻿* {
+    font-family: sans-serif;
+    font-weight: lighter;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    height: 50px;
+    background: #cecece;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+header img {
+    max-width: 100%;
+}
+
+header ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+header h1 {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.ticket {
+    width: 100%;
+}
+
+.left-panel {
+    width: 70%;
+    border-right: 1px solid black;
+}
+
+.comments {
+    border-top: 1px solid black;
+}

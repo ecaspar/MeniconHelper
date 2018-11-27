@@ -123,6 +123,9 @@
   <data name="error" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="history" xml:space="preserve">
+    <value>Historique</value>
+  </data>
   <data name="incorrectPassword" xml:space="preserve">
     <value>Votre mot de passe est incorrect.</value>
   </data>
