@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using MeniconHelper.App_LocalResources;
 
 namespace MeniconHelper.Controllers
 {
@@ -31,13 +32,14 @@ namespace MeniconHelper.Controllers
                     }
                     else
                     { 
-                        ViewBag.Message = "Incorrect password";
+                        ViewBag.Message = GlobalRes.incorrectPassword;
 
                         return View("Index");
                     }    
                 }
             }
-            ViewBag.Message = "Incorrect username";
+            
+            ViewBag.Message = GlobalRes.incorrectUsername;
 
             return View("Index");
         }

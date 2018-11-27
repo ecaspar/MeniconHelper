@@ -70,6 +70,24 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Incorrect password.
+        /// </summary>
+        public static string incorrectPassword {
+            get {
+                return ResourceManager.GetString("incorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Incorrect username.
+        /// </summary>
+        public static string incorrectUsername {
+            get {
+                return ResourceManager.GetString("incorrectUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Password.
         /// </summary>
         public static string password {
