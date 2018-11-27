@@ -120,11 +120,14 @@
   <data name="connection" xml:space="preserve">
     <value>Connection</value>
   </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="incorrectPassword" xml:space="preserve">
-    <value>Incorrect password</value>
+    <value>You entered an incorrect password</value>
   </data>
   <data name="incorrectUsername" xml:space="preserve">
-    <value>Incorrect username</value>
+    <value>You entered an incorrect username</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>

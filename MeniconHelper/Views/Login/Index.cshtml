@@ -20,9 +20,7 @@
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="http://tristanedwards.me/u/SweetAlert//lib/sweet-alert.css">
-
-    <script src="http://tristanedwards.me/u/SweetAlert//lib/sweet-alert.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -69,42 +67,9 @@
         </div>
     }
 
-    <div class="wrapper panel panel-primary">
-        <div class="panel-heading">Sweet Alert Demonstration</div>
-        <div class="panel-body">
-            <p>It makes sweet alerts!</p>
-            <p>Default icons got a little goofy, but whatever....</p>
-            <p>
-                <button id="test-1" class="btn btn-info btn-lg">Basic</button>
-                <button id="test-2" class="btn btn-success btn-lg">Success</button>
-                <button id="test-3" class="btn btn-primary btn-lg">Fancy</button>
-                <button id="test-4" class="btn btn-danger btn-lg">Error</button>
-            <p><a class="btn btn-link" href="http://www.mitechdev.com" target="blank">http://www.mitechdev.com</a>
-
-            <p>&nbsp;</p>
-        </div>
-    </div>
-
     @if (ViewBag.Message != null)
     {
         <script type="text/javascript">
-             document.querySelector('#test-1').onclick = function () {
-        swal("Here's a message!");
-    };
-    document.querySelector('#test-2').onclick = function () {
-        swal("Good job!", "You clicked the button!", "success")
-    };
-    document.querySelector('button#test-3').onclick = function () {
-        swal({
-            title: "Are you sure?",
-            text: "Your will not be able to recover this imaginary file!",
-            type: "warning",
-            showCancelButton: true, confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!"
-        });
-    };
-    document.querySelector('button#test-4').onclick = function () {
-        swal("Oops...", "Something went wrong!", "error");
-    }; 
             alert("@Html.Raw(ViewBag.Message)");
         </script>
     }

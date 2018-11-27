@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SweetAlert.Controllers
+namespace MeniconHelper.Controllers
 {
-    public class SweetController : Controller
+    public class HomeController : Controller
     {
-        // GET: Sweet
-        public ActionResult Alert()
+        // GET: Home
+        public ActionResult Index()
         {
             return View();
         }

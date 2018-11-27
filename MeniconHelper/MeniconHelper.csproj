@@ -170,8 +170,8 @@
     <Compile Include="area.cs">
       <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="document.cs">
       <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
     </Compile>
@@ -218,10 +218,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\login.css" />
-    <Content Include="Content\sweetalert\bootstrap-sweetalert.png" />
-    <Content Include="Content\sweetalert\docs.css" />
-    <Content Include="Content\sweetalert\sweet-alert.css" />
-    <Content Include="Content\sweetalert\thumbs-up.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -234,11 +230,6 @@
     <Content Include="MeniconHelperBDD.edmx.diagram">
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\sweetalert\sweet-alert.less" />
-    <Content Include="Content\sweetalert\sweet-alert-combine.less" />
-    <Content Include="Content\sweetalert\sweet-alert-animations.less" />
-    <Content Include="Content\bootstrap\variables.less" />
-    <Content Include="Content\bootstrap\mixins.less" />
     <None Include="Properties\PublishProfiles\MeniconHelper - Web Deploy.pubxml" />
     <Content Include="MeniconHelperBDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -261,14 +252,13 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

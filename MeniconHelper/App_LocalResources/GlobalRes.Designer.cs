@@ -70,7 +70,16 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect password.
+        ///   Recherche une chaîne localisée semblable à Error.
+        /// </summary>
+        public static string error {
+            get {
+                return ResourceManager.GetString("error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You entered an incorrect password.
         /// </summary>
         public static string incorrectPassword {
             get {
@@ -79,7 +88,7 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Incorrect username.
+        ///   Recherche une chaîne localisée semblable à You entered an incorrect username.
         /// </summary>
         public static string incorrectUsername {
             get {
