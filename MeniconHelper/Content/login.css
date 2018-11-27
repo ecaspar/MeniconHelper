@@ -16,3 +16,11 @@
     border-radius: 0;
     width: 100%;
 }
+
+.wrapper {
+    height: 300px;
+    width: 500px;
+    margin-top: 150px;
+    margin-left: 350px;
+    text-align: center;
+}
