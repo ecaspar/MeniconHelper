@@ -11,7 +11,14 @@ namespace MeniconHelper.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            if(Session["User"]!=null)
+            {
+                person p = (person)(Session["User"]);
+                ViewBag.name = p.first_name;
+                return View();
+            }
+            else
+                return View("../Login/Index");
         }
     }
 }

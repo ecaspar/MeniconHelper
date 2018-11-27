@@ -29,8 +29,8 @@ namespace MeniconHelper.Controllers
                     if(GenerateMD5(loginPerson.password_default) == p.password_default)
                     {
                         Session["User"] = p;
-
-                        return View();
+                        
+                        return RedirectToAction("../Home/Index");
                     }
                     else
                     { 
