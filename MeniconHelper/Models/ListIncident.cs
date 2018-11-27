@@ -16,5 +16,6 @@ namespace MeniconHelper.Models
         public string Type { get; set; }
         public string Area { get; set; }
         public string Engine { get; set; }
+
     }
 }
