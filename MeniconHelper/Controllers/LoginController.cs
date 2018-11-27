@@ -32,19 +32,16 @@ namespace MeniconHelper.Controllers
                     if(GenerateMD5(loginPerson.password_default) == p.password_default)
                     {
                         Session["User"] = p;
-                        meniconHelperEntities.Dispose();
                         return RedirectToAction("../Home/Index");
                     }
                     else
                     { 
                         ViewBag.Message = GlobalRes.incorrectPassword;
-                        meniconHelperEntities.Dispose();
                         return View("Index");
                     }    
                 }
             }
             ViewBag.Message = GlobalRes.incorrectUsername;
-            meniconHelperEntities.Dispose();
             return View("Index");
         }
         public string GenerateMD5(string rawString)

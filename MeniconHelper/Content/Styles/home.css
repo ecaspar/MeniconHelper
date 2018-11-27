@@ -40,3 +40,16 @@ table thead th {
     background: #353535;
     color: #ffffff;
 }
+
+table tbody td {
+    text-align: center;
+    width: 10%;
+}
+
+table tbody td.description {
+    width: 20%;
+}
+
+table tbody td img {
+    max-width: 100%;
+}
