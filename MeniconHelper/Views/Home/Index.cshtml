@@ -9,12 +9,27 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     @Styles.Render("~/Content/Styles/home.css")
+    <script>
+        $(document).ready(function () {
+            $('.button-menu img').click(function () {
+                if ($('.menu').css('display') == 'none') {
+                    $('.menu').css({ 'display': 'flex' });
+                    $('.button-menu img').css({ 'transform': 'rotate(-90deg)' });
+                } else {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
         <div class="logo"><img src="../Content/Images/Logo.png" /></div>
-        <div><h1>Menicon Helper</h1></div>
+        <div class="title"><h1>Menicon Helper</h1></div>
+        <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
                 <li>Home</li>

@@ -222,6 +222,7 @@
     <Content Include="Content\Images\Incident2.jpg" />
     <Content Include="Content\Images\Incident.jpg" />
     <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\Menu.png" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />
     <Content Include="Content\Styles\ticket.css" />

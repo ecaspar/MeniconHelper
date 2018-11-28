@@ -29,7 +29,6 @@ namespace MeniconHelper.Controllers
         {
             List<ListIncident> list = new List<ListIncident>();
 
-
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
                 foreach (incident i in meniconHelperEntities.incident)
