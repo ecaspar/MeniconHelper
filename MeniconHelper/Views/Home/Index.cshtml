@@ -1,4 +1,4 @@
-﻿
+﻿@model MeniconHelper.incident
 @{
     Layout = null;
 }
@@ -58,7 +58,13 @@
                 @foreach (var x in ViewBag.Incident)
                 {
                 <tr>
-                    <td class="reference">@x.Reference</td>
+                    <td class="reference">
+                    @using (Html.BeginForm("Select", "Home", FormMethod.Post))
+                    {
+                        
+                        <button type="submit">@x.Reference</button>
+                    }
+                    </td>
                     <td class="image"><img src="@x.Image" /></td>
                     <td class="description">@x.Description</td>
                     <td class="supervisor">@x.Supervisor</td>

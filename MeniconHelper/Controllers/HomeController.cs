@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MeniconHelper.Models;
 
 namespace MeniconHelper.Controllers
@@ -22,6 +24,11 @@ namespace MeniconHelper.Controllers
             else
                 return View("../Login/Index");
         }
+        [HttpPost]
+        public ActionResult Select(incident i)
+        {
+            return RedirectToAction("../Ticket/Index");
+        }
 
 
         public List<ListIncident> LoadIncident()
@@ -32,6 +39,7 @@ namespace MeniconHelper.Controllers
 
             foreach(incident i in meniconHelperEntities.incident)
             {
+
                 ListIncident listIncident = new ListIncident();
 
                 listIncident.Reference = i.incident_code;
@@ -44,12 +52,12 @@ namespace MeniconHelper.Controllers
                 listIncident.Area = i.area.name;
                 listIncident.Engine = i.engine.name;
 
-            }
-            return listIncident;
                 list.Add(listIncident);
+
             }
 
             return list;
+
         }
     }
 }
