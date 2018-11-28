@@ -43,10 +43,19 @@ namespace MeniconHelper.Controllers
                     List<string> images = new List<string>();
                     images.Add(i.document.First().name);
 
+                    List<person> listPerson = new List<person>();
+
+                    type_incident type = meniconHelperEntities.type_incident.Where(x=>x.id_type_anomaly==i.id_type_anomaly).First();
+                    foreach (var p in type.person)
+                    {
+                        listPerson.Add(p);
+                    }
+
+
                     listIncident.Reference = i.incident_code;
                     listIncident.Image = images;
                     listIncident.Description = i.description;
-                    listIncident.Supervisor = "?";
+                    listIncident.Supervisor = listPerson;
                     listIncident.Date = i.date_create;
                     listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
                     listIncident.Type = i.statut.label;
