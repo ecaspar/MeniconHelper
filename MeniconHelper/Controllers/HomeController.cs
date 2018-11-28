@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MeniconHelper.Models;
 
@@ -46,6 +44,8 @@ namespace MeniconHelper.Controllers
                 listIncident.Area = i.area.name;
                 listIncident.Engine = i.engine.name;
 
+            }
+            return listIncident;
                 list.Add(listIncident);
             }
 
