@@ -8,7 +8,7 @@ namespace MeniconHelper.Models
         public string Reference { get; set; }
         public List<string> Image { get; set; }
         public string Description { get; set; }
-        public string Supervisor { get; set; }
+        public List<person> Supervisor { get; set; }
         public DateTime Date { get; set; }
         public string Declarant { get; set; }
         public string Type { get; set; }
