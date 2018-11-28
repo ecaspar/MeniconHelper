@@ -10,6 +10,8 @@ namespace MeniconHelper.Controllers
     public class TicketController : Controller
     {
         // GET: Ticket
+
+
         public ActionResult Index()
         {
             if (Session["User"] != null)
