@@ -201,6 +201,7 @@
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ListIncident.cs" />
+    <Compile Include="Models\ListTask.cs" />
     <Compile Include="person.cs">
       <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
     </Compile>
@@ -223,6 +224,7 @@
     <Content Include="Content\Images\Incident.jpg" />
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Images\Menu.png" />
+    <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />
     <Content Include="Content\Styles\ticket.css" />

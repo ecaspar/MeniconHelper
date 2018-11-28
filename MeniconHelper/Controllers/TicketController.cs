@@ -20,6 +20,7 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
 
                 ViewBag.Ticket = LoadTicket();
+                ViewBag.Task = LoadTask();
 
                 return View();
             }
@@ -46,6 +47,34 @@ namespace MeniconHelper.Controllers
             }
 
             return listIncident;
+
+        }
+
+        public List<ListTask> LoadTask()
+        {
+
+            List<ListTask> list = new List<ListTask>();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                string reference = Request.QueryString["id"];
+
+                int idTicket = meniconHelperEntities.incident.First(x => x.incident_code == reference).id_anomaly;
+
+                foreach (task t in meniconHelperEntities.task.Where(x => x.id_anomaly == idTicket))
+                {
+                    ListTask listTask = new ListTask();
+
+                    listTask.Comment = t.comment;
+                    listTask.CreateDate = t.date_create;
+                    listTask.CloseDate = t.date_close;
+
+                    list.Add(listTask);
+                }
+
+            }
+
+            return list;
 
         }
     }

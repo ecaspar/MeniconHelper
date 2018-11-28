@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/ticket.css")
     <script>
         $(document).ready(function () {
@@ -53,7 +54,7 @@
     <div class="ticket">
         <div class="left-panel">
             <div class="informations">
-                <h2>TQUA1</h2>
+                <h2>@ViewBag.Ticket.Reference</h2>
                 <table border="1">
                     <thead>
                         <tr>
@@ -88,16 +89,14 @@
                 </table>
                 <img src="../Content/Images/Incident.jpg" />
             </div>
-            <div class="comments">
-                <h2>@GlobalRes.comments</h2>
-            </div>
         </div>
         <div class="right-panel">
-            <h2>@GlobalRes.history</h2>
+            <h2>@GlobalRes.comments</h2>
             <ul>
-                <li>Ajout du ticket</li>
-                <li>Modification du superviseur</li>
-                <li>Cloture du ticket</li>
+                @foreach (var x in ViewBag.Task)
+                {
+                    <li>@x.Comment</li>
+                }
             </ul>
         </div>
     </div>

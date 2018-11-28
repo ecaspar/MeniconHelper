@@ -14,6 +14,8 @@ namespace MeniconHelper
     
     public partial class task
     {
+        // internal IEnumerable<task> task;
+
         public int id_task { get; set; }
         public string comment { get; set; }
         public System.DateTime date_create { get; set; }
