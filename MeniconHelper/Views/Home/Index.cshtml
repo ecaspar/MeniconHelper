@@ -59,11 +59,7 @@
                 {
                 <tr>
                     <td class="reference">
-                    @using (Html.BeginForm("Select", "Home", FormMethod.Post))
-                    {
-                        
-                        <button type="submit">@x.Reference</button>
-                    }
+                        <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
                     </td>
                     <td class="image"><img src="@x.Image" /></td>
                     <td class="description">@x.Description</td>

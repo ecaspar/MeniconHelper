@@ -24,12 +24,11 @@ namespace MeniconHelper.Controllers
             else
                 return View("../Login/Index");
         }
-        [HttpPost]
-        public ActionResult Select(incident i)
-        {
-            return RedirectToAction("../Ticket/Index");
-        }
 
+        public ActionResult Select(string reference)
+        {
+            return RedirectToAction("../Ticket/Index", new { id = reference });
+        }
 
         public List<ListIncident> LoadIncident()
         {
