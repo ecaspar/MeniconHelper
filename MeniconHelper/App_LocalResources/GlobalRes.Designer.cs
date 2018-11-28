@@ -61,6 +61,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Comments.
+        /// </summary>
+        public static string comments {
+            get {
+                return ResourceManager.GetString("comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connection.
         /// </summary>
         public static string connection {

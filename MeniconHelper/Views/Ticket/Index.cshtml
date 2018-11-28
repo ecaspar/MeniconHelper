@@ -20,6 +20,8 @@
                 $('.ticket').css({ 'height': windowHeight });
                 $('.informations').css({ 'height': informationsHeight });
                 $('.comments').css({ 'height': commentsHeight });
+                $('.left-panel').css({ 'border-right': '1px solid black' });
+                $('.comments').css({ 'border-top': '1px solid black' });
             }).resize();
         });
     </script>
@@ -40,10 +42,43 @@
     <div class="ticket">
         <div class="left-panel">
             <div class="informations">
-
+                <h2>TQUA1</h2>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Superviseur</th>
+                            <th>Déclarant</th>
+                            <th>Type d'incident</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>L. Hebinger</td>
+                            <td>E. Caspar</td>
+                            <td>Qualité</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Ligne</th>
+                            <th>Machine</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ligne 1</td>
+                            <td>Emballage</td>
+                            <td>@DateTime.Now.ToShortDateString()</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img src="../Content/Images/Incident.jpg" />
             </div>
             <div class="comments">
-
+                <h2>@GlobalRes.comments</h2>
             </div>
         </div>
         <div class="right-panel">
