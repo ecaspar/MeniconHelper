@@ -1,0 +1,58 @@
+﻿.ticket {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-panel {
+    width: 70%;
+}
+
+.right-panel {
+    width: 30%;
+}
+
+.right-panel ul {
+    padding: 0;
+}
+
+.right-panel ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    height: 50px;
+    border-top: 1px solid black;
+}
+
+table {
+    margin: 0 auto;
+    margin-top: 32px;
+    width: 60%;
+}
+
+.informations img {
+    margin-top: 45px;
+    max-width: 150px;
+    max-height: 200px;
+}
+
+thead tr th {
+    background: #4f4f4f;
+    color: #FFFFFF;
+    width: 33.33%;
+    height: 40px;
+}
+
+tbody tr td {
+    height: 50px;
+}
+
+.informations, .right-panel {
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    padding-top: 20px;
+}

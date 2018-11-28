@@ -1,0 +1,11 @@
+﻿.login-form {
+    margin-top: 25%;
+}
+
+.LoginForm {
+    background: #F7F7F7;
+    outline: 1px solid #28a745;
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+}
