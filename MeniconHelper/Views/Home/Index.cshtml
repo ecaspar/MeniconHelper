@@ -61,7 +61,7 @@
                     <td class="reference">
                         <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
                     </td>
-                    <td class="image"><img src="@x.Image" /></td>
+                    <td class="image"><img src="@x.Image[0]" /></td>
                     <td class="description">@x.Description</td>
                     <td class="supervisor">@x.Supervisor</td>
                     <td class="date">@x.Date</td>

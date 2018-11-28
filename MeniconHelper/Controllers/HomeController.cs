@@ -40,8 +40,11 @@ namespace MeniconHelper.Controllers
                 {
                     ListIncident listIncident = new ListIncident();
 
+                    List<string> images = new List<string>();
+                    images.Add(i.document.First().name);
+
                     listIncident.Reference = i.incident_code;
-                    listIncident.Image = meniconHelperEntities.document.First(x=>x.id_anomaly == i.id_anomaly).name;
+                    listIncident.Image = images;
                     listIncident.Description = i.description;
                     listIncident.Supervisor = "?";
                     listIncident.Date = i.date_create;
