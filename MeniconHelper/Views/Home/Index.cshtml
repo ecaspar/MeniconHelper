@@ -18,6 +18,7 @@
         <div class="menu">
             <ul>
                 <li>Home</li>
+                <li>Mes tickets</li>
                 <li>Mon compte</li>
                 <li>Déconnexion</li>
             </ul>
@@ -30,7 +31,6 @@
                     <th>Référence</th>
                     <th>Photo</th>
                     <th>Description</th>
-                    <th>Cause</th>
                     <th>Superviseur</th>
                     <th>Date</th>
                     <th>Déclarant</th>
@@ -39,6 +39,22 @@
                     <th>Machine</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach (var x in ViewBag.Incident)
+                {
+                <tr>
+                    <td class="reference">@x.Reference</td>
+                    <td class="image"><img src="@x.Image" /></td>
+                    <td class="description">@x.Description</td>
+                    <td class="supervisor">@x.Supervisor</td>
+                    <td class="date">@x.Date</td>
+                    <td class="declarant">@x.Declarant</td>
+                    <td class="type">@x.Type</td>
+                    <td class="area">@x.Area</td>
+                    <td class="engine">@x.Engine</td>
+                </tr>
+                }
+            </tbody>
         </table>
     </div>
 </body>

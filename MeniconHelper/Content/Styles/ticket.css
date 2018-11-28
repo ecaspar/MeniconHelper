@@ -32,24 +32,35 @@ header h1 {
     font-weight: lighter;
 }
 
-table {
+.ticket {
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-table thead th {
-    background: #353535;
-    color: #ffffff;
+.left-panel {
+    width: 70%;
 }
 
-table tbody td {
+.right-panel {
+    width: 30%;
+}
+
+table {
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.informations img {
+    max-width: 150px;
+    max-height: 200px;
+}
+
+.informations, .comments, .right-panel {
     text-align: center;
-    width: 10%;
 }
 
-table tbody td.description {
-    width: 20%;
-}
-
-table tbody td img {
-    max-width: 100%;
+h2 {
+    margin: 0;
+    padding-top: 20px;
 }
