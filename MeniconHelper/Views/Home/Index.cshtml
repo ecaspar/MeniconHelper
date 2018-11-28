@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../Content/Javascript/jquery.tablesorter.js"></script>
     @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/home.css")
     <script>
@@ -23,6 +24,7 @@
                     $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
                 }
             });
+            $('.tablesorter').tablesorter();
         });
     </script>
 </head>
@@ -33,7 +35,7 @@
         <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
-                <li>Home</li>
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
                 <li>Mes tickets</li>
                 <li>Mon compte</li>
                 <li>Déconnexion</li>
@@ -41,7 +43,7 @@
         </div>
     </header>
     <div> 
-        <table border="1">
+        <table border="1" class="tablesorter">
             <thead>
                 <tr>
                     <th>Référence</th>
