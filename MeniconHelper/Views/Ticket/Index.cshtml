@@ -64,9 +64,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>L. Hebinger</td>
-                            <td>E. Caspar</td>
-                            <td>Qualité</td>
+                            <td>@ViewBag.Ticket.Supervisor</td>
+                            <td>@ViewBag.Ticket.Declarant</td>
+                            <td>@ViewBag.Ticket.Type</td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,9 +80,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Ligne 1</td>
-                            <td>Emballage</td>
-                            <td>@DateTime.Now.ToShortDateString()</td>
+                            <td>@ViewBag.Ticket.Area</td>
+                            <td>@ViewBag.Ticket.Engine</td>
+                            <td>@ViewBag.Ticket.Date</td>
                         </tr>
                     </tbody>
                 </table>
