@@ -35,15 +35,24 @@ namespace MeniconHelper.Controllers
 
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                listIncident.Reference = Request.QueryString["id"];
-                listIncident.Image = meniconHelperEntities.document.First(x => x.id_anomaly == (meniconHelperEntities.incident.FirstOrDefault(y => y.incident_code == listIncident.Reference).id_anomaly)).name;
-                listIncident.Description = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).description;
+                string code = Request.QueryString["id"];
+                incident i = meniconHelperEntities.incident.Where(x=>x.incident_code == code).First();
+                List<string> images = new List<string>();
+
+                foreach(var image in i.document)
+                {
+                    images.Add(image.name);
+                }
+
+                listIncident.Reference = i.incident_code;
+                listIncident.Image = images;
+                listIncident.Description = i.description;
                 listIncident.Supervisor = "?";
-                listIncident.Date = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).date_create;
-                listIncident.Declarant = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).person.first_name + " " + meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).person.last_name; ;
-                listIncident.Type = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).statut.label;
-                listIncident.Area = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).area.name;
-                listIncident.Engine = meniconHelperEntities.incident.First(x => x.incident_code == listIncident.Reference).engine.name;
+                listIncident.Date = i.date_create;
+                listIncident.Declarant = i.person.first_name + " " +i.person.last_name; ;
+                listIncident.Type = i.statut.label;
+                listIncident.Area = i.area.name;
+                listIncident.Engine = i.engine.name;
             }
 
             return listIncident;

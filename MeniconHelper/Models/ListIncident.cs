@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MeniconHelper.Models
 {
     public class ListIncident
     {
         public string Reference { get; set; }
-        public string Image { get; set; }
+        public List<string> Image { get; set; }
         public string Description { get; set; }
         public string Supervisor { get; set; }
         public DateTime Date { get; set; }
