@@ -28,7 +28,7 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
-        public ListIncident LoadTicket()
+        private ListIncident LoadTicket()
         {
 
             ListIncident listIncident = new ListIncident();
@@ -65,7 +65,7 @@ namespace MeniconHelper.Controllers
 
         }
 
-        public List<ListTask> LoadTask()
+        private List<ListTask> LoadTask()
         {
 
             List<ListTask> list = new List<ListTask>();
