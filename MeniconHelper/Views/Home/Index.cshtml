@@ -26,6 +26,12 @@
                     $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
                 }
             });
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
             $('.tablesorter').tablesorter({
                 widgets: ["zebra", "filter"],
                 ignoreCase: false
@@ -40,14 +46,14 @@
         <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
-                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-                <li>Mes tickets</li>
-                <li>Mon compte</li>
-                <li>Déconnexion</li>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
+                <a href="@Url.Action("MyTickets", "Ticket")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
+                <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                <a href=""><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
             </ul>
         </div>
     </header>
-    <div> 
+    <div class="table-container"> 
         <table border="1" class="tablesorter">
             <thead>
                 <tr>

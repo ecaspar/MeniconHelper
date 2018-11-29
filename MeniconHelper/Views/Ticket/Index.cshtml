@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/ticket.css")
     <script>
@@ -23,7 +24,12 @@
                 $('.left-panel').css({ 'border-right': '1px solid black' });
                 $('.comments').css({ 'border-top': '1px solid black' });
             }).resize();
-
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
             $('.button-menu img').click(function () {
                 if ($('.menu').css('display') == 'none') {
                     $('.menu').css({ 'display': 'flex' });
@@ -43,10 +49,10 @@
         <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
-                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
-                <li>Mes tickets</li>
-                <li>Mon compte</li>
-                <li>Déconnexion</li>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
+                <a href="@Url.Action("MyTickets", "Ticket")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
+                <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                <a href=""><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
             </ul>
         </div>
     </header>
