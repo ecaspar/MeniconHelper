@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MeniconHelper.task
+
+@{
     Layout = null;
 }
 
@@ -96,17 +98,33 @@
             </div>
         </div>
         <div class="right-panel">
-            <h2>@GlobalRes.comments</h2>
-            <ul>
-                @foreach (var x in ViewBag.Task)
+            <div class="list-comment">
+                <h2>@GlobalRes.comments</h2>
+                <ul>
+                    @foreach (var x in ViewBag.Task)
+                    {
+                        <li>
+                            @x.CreateDate @x.PersonComment.last_name
+                            <br />
+                            @x.Comment
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="add-comment">
+                @using (Html.BeginForm("AddComment", "Ticket", FormMethod.Post))
                 {
-                <li>
-                    @x.CreateDate @x.PersonComment.last_name
-                    <br />
-                    @x.Comment
-                </li>
+
+                    <div class="form-group">
+
+                        @Html.TextBoxFor(t => t.comment, new { Class = "CommentForm", placeholder = "Commentaire" })
+
+                    </div>
+
+                    <button type="submit" class="btn btn-outline-success btn-block">Ajouter un commentaire</button>
+
                 }
-            </ul>
+            </div>
         </div>
     </div>
 </body>

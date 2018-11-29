@@ -11,7 +11,6 @@ namespace MeniconHelper.Controllers
     {
         // GET: Ticket
 
-
         public ActionResult Index()
         {
             if (Session["User"] != null)
@@ -22,6 +21,22 @@ namespace MeniconHelper.Controllers
                 ViewBag.Ticket = LoadTicket();
                 ViewBag.Task = LoadTask();
 
+                string code = Request.QueryString["id"];
+                Session["Ticket"] = code;
+                using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+                {
+                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+                    List<int> listPerson = new List<int>();
+                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                    foreach (var per in type.person)
+                    {
+                        listPerson.Add(per.id_person);
+                    }
+                    if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
+                        ViewBag.Authorize = true;
+                    else
+                        ViewBag.Authorize = false;
+                }
                 return View();
             }
             else
@@ -29,11 +44,11 @@ namespace MeniconHelper.Controllers
         }
 
         [HttpPost]
-        public  ActionResult AddComment(task newTask)
+        public ActionResult AddComment(task newTask)
         {
 
-            string code = Request.QueryString["id"];
-            List<person> listPerson = new List<person>();
+            string code = Session["Ticket"].ToString();
+            List<int> listPerson = new List<int>();
             person p = (person)(Session["User"]);
 
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -43,17 +58,23 @@ namespace MeniconHelper.Controllers
                 type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                 foreach (var per in type.person)
                 {
-                    listPerson.Add(per);
+                    listPerson.Add(per.id_person);
                 }
-                if (i.person == p || listPerson.Contains(p))
+                if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
                 {
                     newTask.date_create = DateTime.Now;
-                    newTask.person = p;
-                    newTask.incident = i;
+                    newTask.id_person = p.id_person;
+                    newTask.id_anomaly = i.id_anomaly;
                     newTask.date_close = DateTime.Now;
+
+                    meniconHelperEntities.task.Add(newTask);
+
+                    meniconHelperEntities.SaveChanges();
                 }
             }
-            return View();
+
+            return RedirectToAction("../Ticket/Index", new { id = code });
+
         }
 
         private ListIncident LoadTicket()
