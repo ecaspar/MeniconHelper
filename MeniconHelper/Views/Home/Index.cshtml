@@ -33,9 +33,9 @@
                 }
             });
             $('.tablesorter').tablesorter({
-                widgets: ["zebra", "filter"],
+                widgets: ["zebra", "filter", "pager"],
                 ignoreCase: false
-            });
+            }).tablesorterPager({ container: $('#pager') });
         });
     </script>
 </head>
@@ -87,6 +87,22 @@
                 }
             </tbody>
         </table>
+        <div id="pager" class="pager">
+            <form>
+                <i class="fas fa-fast-backward first"></i>
+                <i class="fas fa-step-backward prev"></i>
+                <span class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows"></span>
+                <i class="fas fa-step-forward next"></i>
+                <i class="fas fa-fast-forward last"></i>
+                <select class="pagesize">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="all">All Rows</option>
+                </select>
+            </form>
+        </div>
     </div>
 </body>
 </html>

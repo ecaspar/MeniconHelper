@@ -33,3 +33,7 @@ input.tablesorter-filter {
     padding-left: 23px;
     background: url("../Images/Magnifier.png") no-repeat scroll;
 }
+
+.pager {
+    text-align: center;
+}

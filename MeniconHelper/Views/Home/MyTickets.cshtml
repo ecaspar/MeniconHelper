@@ -1,4 +1,4 @@
-﻿
+﻿@model MeniconHelper.incident
 @{
     Layout = null;
 }
@@ -9,9 +9,121 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>MyTickets</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../Content/Javascript/jquery.tablesorter.js"></script>
+    <script src="../Content/Javascript/jquery.tablesorter.widgets.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @Styles.Render("~/Content/Styles/header.css")
+    @Styles.Render("~/Content/Styles/home.css")
+    <script>
+        $(document).ready(function () {
+            $('.button-menu img').click(function () {
+                if ($('.menu').css('display') == 'none') {
+                    $('.menu').css({ 'display': 'flex' });
+                    $('.button-menu img').css({ 'transform': 'rotate(-90deg)' });
+                } else {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $('.tablesorter').tablesorter({
+                widgets: ["zebra", "filter"],
+                ignoreCase: false
+            });
+        });
+    </script>
 </head>
 <body>
-    <div> 
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div class="title"><h1>Menicon Helper</h1></div>
+        <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
+        <div class="menu">
+            <ul>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
+                <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                <a href=""><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
+            </ul>
+        </div>
+    </header>
+    <div>
+        <div class="table-container table-supervise">
+            <table border="1" class="tablesorter">
+                <thead>
+                    <tr>
+                        <th class="filter-match">Référence</th>
+                        <th class="filter-false">Photo</th>
+                        <th class="filter-false">Description</th>
+                        <th class="filter-match">Superviseur</th>
+                        <th class="filter-false">Date</th>
+                        <th class="filter-match">Déclarant</th>
+                        <th class="filter-false">Type</th>
+                        <th class="filter-match">Ligne</th>
+                        <th class="filter-match">Machine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in ViewBag.SuperviseIncident)
+                    {
+                        <tr>
+                            <td class="reference">
+                                <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
+                            </td>
+                            <td class="image"><img src="@x.Image[0]" /></td>
+                            <td class="description">@x.Description</td>
+                            <td class="supervisor">@x.Supervisor[0].first_name</td>
+                            <td class="date">@x.Date</td>
+                            <td class="declarant">@x.Declarant</td>
+                            <td class="type">@x.Type</td>
+                            <td class="area">@x.Area</td>
+                            <td class="engine">@x.Engine</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container table-declarant">
+            <table border="1" class="tablesorter">
+                <thead>
+                    <tr>
+                        <th class="filter-match">Référence</th>
+                        <th class="filter-false">Photo</th>
+                        <th class="filter-false">Description</th>
+                        <th class="filter-match">Superviseur</th>
+                        <th class="filter-false">Date</th>
+                        <th class="filter-match">Déclarant</th>
+                        <th class="filter-false">Type</th>
+                        <th class="filter-match">Ligne</th>
+                        <th class="filter-match">Machine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var x in ViewBag.DeclarantIncident)
+                    {
+                        <tr>
+                            <td class="reference">
+                                <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
+                            </td>
+                            <td class="image"><img src="@x.Image[0]" /></td>
+                            <td class="description">@x.Description</td>
+                            <td class="supervisor">@x.Supervisor[0].first_name</td>
+                            <td class="date">@x.Date</td>
+                            <td class="declarant">@x.Declarant</td>
+                            <td class="type">@x.Type</td>
+                            <td class="area">@x.Area</td>
+                            <td class="engine">@x.Engine</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

@@ -48,29 +48,35 @@ namespace MeniconHelper.Controllers
         {
 
             string code = Session["Ticket"].ToString();
-            List<int> listPerson = new List<int>();
-            person p = (person)(Session["User"]);
 
-            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            if (newTask.comment != null)
             {
-                incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
 
-                type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                foreach (var per in type.person)
+                List<int> listPerson = new List<int>();
+                person p = (person)(Session["User"]);
+
+                using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
                 {
-                    listPerson.Add(per.id_person);
-                }
-                if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
-                {
-                    newTask.date_create = DateTime.Now;
-                    newTask.id_person = p.id_person;
-                    newTask.id_anomaly = i.id_anomaly;
-                    newTask.date_close = DateTime.Now;
+                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
 
-                    meniconHelperEntities.task.Add(newTask);
+                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                    foreach (var per in type.person)
+                    {
+                        listPerson.Add(per.id_person);
+                    }
+                    if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
+                    {
+                        newTask.date_create = DateTime.Now;
+                        newTask.id_person = p.id_person;
+                        newTask.id_anomaly = i.id_anomaly;
+                        newTask.date_close = DateTime.Now;
 
-                    meniconHelperEntities.SaveChanges();
+                        meniconHelperEntities.task.Add(newTask);
+
+                        meniconHelperEntities.SaveChanges();
+                    }
                 }
+
             }
 
             return RedirectToAction("../Ticket/Index", new { id = code });
