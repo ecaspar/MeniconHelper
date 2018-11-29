@@ -14,14 +14,14 @@ namespace MeniconHelper
     
     public partial class task
     {
-        // internal IEnumerable<task> task;
-
         public int id_task { get; set; }
         public string comment { get; set; }
         public System.DateTime date_create { get; set; }
         public System.DateTime date_close { get; set; }
         public int id_anomaly { get; set; }
+        public Nullable<int> id_person { get; set; }
     
         public virtual incident incident { get; set; }
+        public virtual person person { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -95,7 +94,11 @@
             <ul>
                 @foreach (var x in ViewBag.Task)
                 {
-                    <li>@x.Comment</li>
+                <li>
+                    @x.CreateDate @x.PersonComment.last_name
+                    <br />
+                    @x.Comment
+                </li>
                 }
             </ul>
         </div>

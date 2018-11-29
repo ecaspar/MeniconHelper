@@ -83,7 +83,7 @@ namespace MeniconHelper.Controllers
                     listTask.Comment = t.comment;
                     listTask.CreateDate = t.date_create;
                     listTask.CloseDate = t.date_close;
-
+                    listTask.PersonComment = t.person;
                     list.Add(listTask);
                 }
 
