@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MeniconHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MeniconHelperModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="area">
           <Key>
             <PropertyRef Name="id_area" />
@@ -100,6 +100,7 @@
           <Property Name="date_create" Type="datetime" Nullable="false" />
           <Property Name="date_close" Type="datetime" Nullable="false" />
           <Property Name="id_anomaly" Type="int" Nullable="false" />
+          <Property Name="id_person" Type="int" />
         </EntityType>
         <EntityType Name="type_incident">
           <Key>
@@ -118,6 +119,18 @@
             </Principal>
             <Dependent Role="document">
               <PropertyRef Name="id_anomaly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__id_person__6E01572D">
+          <End Role="person" Type="Self.person" Multiplicity="0..1" />
+          <End Role="task" Type="Self.task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_person" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -244,6 +257,10 @@
             <End Role="incident" EntitySet="incident" />
             <End Role="document" EntitySet="document" />
           </AssociationSet>
+          <AssociationSet Name="FK__task__id_person__6E01572D" Association="Self.FK__task__id_person__6E01572D">
+            <End Role="person" EntitySet="person" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
           <AssociationSet Name="incident_area3_FK" Association="Self.incident_area3_FK">
             <End Role="area" EntitySet="area" />
             <End Role="incident" EntitySet="incident" />
@@ -281,8 +298,7 @@
             <End Role="task" EntitySet="task" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MeniconHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -360,6 +376,7 @@
           <NavigationProperty Name="incident" Relationship="Self.incident_person_FK" FromRole="person" ToRole="incident" />
           <NavigationProperty Name="role" Relationship="Self.person_role_FK" FromRole="person" ToRole="role" />
           <NavigationProperty Name="type_incident" Relationship="Self.supervise" FromRole="person" ToRole="type_incident" />
+          <NavigationProperty Name="task" Relationship="MeniconHelperModel.FK__task__id_person__6E01572D" FromRole="person" ToRole="task" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -389,6 +406,8 @@
           <Property Name="date_close" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_anomaly" Type="Int32" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.task_incident_FK" FromRole="task" ToRole="incident" />
+          <Property Name="id_person" Type="Int32" />
+          <NavigationProperty Name="person" Relationship="MeniconHelperModel.FK__task__id_person__6E01572D" FromRole="task" ToRole="person" />
         </EntityType>
         <EntityType Name="type_incident">
           <Key>
@@ -546,7 +565,23 @@
             <End Role="person" EntitySet="person" />
             <End Role="type_incident" EntitySet="type_incident" />
           </AssociationSet>
+          <AssociationSet Name="FK__task__id_person__6E01572D" Association="MeniconHelperModel.FK__task__id_person__6E01572D">
+            <End Role="person" EntitySet="person" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK__task__id_person__6E01572D">
+          <End Type="MeniconHelperModel.person" Role="person" Multiplicity="0..1" />
+          <End Type="MeniconHelperModel.task" Role="task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -641,6 +676,7 @@
           <EntitySetMapping Name="task">
             <EntityTypeMapping TypeName="MeniconHelperModel.task">
               <MappingFragment StoreEntitySet="task">
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
                 <ScalarProperty Name="id_task" ColumnName="id_task" />
                 <ScalarProperty Name="comment" ColumnName="comment" />
                 <ScalarProperty Name="date_create" ColumnName="date_create" />

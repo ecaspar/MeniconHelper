@@ -30,7 +30,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Ticket/Index", new { id = reference });
         }
 
-        public List<ListIncident> LoadIncident()
+        private List<ListIncident> LoadIncident()
         {
             List<ListIncident> list = new List<ListIncident>();
 

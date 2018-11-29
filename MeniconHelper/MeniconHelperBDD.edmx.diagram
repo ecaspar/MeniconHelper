@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="MeniconHelperModel.person" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeniconHelperModel.role" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MeniconHelperModel.statut" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MeniconHelperModel.task" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MeniconHelperModel.task" Width="1.5" PointX="10.875" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MeniconHelperModel.type_incident" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
         <AssociationConnector Association="MeniconHelperModel.incident_area3_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.document_incident_FK" ManuallyRouted="false" />
@@ -23,6 +23,8 @@
         <AssociationConnector Association="MeniconHelperModel.task_incident_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.person_role_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.supervise" ManuallyRouted="false" />
+        <AssociationConnector Association="MeniconHelperModel.FK__task__id_person__6E01572D" ManuallyRouted="false" >
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
