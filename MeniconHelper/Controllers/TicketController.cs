@@ -28,6 +28,34 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
+        [HttpPost]
+        public  ActionResult AddComment(task newTask)
+        {
+
+            string code = Request.QueryString["id"];
+            List<person> listPerson = new List<person>();
+            person p = (person)(Session["User"]);
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+
+                type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                foreach (var per in type.person)
+                {
+                    listPerson.Add(per);
+                }
+                if (i.person == p || listPerson.Contains(p))
+                {
+                    newTask.date_create = DateTime.Now;
+                    newTask.person = p;
+                    newTask.incident = i;
+                    newTask.date_close = DateTime.Now;
+                }
+            }
+            return View();
+        }
+
         private ListIncident LoadTicket()
         {
 
@@ -92,5 +120,6 @@ namespace MeniconHelper.Controllers
             return list;
 
         }
+
     }
 }
