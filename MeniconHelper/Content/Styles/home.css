@@ -19,3 +19,17 @@ table tbody td.description {
 table tbody td img {
     max-width: 100%;
 }
+
+input.tablesorter-filter.disabled {
+    display: none;
+}
+
+input.tablesorter-filter {
+    background: #EEEEEE;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    height: 21px;
+    padding-left: 25px;
+    background: url("../Images/Magnifier.png") no-repeat scroll;
+}

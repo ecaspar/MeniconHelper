@@ -223,8 +223,10 @@
     <Content Include="Content\Images\Incident2.jpg" />
     <Content Include="Content\Images\Incident.jpg" />
     <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\Magnifier.png" />
     <Content Include="Content\Images\Menu.png" />
     <Content Include="Content\Javascript\jquery.tablesorter.js" />
+    <Content Include="Content\Javascript\jquery.tablesorter.widgets.js" />
     <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />

@@ -11,6 +11,8 @@
     <title>Home</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="../Content/Javascript/jquery.tablesorter.js"></script>
+    <script src="../Content/Javascript/jquery.tablesorter.widgets.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/home.css")
     <script>
@@ -24,7 +26,10 @@
                     $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
                 }
             });
-            $('.tablesorter').tablesorter();
+            $('.tablesorter').tablesorter({
+                widgets: ["zebra", "filter"],
+                ignoreCase: false
+            });
         });
     </script>
 </head>
@@ -46,15 +51,15 @@
         <table border="1" class="tablesorter">
             <thead>
                 <tr>
-                    <th>Référence</th>
-                    <th>Photo</th>
-                    <th>Description</th>
-                    <th>Superviseur</th>
-                    <th>Date</th>
-                    <th>Déclarant</th>
-                    <th>Type</th>
-                    <th>Ligne</th>
-                    <th>Machine</th>
+                    <th class="filter-match">Référence</th>
+                    <th class="filter-false">Photo</th>
+                    <th class="filter-false">Description</th>
+                    <th class="filter-match">Superviseur</th>
+                    <th class="filter-false">Date</th>
+                    <th class="filter-match">Déclarant</th>
+                    <th class="filter-false">Type</th>
+                    <th class="filter-match">Ligne</th>
+                    <th class="filter-match">Machine</th>
                 </tr>
             </thead>
             <tbody>

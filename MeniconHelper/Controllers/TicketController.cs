@@ -55,7 +55,7 @@ namespace MeniconHelper.Controllers
                 listIncident.Description = i.description;
                 listIncident.Supervisor = listPerson;
                 listIncident.Date = i.date_create;
-                listIncident.Declarant = i.person.first_name + " " + i.person.last_name; ;
+                listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
                 listIncident.Type = i.statut.label;
                 listIncident.Area = i.area.name;
                 listIncident.Engine = i.engine.name;
