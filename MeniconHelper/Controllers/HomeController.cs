@@ -26,6 +26,11 @@ namespace MeniconHelper.Controllers
                 //Call the function which load all ticket.
                 ViewBag.Incident = LoadIncident();
 
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
+
                 return View();
             }
             else
@@ -61,6 +66,11 @@ namespace MeniconHelper.Controllers
         {
             Session["User"] = null;
             return View("../Login/Index");
+        }
+
+        public ActionResult Admin()
+        {
+            return RedirectToAction("../Admin/Index");
         }
 
         //Load All tickets from the db
