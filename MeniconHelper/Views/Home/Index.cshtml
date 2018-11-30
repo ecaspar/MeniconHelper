@@ -66,6 +66,10 @@
                 <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
                 <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes déclarations</li></a>
                 <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                @if(ViewBag.Admin)
+                {
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-sign-out-alt"></i><li>Administration</li></a>
+                }
                 <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
             </ul>
         </div>

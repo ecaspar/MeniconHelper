@@ -50,6 +50,10 @@ namespace MeniconHelper.Controllers
                     else
                         ViewBag.Authorize = false;
                     //
+                    if (p.id_role == 0)
+                        ViewBag.Admin = true;
+                    else
+                        ViewBag.Admin = false;
                 }
                 return View();
             }

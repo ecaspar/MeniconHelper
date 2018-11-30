@@ -170,6 +170,7 @@
     <Compile Include="area.cs">
       <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
@@ -273,6 +274,7 @@
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Home\MyTickets.cshtml" />
     <Content Include="Views\Home\MyDeclarations.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
