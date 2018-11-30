@@ -225,7 +225,9 @@
     <Content Include="Content\Images\Logo.png" />
     <Content Include="Content\Images\Magnifier.png" />
     <Content Include="Content\Images\Menu.png" />
+    <Content Include="Content\Javascript\bootstrap-select.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.js" />
+    <Content Include="Content\Javascript\jquery.tablesorter.pager.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.widgets.js" />
     <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />

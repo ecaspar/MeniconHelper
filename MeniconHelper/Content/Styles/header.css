@@ -20,7 +20,8 @@ header {
 }
 
 header img {
-    max-width: 100%;  
+    max-width: 100%;
+    margin-left: 2%;
 }
 
 header h1 {
@@ -86,5 +87,4 @@ header h1 {
     width: 45px;
     height: 45px;
     margin-right: 2%;
-    margin-top: 2.5px;
 }

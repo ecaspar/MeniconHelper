@@ -10,8 +10,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="../Content/Javascript/jquery.tablesorter.js"></script>
     <script src="../Content/Javascript/jquery.tablesorter.widgets.js"></script>
+    <script src="../Content/Javascript/jquery.tablesorter.pager.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/home.css")
@@ -32,10 +35,22 @@
                     $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
                 }
             });
+            var pagerOptions = {
+                container: $(".pager"),
+                page: 0,
+                size: 1,
+                pageReset: 0,
+                cssNext: '.next',
+                cssPrev: '.prev',
+                cssFirst: '.first',
+                cssLast: '.last',
+                output: '{startRow} de {endRow} ({totalRows})'
+            };
             $('.tablesorter').tablesorter({
+                theme: 'blue',
                 widgets: ["zebra", "filter", "pager"],
                 ignoreCase: false
-            }).tablesorterPager({ container: $('#pager') });
+            }).tablesorterPager(pagerOptions);
         });
     </script>
 </head>
@@ -53,56 +68,55 @@
             </ul>
         </div>
     </header>
-    <div class="table-container"> 
-        <table border="1" class="tablesorter">
-            <thead>
+    <div class="table-container">
+        <table border="1" class="tablesorter table table-hover table-responsive">
+            <thead class="thead-dark">
                 <tr>
-                    <th class="filter-match">Référence</th>
-                    <th class="filter-false">Photo</th>
-                    <th class="filter-false">Description</th>
-                    <th class="filter-match">Superviseur</th>
-                    <th class="filter-false">Date</th>
-                    <th class="filter-match">Déclarant</th>
-                    <th class="filter-false">Type</th>
-                    <th class="filter-match">Ligne</th>
-                    <th class="filter-match">Machine</th>
+                    <th scope="col" class="filter-match">Référence</th>
+                    <th scope="col" class="filter-false">Photo</th>
+                    <th scope="col" class="filter-false">Description</th>
+                    <th scope="col" class="filter-match">Superviseur</th>
+                    <th scope="col" class="filter-false">Date</th>
+                    <th scope="col" class="filter-match">Déclarant</th>
+                    <th scope="col" class="filter-false">Type</th>
+                    <th scope="col" class="filter-match">Ligne</th>
+                    <th scope="col" class="filter-match">Machine</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var x in ViewBag.Incident)
                 {
-                <tr>
-                    <td class="reference">
-                        <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
-                    </td>
-                    <td class="image"><img src="@x.Image[0]" /></td>
-                    <td class="description">@x.Description</td>
-                    <td class="supervisor">@x.Supervisor[0].first_name</td>
-                    <td class="date">@x.Date</td>
-                    <td class="declarant">@x.Declarant</td>
-                    <td class="type">@x.Type</td>
-                    <td class="area">@x.Area</td>
-                    <td class="engine">@x.Engine</td>
-                </tr>
+                    <tr>
+                        <td class="reference">
+                            <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
+                        </td>
+                        <td class="image"><img src="@x.Image[0]" /></td>
+                        <td class="description">@x.Description</td>
+                        <td class="supervisor">@x.Supervisor[0].first_name</td>
+                        <td class="date">@x.Date</td>
+                        <td class="declarant">@x.Declarant</td>
+                        <td class="type">@x.Type</td>
+                        <td class="area">@x.Area</td>
+                        <td class="engine">@x.Engine</td>
+                    </tr>
                 }
             </tbody>
         </table>
-        <div id="pager" class="pager">
-            <form>
-                <i class="fas fa-fast-backward first"></i>
-                <i class="fas fa-step-backward prev"></i>
-                <span class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows"></span>
-                <i class="fas fa-step-forward next"></i>
-                <i class="fas fa-fast-forward last"></i>
-                <select class="pagesize">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="all">All Rows</option>
-                </select>
-            </form>
-        </div>
+    </div>
+    <div id="pager" class="pager">
+        <form>
+            <i class="fas fa-fast-backward first"></i>
+            <i class="fas fa-step-backward prev"></i>
+            <span class="pagedisplay" data-pager-output-filtered="{startRow:input} &ndash; {endRow} / {filteredRows} of {totalRows} total rows"></span>
+            <i class="fas fa-step-forward next"></i>
+            <i class="fas fa-fast-forward last"></i>
+            <select class="pagesize form-control-sm">
+                <option selected="selected" value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+            </select>
+        </form>
     </div>
 </body>
 </html>

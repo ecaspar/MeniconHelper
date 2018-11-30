@@ -3,6 +3,7 @@
 }
 
 table thead th {
+    text-align: center;
     background: #353535;
     color: #ffffff;
 }
@@ -10,6 +11,10 @@ table thead th {
 table tbody td {
     text-align: center;
     width: 10%;
+}
+
+table tbody td a {
+    color: #01007e;
 }
 
 table tbody td.description {
@@ -27,13 +32,13 @@ input.tablesorter-filter.disabled {
 input.tablesorter-filter {
     background: #EEEEEE;
     border: 0;
-    margin: 0;
     padding: 0;
-    height: 21px;
     padding-left: 23px;
     background: url("../Images/Magnifier.png") no-repeat scroll;
 }
 
 .pager {
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
