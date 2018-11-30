@@ -229,9 +229,11 @@
     <Content Include="Content\Javascript\jquery.tablesorter.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.pager.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.widgets.js" />
+    <Content Include="Content\Javascript\tableHeadFixer.js" />
     <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />
+    <Content Include="Content\Styles\mytickets.css" />
     <Content Include="Content\Styles\ticket.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -270,6 +272,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
     <Content Include="Views\Home\MyTickets.cshtml" />
+    <Content Include="Views\Home\MyDeclarations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

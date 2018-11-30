@@ -6,7 +6,7 @@ namespace MeniconHelper.Models
     public class ListIncident
     {
         public string Reference { get; set; }
-        public List<string> Image { get; set; }
+        public List<document> Image { get; set; }
         public string Description { get; set; }
         public List<person> Supervisor { get; set; }
         public DateTime Date { get; set; }

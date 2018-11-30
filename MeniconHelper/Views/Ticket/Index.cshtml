@@ -22,11 +22,14 @@
                 var windowHeight = $(window).height() - $('header').height();
                 var informationsHeight = windowHeight * 0.70;
                 var commentsHeight = windowHeight * 0.30 - 1;
+                var listCommentsHeight = windowHeight - commentsHeight - $('h2').height() + 25;
                 $('.ticket').css({ 'height': windowHeight });
                 $('.informations').css({ 'height': informationsHeight });
                 $('.comments').css({ 'height': commentsHeight });
                 $('.left-panel').css({ 'border-right': '1px solid black' });
                 $('.comments').css({ 'border-top': '1px solid black' });
+                $('nav').css({ 'height': listCommentsHeight });
+                $('nav ul').css({ 'height': listCommentsHeight });
             }).resize();
             $(document).click(function (e) {
                 if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
@@ -55,6 +58,7 @@
             <ul>
                 <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
                 <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes déclarations</li></a>
                 <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
                 <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
             </ul>
@@ -64,28 +68,33 @@
         <div class="left-panel">
             <div class="informations">
                 <h2>@ViewBag.Ticket.Reference</h2>
-                <table border="1">
-                    <thead>
+                <table border="1" class="table">
+                    <thead class="thead-dark">
                         <tr>
-                            <th>Superviseur</th>
-                            <th>Déclarant</th>
-                            <th>Type d'incident</th>
+                            <th scope="col">Superviseur</th>
+                            <th scope="col">Déclarant</th>
+                            <th scope="col">Type d'incident</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>@ViewBag.Ticket.Supervisor[0].first_name</td>
+                            <td>
+                                @foreach (var p in ViewBag.Ticket.Supervisor)
+                                {
+                                    @p.first_name
+                                }
+                            </td>
                             <td>@ViewBag.Ticket.Declarant</td>
                             <td>@ViewBag.Ticket.Type</td>
                         </tr>
                     </tbody>
                 </table>
-                <table border="1">
-                    <thead>
+                <table border="1" class="table">
+                    <thead class="thead-dark">
                         <tr>
-                            <th>Ligne</th>
-                            <th>Machine</th>
-                            <th>Date</th>
+                            <th scope="col">Ligne</th>
+                            <th scope="col">Machine</th>
+                            <th scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,22 +105,36 @@
                         </tr>
                     </tbody>
                 </table>
-                <img src="@ViewBag.Ticket.Image[0]" />
+                @foreach (var i in ViewBag.Ticket.Image)
+                {
+                    <img src="@i.name" data-toggle="modal" data-target="#modal-@i.id_document" />
+                    <div class="modal fade" id="modal-@i.id_document" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <img src="@i.name" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
         <div class="right-panel">
             <div class="list-comment">
                 <h2>@GlobalRes.comments</h2>
-                <ul>
-                    @foreach (var x in ViewBag.Task)
-                    {
-                        <li>
-                            @x.CreateDate @x.PersonComment.last_name
-                            <br />
-                            @x.Comment
-                        </li>
-                    }
-                </ul>
+                <nav>
+                    <ul class="list-group">
+                        @foreach (var x in ViewBag.Task)
+                        {
+                            <li class="list-group-item">
+                                @x.CreateDate @x.PersonComment.last_name
+                                <br />
+                                @x.Comment
+                            </li>
+                        }
+                    </ul>
+                </nav>
             </div>
             @if (ViewBag.Authorize)
             {

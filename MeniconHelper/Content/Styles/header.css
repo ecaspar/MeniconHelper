@@ -1,7 +1,7 @@
 ﻿* {
     font-family: sans-serif;
     font-weight: lighter;
-    transition: all 0.5s;
+    
 }
 
 body {
@@ -38,6 +38,7 @@ header h1 {
     width: 200px;
     background: #FFFFFF;
     outline: 1px solid black;
+    z-index: 1;
 }
 
 .menu ul {
@@ -73,6 +74,10 @@ header h1 {
 
 .logo, .title, .button-menu {
     width: 20%;
+}
+
+.logo {
+    text-align: left;
 }
 
 .title {
