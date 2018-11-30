@@ -7,16 +7,23 @@ using MeniconHelper.Models;
 
 namespace MeniconHelper.Controllers
 {
+    /// <summary>
+    /// Home Controller link to the view Views/Home/Index
+    /// 
+    /// Display all the ticket in the base using the function "LoadIncident".
+    /// </summary>
     public class HomeController : Controller
     {
-        // GET: Home
+        //Main view of the controller
         public ActionResult Index()
         {
-            if(Session["User"]!=null)
+            //Someone who isn't logged can't access to this view.
+            if (Session["User"]!=null)
             {
+                //Get which user is logged.
                 person p = (person)(Session["User"]);
                 ViewBag.name = p.first_name + " " + p.last_name;
-
+                //Call the function which load all ticket.
                 ViewBag.Incident = LoadIncident();
 
                 return View();
@@ -25,8 +32,10 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
+        //Controller for the view Views/Home/MyTickets
         public ActionResult MyTickets()
         {
+            //Someone who isn't logged can't access to this view.
             if (Session["User"] != null)
             {
                 person p = (person)(Session["User"]);
@@ -41,24 +50,38 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
+        //Redirect in the view Views/Ticket/Index.
         public ActionResult Select(string reference)
         {
             return RedirectToAction("../Ticket/Index", new { id = reference });
         }
 
+        //Sign out function
+        public ActionResult SignOut()
+        {
+            Session["User"] = null;
+            return View("../Login/Index");
+        }
+
+        //Load All tickets from the db
         private List<ListIncident> LoadIncident()
         {
+            //Create a list of Incident which is a Model - Models/ListIncident
             List<ListIncident> list = new List<ListIncident>();
 
+            //Connect to the db using EntityFramework.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                //List all incident in the db
                 foreach (incident i in meniconHelperEntities.incident)
                 {
                     ListIncident listIncident = new ListIncident();
 
+                    //List of URL. Each incident can have up to 3 images.
                     List<string> images = new List<string>();
                     images.Add(i.document.First().name);
 
+                    //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
 
                     type_incident type = meniconHelperEntities.type_incident.Where(x=>x.id_type_anomaly==i.id_type_anomaly).First();
@@ -66,7 +89,7 @@ namespace MeniconHelper.Controllers
                     {
                         listPerson.Add(p);
                     }
-
+                    //
 
                     listIncident.Reference = i.incident_code;
                     listIncident.Image = images;
@@ -85,30 +108,37 @@ namespace MeniconHelper.Controllers
                 
         }
 
+        //Load only supervised tickets by the logged user
         private List<ListIncident> LoadSuperviseIncident()
         {
+            //Create a list of Incident which is a Model - Models/ListIncident
             List<ListIncident> list = new List<ListIncident>();
 
+            //Connect to the db using EntityFramework - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                //List all incident in the db
                 foreach (incident i in meniconHelperEntities.incident)
                 {
                     ListIncident listIncident = new ListIncident();
                     person p = (person)(Session["User"]);
+                    List<int> listId = new List<int>();
+
+                    //List of URL. Each incident can have up to 3 images.
                     List<string> images = new List<string>();
                     images.Add(i.document.First().name);
 
-                    List<int> listId = new List<int>();
+                    //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
-
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                     foreach (var per in type.person)
                     {
                         listPerson.Add(per);
                         listId.Add(per.id_person);
                     }
+                    //
 
-
+                    //Only add to the list of ticket if the user supervise the ticket
                     if (listId.Contains(p.id_person))
                     {
                         listIncident.Reference = i.incident_code;
@@ -128,28 +158,35 @@ namespace MeniconHelper.Controllers
             return list;
 
         }
+
+        //Load only created tickets by the logged user
         private List<ListIncident> LoadDeclarantIncident()
         {
+            //Create a list of Incident which is a Model - Models/ListIncident
             List<ListIncident> list = new List<ListIncident>();
-
+            //Connect to the bdd using EntityFramework - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                //List all incident in the db
                 foreach (incident i in meniconHelperEntities.incident)
                 {
                     ListIncident listIncident = new ListIncident();
                     person p = (person)(Session["User"]);
+
+                    //List of URL. Each incident can have up to 3 images.
                     List<string> images = new List<string>();
                     images.Add(i.document.First().name);
 
+                    //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
-
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                     foreach (var per in type.person)
                     {
                         listPerson.Add(per);
                     }
+                    //
 
-
+                    //Only add the ticket if the user created the ticket.
                     if (i.person.id_person == p.id_person)
                     {
                         listIncident.Reference = i.incident_code;
