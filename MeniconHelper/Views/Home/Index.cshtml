@@ -15,6 +15,7 @@
     <script src="../Content/Javascript/jquery.tablesorter.js"></script>
     <script src="../Content/Javascript/jquery.tablesorter.widgets.js"></script>
     <script src="../Content/Javascript/jquery.tablesorter.pager.js"></script>
+    <script src="../Content/Javascript/widget-scroller.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/Styles/header.css")
     @Styles.Render("~/Content/Styles/home.css")
@@ -38,7 +39,7 @@
             var pagerOptions = {
                 container: $(".pager"),
                 page: 0,
-                size: 1,
+                size: 10,
                 pageReset: 0,
                 cssNext: '.next',
                 cssPrev: '.prev',
@@ -63,6 +64,7 @@
             <ul>
                 <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
                 <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes déclarations</li></a>
                 <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
                 @if(ViewBag.Admin)
                 {
@@ -73,7 +75,7 @@
         </div>
     </header>
     <div class="table-container">
-        <table border="1" class="tablesorter table table-hover table-responsive">
+        <table border="1" class="tablesorter table table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col" class="filter-match">Référence</th>
@@ -94,7 +96,7 @@
                         <td class="reference">
                             <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
                         </td>
-                        <td class="image"><img src="@x.Image[0]" /></td>
+                        <td class="image"><img src="@x.Image[0].name" /></td>
                         <td class="description">@x.Description</td>
                         <td class="supervisor">@x.Supervisor[0].first_name</td>
                         <td class="date">@x.Date</td>

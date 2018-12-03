@@ -47,6 +47,22 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
 
                 ViewBag.SuperviseIncident = LoadSuperviseIncident();
+
+                return View();
+            }
+            else
+                return View("../Login/Index");
+        }
+
+        //Controller for the view Views/Home/MyDeclarations
+        public ActionResult MyDeclarations()
+        {
+            //Someone who isn't logged can't access to this view.
+            if (Session["User"] != null)
+            {
+                person p = (person)(Session["User"]);
+                ViewBag.name = p.first_name + " " + p.last_name;
+
                 ViewBag.DeclarantIncident = LoadDeclarantIncident();
 
                 return View();
@@ -88,8 +104,8 @@ namespace MeniconHelper.Controllers
                     ListIncident listIncident = new ListIncident();
 
                     //List of URL. Each incident can have up to 3 images.
-                    List<string> images = new List<string>();
-                    images.Add(i.document.First().name);
+                    List<document> images = new List<document>();
+                    images.Add(i.document.First());
 
                     //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
@@ -135,8 +151,8 @@ namespace MeniconHelper.Controllers
                     List<int> listId = new List<int>();
 
                     //List of URL. Each incident can have up to 3 images.
-                    List<string> images = new List<string>();
-                    images.Add(i.document.First().name);
+                    List<document> images = new List<document>();
+                    images.Add(i.document.First());
 
                     //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
@@ -184,8 +200,8 @@ namespace MeniconHelper.Controllers
                     person p = (person)(Session["User"]);
 
                     //List of URL. Each incident can have up to 3 images.
-                    List<string> images = new List<string>();
-                    images.Add(i.document.First().name);
+                    List<document> images = new List<document>();
+                    images.Add(i.document.First());
 
                     //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();

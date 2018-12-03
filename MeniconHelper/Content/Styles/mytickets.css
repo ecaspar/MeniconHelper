@@ -1,0 +1,88 @@
+﻿table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table thead th {
+    text-align: center;
+    background: #353535;
+    color: #ffffff;
+    width: 10%;
+}
+
+table thead th:nth-child(3) {
+    width: 20%;
+}
+
+table tbody td, .table td {
+    text-align: center;
+    width: 10%;
+    font-size: 16px;
+}
+
+.table .new-row td {
+    padding: 5px;
+}
+
+table tbody td a {
+    color: #01007e;
+}
+
+table tbody td.description {
+    width: 20%;
+}
+
+table tbody td img {
+    max-width: 50%;
+}
+
+input.tablesorter-filter.disabled {
+    display: none;
+}
+
+input.tablesorter-filter {
+    background: #EEEEEE;
+    border: 0;
+    padding: 0;
+    padding-left: 23px;
+    background: url("../Images/Magnifier.png") no-repeat scroll;
+}
+
+.pager {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.table-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+nav .table-container {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+body {
+    overflow: hidden;
+    text-align: center;
+}
+
+#pager-supervisor {
+    margin-bottom: 7px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid black;
+}
