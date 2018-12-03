@@ -18,7 +18,6 @@ namespace MeniconHelper
         public person()
         {
             this.incident = new HashSet<incident>();
-            this.type_incident = new HashSet<type_incident>();
             this.task = new HashSet<task>();
         }
     
@@ -37,8 +36,6 @@ namespace MeniconHelper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<incident> incident { get; set; }
         public virtual role role { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<type_incident> type_incident { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<task> task { get; set; }
     }

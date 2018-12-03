@@ -48,6 +48,11 @@ namespace MeniconHelper.Controllers
 
                 ViewBag.SuperviseIncident = LoadSuperviseIncident();
 
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
+
                 return View();
             }
             else
@@ -64,6 +69,12 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
 
                 ViewBag.DeclarantIncident = LoadDeclarantIncident();
+
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
+
 
                 return View();
             }
@@ -111,9 +122,15 @@ namespace MeniconHelper.Controllers
                     List<person> listPerson = new List<person>();
 
                     type_incident type = meniconHelperEntities.type_incident.Where(x=>x.id_type_anomaly==i.id_type_anomaly).First();
-                    foreach (var p in type.person)
+                    foreach (var r in type.role)
                     {
-                        listPerson.Add(p);
+                        if(r.id_role != 0)
+                        {
+                            foreach (var p in r.person)
+                            {
+                                listPerson.Add(p);
+                            }
+                        }
                     }
                     //
 
@@ -157,10 +174,16 @@ namespace MeniconHelper.Controllers
                     //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var per in type.person)
+                    foreach (var r in type.role)
                     {
-                        listPerson.Add(per);
-                        listId.Add(per.id_person);
+                        if(r.id_role!=0)
+                        {
+                            foreach (var per in r.person)
+                            {
+                                listPerson.Add(per);
+                                listId.Add(per.id_person);
+                            }
+                        }
                     }
                     //
 
@@ -206,9 +229,15 @@ namespace MeniconHelper.Controllers
                     //This part list all the supervisor of this incident.
                     List<person> listPerson = new List<person>();
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var per in type.person)
+                    foreach (var r in type.role)
                     {
-                        listPerson.Add(per);
+                        if(r.id_role!=0)
+                        {
+                            foreach (var per in r.person)
+                            {
+                                listPerson.Add(per);
+                            }
+                        }
                     }
                     //
 

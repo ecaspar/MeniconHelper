@@ -22,9 +22,9 @@
         <AssociationConnector Association="MeniconHelperModel.incident_type_incident0_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.task_incident_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.person_role_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="MeniconHelperModel.supervise" ManuallyRouted="false" />
         <AssociationConnector Association="MeniconHelperModel.FK__task__id_person__6E01572D" ManuallyRouted="false" >
         </AssociationConnector>
+        <AssociationConnector Association="MeniconHelperModel.supervise1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
