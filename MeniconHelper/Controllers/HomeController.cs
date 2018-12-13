@@ -48,6 +48,10 @@ namespace MeniconHelper.Controllers
 
                 ViewBag.SuperviseIncident = LoadSuperviseIncident();
 
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
                 return View();
             }
             else
@@ -64,6 +68,11 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
 
                 ViewBag.DeclarantIncident = LoadDeclarantIncident();
+
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
 
                 return View();
             }
