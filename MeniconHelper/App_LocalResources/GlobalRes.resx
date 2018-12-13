@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="addComment" xml:space="preserve">
+    <value>Add comment</value>
+  </data>
+  <data name="administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="area" xml:space="preserve">
+    <value>Area</value>
+  </data>
   <data name="comments" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="connection" xml:space="preserve">
     <value>Connection</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="declarant" xml:space="preserve">
+    <value>Declarant</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="engine" xml:space="preserve">
+    <value>Engine</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Error</value>
@@ -129,14 +150,44 @@
   <data name="history" xml:space="preserve">
     <value>History</value>
   </data>
+  <data name="home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="incorrectPassword" xml:space="preserve">
     <value>You entered an incorrect password</value>
   </data>
   <data name="incorrectUsername" xml:space="preserve">
     <value>You entered an incorrect username</value>
   </data>
+  <data name="myAccount" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="myDeclaration" xml:space="preserve">
+    <value>My declarations</value>
+  </data>
+  <data name="myTicket" xml:space="preserve">
+    <value>My tickets</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="picture" xml:space="preserve">
+    <value>Picture</value>
+  </data>
+  <data name="reference" xml:space="preserve">
+    <value>Reference</value>
+  </data>
+  <data name="signOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="supervisor" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="typeIncident" xml:space="preserve">
+    <value>Type of incident</value>
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>

@@ -41,9 +41,15 @@ namespace MeniconHelper.Controllers
 
                     //Allow the logged user to add a task/comment only if he's supervisor/creator of the ticket
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var per in type.person)
+                    foreach (var r in type.role)
                     {
-                        listPerson.Add(per.id_person);
+                        if(r.id_role!=0)
+                        {
+                            foreach (var per in r.person)
+                            {
+                                listPerson.Add(per.id_person);
+                            }
+                        }
                     }
                     if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
                         ViewBag.Authorize = true;
@@ -83,9 +89,15 @@ namespace MeniconHelper.Controllers
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
 
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var per in type.person)
+                    foreach (var r in type.role)
                     {
-                        listPerson.Add(per.id_person);
+                        if(r.id_role!=0)
+                        {
+                            foreach (var per in r.person)
+                            {
+                                listPerson.Add(per.id_person);
+                            }
+                        }
                     }
                     //Second check if the user can add a task/comment.
                     if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
@@ -129,9 +141,15 @@ namespace MeniconHelper.Controllers
                 }
                 List<person> listPerson = new List<person>();
                 type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                foreach (var p in type.person)
+                foreach (var r in type.role)
                 {
-                    listPerson.Add(p);
+                    if(r.id_role!=0)
+                    {
+                        foreach (var p in r.person)
+                        {
+                            listPerson.Add(p);
+                        }
+                    }
                 }
 
                 listIncident.Reference = i.incident_code;

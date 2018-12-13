@@ -62,15 +62,15 @@
         <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
-                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
-                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
-                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-scroll"></i><li>Mes déclarations</li></a>
-                <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>@GlobalRes.home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myTicket</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myDeclaration</li></a>
+                <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
                 @if (ViewBag.Admin)
                 {
-                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-hammer"></i><li>Administration</li></a>
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.administration</li></a>
                 }
-                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
+                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
             </ul>
         </div>
     </header>
@@ -78,15 +78,15 @@
         <table border="1" class="tablesorter table table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col" class="filter-match">Référence</th>
-                    <th scope="col" class="filter-false">Photo</th>
-                    <th scope="col" class="filter-false">Description</th>
-                    <th scope="col" class="filter-match">Superviseur</th>
-                    <th scope="col" class="filter-false">Date</th>
-                    <th scope="col" class="filter-match">Déclarant</th>
-                    <th scope="col" class="filter-false">Type</th>
-                    <th scope="col" class="filter-match">Ligne</th>
-                    <th scope="col" class="filter-match">Machine</th>
+                    <th scope="col" class="filter-match">@GlobalRes.reference</th>
+                    <th scope="col" class="filter-false">@GlobalRes.picture</th>
+                    <th scope="col" class="filter-false">@GlobalRes.description</th>
+                    <th scope="col" class="filter-match">@GlobalRes.supervisor</th>
+                    <th scope="col" class="filter-false">@GlobalRes.date</th>
+                    <th scope="col" class="filter-match">@GlobalRes.declarant</th>
+                    <th scope="col" class="filter-false">@GlobalRes.type</th>
+                    <th scope="col" class="filter-match">@GlobalRes.area</th>
+                    <th scope="col" class="filter-match">@GlobalRes.engine</th>
                 </tr>
             </thead>
             <tbody>

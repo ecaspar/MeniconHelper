@@ -40,7 +40,8 @@ namespace MeniconHelper.Controllers
                     if (p.username == loginPerson.username)
                     {
                         //Check if password match with the user
-                        if (GenerateMD5(loginPerson.password_default) == p.password_default)
+                        
+if (GenerateMD5(loginPerson.password_default) == p.password_default)
                         {
                             //Define a Session for the user and redirect to the main View
                             Session["User"] = p;

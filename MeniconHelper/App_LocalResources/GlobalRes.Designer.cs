@@ -61,6 +61,33 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add comment.
+        /// </summary>
+        public static string addComment {
+            get {
+                return ResourceManager.GetString("addComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Administration.
+        /// </summary>
+        public static string administration {
+            get {
+                return ResourceManager.GetString("administration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Area.
+        /// </summary>
+        public static string area {
+            get {
+                return ResourceManager.GetString("area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Comments.
         /// </summary>
         public static string comments {
@@ -75,6 +102,42 @@ namespace MeniconHelper.App_LocalResources {
         public static string connection {
             get {
                 return ResourceManager.GetString("connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Date.
+        /// </summary>
+        public static string date {
+            get {
+                return ResourceManager.GetString("date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Declarant.
+        /// </summary>
+        public static string declarant {
+            get {
+                return ResourceManager.GetString("declarant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Description.
+        /// </summary>
+        public static string description {
+            get {
+                return ResourceManager.GetString("description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Engine.
+        /// </summary>
+        public static string engine {
+            get {
+                return ResourceManager.GetString("engine", resourceCulture);
             }
         }
         
@@ -97,6 +160,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Home.
+        /// </summary>
+        public static string home {
+            get {
+                return ResourceManager.GetString("home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à You entered an incorrect password.
         /// </summary>
         public static string incorrectPassword {
@@ -115,11 +187,92 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à My account.
+        /// </summary>
+        public static string myAccount {
+            get {
+                return ResourceManager.GetString("myAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à My declarations.
+        /// </summary>
+        public static string myDeclaration {
+            get {
+                return ResourceManager.GetString("myDeclaration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à My tickets.
+        /// </summary>
+        public static string myTicket {
+            get {
+                return ResourceManager.GetString("myTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Password.
         /// </summary>
         public static string password {
             get {
                 return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Picture.
+        /// </summary>
+        public static string picture {
+            get {
+                return ResourceManager.GetString("picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Reference.
+        /// </summary>
+        public static string reference {
+            get {
+                return ResourceManager.GetString("reference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sign out.
+        /// </summary>
+        public static string signOut {
+            get {
+                return ResourceManager.GetString("signOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Supervisor.
+        /// </summary>
+        public static string supervisor {
+            get {
+                return ResourceManager.GetString("supervisor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type.
+        /// </summary>
+        public static string type {
+            get {
+                return ResourceManager.GetString("type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Type of incident.
+        /// </summary>
+        public static string typeIncident {
+            get {
+                return ResourceManager.GetString("typeIncident", resourceCulture);
             }
         }
         

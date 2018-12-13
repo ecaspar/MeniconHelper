@@ -85,11 +85,11 @@
         </EntityType>
         <EntityType Name="supervise">
           <Key>
+            <PropertyRef Name="id_role" />
             <PropertyRef Name="id_type_anomaly" />
-            <PropertyRef Name="id_person" />
           </Key>
+          <Property Name="id_role" Type="int" Nullable="false" />
           <Property Name="id_type_anomaly" Type="int" Nullable="false" />
-          <Property Name="id_person" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="task">
           <Key>
@@ -206,19 +206,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="supervise_person0_FK">
-          <End Role="person" Type="Self.person" Multiplicity="1" />
+        <Association Name="supervise_role_FK">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
           <End Role="supervise" Type="Self.supervise" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="person">
-              <PropertyRef Name="id_person" />
+            <Principal Role="role">
+              <PropertyRef Name="id_role" />
             </Principal>
             <Dependent Role="supervise">
-              <PropertyRef Name="id_person" />
+              <PropertyRef Name="id_role" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="supervise_type_incident_FK">
+        <Association Name="supervise_type_incident0_FK">
           <End Role="type_incident" Type="Self.type_incident" Multiplicity="1" />
           <End Role="supervise" Type="Self.supervise" Multiplicity="*" />
           <ReferentialConstraint>
@@ -285,11 +285,11 @@
             <End Role="role" EntitySet="role" />
             <End Role="person" EntitySet="person" />
           </AssociationSet>
-          <AssociationSet Name="supervise_person0_FK" Association="Self.supervise_person0_FK">
-            <End Role="person" EntitySet="person" />
+          <AssociationSet Name="supervise_role_FK" Association="Self.supervise_role_FK">
+            <End Role="role" EntitySet="role" />
             <End Role="supervise" EntitySet="supervise" />
           </AssociationSet>
-          <AssociationSet Name="supervise_type_incident_FK" Association="Self.supervise_type_incident_FK">
+          <AssociationSet Name="supervise_type_incident0_FK" Association="Self.supervise_type_incident0_FK">
             <End Role="type_incident" EntitySet="type_incident" />
             <End Role="supervise" EntitySet="supervise" />
           </AssociationSet>
@@ -375,7 +375,6 @@
           <Property Name="id_role" Type="Int32" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.incident_person_FK" FromRole="person" ToRole="incident" />
           <NavigationProperty Name="role" Relationship="Self.person_role_FK" FromRole="person" ToRole="role" />
-          <NavigationProperty Name="type_incident" Relationship="Self.supervise" FromRole="person" ToRole="type_incident" />
           <NavigationProperty Name="task" Relationship="MeniconHelperModel.FK__task__id_person__6E01572D" FromRole="person" ToRole="task" />
         </EntityType>
         <EntityType Name="role">
@@ -386,6 +385,7 @@
           <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="person" Relationship="Self.person_role_FK" FromRole="role" ToRole="person" />
+          <NavigationProperty Name="type_incident" Relationship="MeniconHelperModel.supervise1" FromRole="role" ToRole="type_incident" />
         </EntityType>
         <EntityType Name="statut">
           <Key>
@@ -417,7 +417,7 @@
           <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.incident_type_incident0_FK" FromRole="type_incident" ToRole="incident" />
-          <NavigationProperty Name="person" Relationship="Self.supervise" FromRole="type_incident" ToRole="person" />
+          <NavigationProperty Name="role" Relationship="MeniconHelperModel.supervise1" FromRole="type_incident" ToRole="role" />
         </EntityType>
         <Association Name="incident_area3_FK">
           <End Role="area" Type="Self.area" Multiplicity="1" />
@@ -515,10 +515,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="supervise">
-          <End Role="person" Type="Self.person" Multiplicity="*" />
-          <End Role="type_incident" Type="Self.type_incident" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="MeniconHelperEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="area" EntityType="Self.area" />
           <EntitySet Name="document" EntityType="Self.document" />
@@ -561,13 +557,13 @@
             <End Role="role" EntitySet="role" />
             <End Role="person" EntitySet="person" />
           </AssociationSet>
-          <AssociationSet Name="supervise" Association="Self.supervise">
-            <End Role="person" EntitySet="person" />
-            <End Role="type_incident" EntitySet="type_incident" />
-          </AssociationSet>
           <AssociationSet Name="FK__task__id_person__6E01572D" Association="MeniconHelperModel.FK__task__id_person__6E01572D">
             <End Role="person" EntitySet="person" />
             <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="supervise1" Association="MeniconHelperModel.supervise1">
+            <End Role="role" EntitySet="role" />
+            <End Role="type_incident" EntitySet="type_incident" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK__task__id_person__6E01572D">
@@ -581,6 +577,10 @@
               <PropertyRef Name="id_person" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="supervise1">
+          <End Type="MeniconHelperModel.role" Role="role" Multiplicity="*" />
+          <End Type="MeniconHelperModel.type_incident" Role="type_incident" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -694,12 +694,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="supervise" TypeName="MeniconHelperModel.supervise" StoreEntitySet="supervise">
-            <EndProperty Name="person">
-              <ScalarProperty Name="id_person" ColumnName="id_person" />
-            </EndProperty>
+          <AssociationSetMapping Name="supervise1" TypeName="MeniconHelperModel.supervise1" StoreEntitySet="supervise">
             <EndProperty Name="type_incident">
               <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
+            </EndProperty>
+            <EndProperty Name="role">
+              <ScalarProperty Name="id_role" ColumnName="id_role" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

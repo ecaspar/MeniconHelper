@@ -56,15 +56,15 @@
         <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
         <div class="menu">
             <ul>
-                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>Home</li></a>
-                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>Mes tickets</li></a>
-                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-scroll"></i><li>Mes déclarations</li></a>
-                <a href=""><i class="fas fa-user"></i><li>Mon compte</li></a>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>@GlobalRes.home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myTicket</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myDeclaration</li></a>
+                <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
                 @if (ViewBag.Admin)
                 {
-                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-hammer"></i><li>Administration</li></a>
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.administration</li></a>
                 }
-                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>Déconnexion</li></a>
+                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
             </ul>
         </div>
     </header>
@@ -75,9 +75,9 @@
                 <table border="1" class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Superviseur</th>
-                            <th scope="col">Déclarant</th>
-                            <th scope="col">Type d'incident</th>
+                            <th scope="col">@GlobalRes.supervisor</th>
+                            <th scope="col">@GlobalRes.declarant</th>
+                            <th scope="col">@GlobalRes.typeIncident</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,9 +96,9 @@
                 <table border="1" class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Ligne</th>
-                            <th scope="col">Machine</th>
-                            <th scope="col">Date</th>
+                            <th scope="col">@GlobalRes.area</th>
+                            <th scope="col">@GlobalRes.engine</th>
+                            <th scope="col">@GlobalRes.date</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -148,11 +148,11 @@
 
                     <div>
 
-                        @Html.TextAreaFor(t => t.comment, new { Class = "CommentForm", placeholder = "Commentaire" })
+                        @Html.TextAreaFor(t => t.comment, new { Class = "CommentForm", placeholder = GlobalRes.comments})
 
                     </div>
 
-                    <button type="submit" class="btn btn-outline-dark btn-block">Ajouter un commentaire</button>
+                    <button type="submit" class="btn btn-outline-dark btn-block">@GlobalRes.addComment</button>
 
                 }
             </div>
