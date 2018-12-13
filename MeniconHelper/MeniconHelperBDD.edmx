@@ -19,7 +19,7 @@
             <PropertyRef Name="id_document" />
           </Key>
           <Property Name="id_document" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="text" />
           <Property Name="date_create" Type="datetime" Nullable="false" />
           <Property Name="id_anomaly" Type="int" Nullable="false" />
         </EntityType>
@@ -317,7 +317,7 @@
             <PropertyRef Name="id_document" />
           </Key>
           <Property Name="id_document" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_anomaly" Type="Int32" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.document_incident_FK" FromRole="document" ToRole="incident" />
