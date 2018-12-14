@@ -59,28 +59,29 @@
                 <h4>@ViewBag.name</h4>
                 <div class="separation"></div>
                 <div class="form-group">
-                    <span>Mail</span>
+                    <span><i class="far fa-envelope"></i></span>
                     <input class="mail_address" type="email" placeholder="@ViewBag.person.email" disabled="disabled" />
                 </div>
                 <div class="form-group">
-                    <span>Phone</span>
+                    <span><i class="fas fa-mobile-alt"></i></span>
                     <input class="phone_number" type="tel" placeholder="@ViewBag.person.phone" disabled="disabled" />
                 </div>
                 <button>Modifier le mot de passe</button>
                 @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
                 {
                     <div class="form-group">
-                        @Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = "Ancien" })
+                        <span><i class="fas fa-lock-open"></i></span>
+                        @Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = "Ancien mot de passe", required = "Required" })
                     </div>
                     <div class="form-group">
-                        <input type="password" id="newPassword" name="newPassword" />
-                        <!-- Html.TextBoxFor(string newPassword, new { Id = "NewPassword", Class = "PasswordForm", placeholder = "Nouveau", Type = "Password" }) -->
+                        <span><i class="fas fa-unlock"></i></span>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Nouveau mot de passe" required="required" />
                     </div>
                     <div class="form-group">
-                        <input type="password" id="confirmPassword" name="confirmPassword" />
-                        <!-- Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = "Confirmation", Type = "Password" }) -->
+                        <span><i class="fas fa-key"></i></span>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required="required" />
                     </div>
-                    <button type="submit" class="btn btn-outline-success btn-block">Valider</button>
+                    <button type="submit" class="btn btn-outline-success">Valider</button>
                 }
             </div>
                 <div class="col-sm-3"></div>
