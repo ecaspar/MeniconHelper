@@ -232,6 +232,7 @@
     <Content Include="Content\Javascript\jquery.tablesorter.pager.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.widgets.js" />
     <Content Include="Content\Javascript\tableHeadFixer.js" />
+    <Content Include="Content\Styles\admin.css" />
     <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />

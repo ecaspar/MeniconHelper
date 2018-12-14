@@ -19,6 +19,7 @@ namespace MeniconHelper.Controllers
                 //Get which user is logged.
                 person p = (person)(Session["User"]);
                 ViewBag.name = p.first_name + " " + p.last_name;
+                ViewBag.person = p;
 
                 if (p.id_role == 0)
                     ViewBag.Admin = true;
@@ -31,6 +32,7 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
+        [HttpPost]
         public ActionResult ChangePassword(person person, string newPassword, string confirmPassword)
         {
             MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities();
@@ -45,8 +47,7 @@ namespace MeniconHelper.Controllers
                     meniconHelperEntities.SaveChanges();
                 }
             }
-
-            return View();
+            return RedirectToAction("../Account/Index");
         }
 
         public string GenerateMD5(string rawString)
