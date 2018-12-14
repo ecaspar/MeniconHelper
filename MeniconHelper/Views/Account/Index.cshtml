@@ -83,8 +83,14 @@
                     <button type="submit" class="btn btn-outline-success btn-block">Valider</button>
                 }
             </div>
-                <div class="col-sm-3"></div>
-                </div>
-                </div>
-            </body>
-        </html>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            alert("@Html.Raw(ViewBag.Message)");
+        </script>
+    }
+</body>
+</html>

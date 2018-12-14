@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
+using MeniconHelper.App_LocalResources;
 
 namespace MeniconHelper.Controllers
 {
@@ -35,16 +33,26 @@ namespace MeniconHelper.Controllers
         [HttpPost]
         public ActionResult ChangePassword(person person, string newPassword, string confirmPassword)
         {
-            MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities();
-            person p = (person)(Session["User"]);
-            if (p.password_default == GenerateMD5(person.password_default))
+            if(person.password_default!=null && newPassword!=null && confirmPassword!=null)
             {
-                if(newPassword == confirmPassword)
+                using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
                 {
-                    //Update password de p
-                    person pswPerson = meniconHelperEntities.person.Single(x => x.id_person == p.id_person);
-                    pswPerson.password_default = GenerateMD5(confirmPassword);
-                    meniconHelperEntities.SaveChanges();
+                    if (meniconHelperEntities.Database.Exists())
+                    {
+                        person p = (person)(Session["User"]);
+                        if (p.password_default == GenerateMD5(person.password_default))
+                        {
+                            if (newPassword == confirmPassword)
+                            {
+                                //Update password de p
+                                person pswPerson = meniconHelperEntities.person.Single(x => x.id_person == p.id_person);
+                                pswPerson.password_default = GenerateMD5(confirmPassword);
+                                meniconHelperEntities.SaveChanges();
+                            }
+                        }
+                    }
+                    else
+                        ViewBag.Message = GlobalRes.dbOffline;
                 }
             }
             return RedirectToAction("../Account/Index");

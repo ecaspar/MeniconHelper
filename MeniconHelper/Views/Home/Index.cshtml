@@ -124,5 +124,11 @@
             </select>
         </form>
     </div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            alert("@Html.Raw(ViewBag.Message)");
+        </script>
+    }
 </body>
 </html>

@@ -33,29 +33,34 @@ namespace MeniconHelper.Controllers
             //Connection to db using Entity Framework - MeniconHelperBDD.edmx to get the diagram
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //Get all users in db
-                foreach (person p in meniconHelperEntities.person)
+                if(meniconHelperEntities.Database.Exists())
                 {
-                    //Check if user exist
-                    if (p.username == loginPerson.username)
+                    //Get all users in db
+                    foreach (person p in meniconHelperEntities.person)
                     {
-                        //Check if password match with the user
-                        
-                        if (GenerateMD5(loginPerson.password_default) == p.password_default)
+                        //Check if user exist
+                        if (p.username == loginPerson.username && loginPerson.password_default != null)
                         {
-                            //Define a Session for the user and redirect to the main View
-                            Session["User"] = p;
-                            return RedirectToAction("../Home/Index");
-                        }
-                        else
-                        {
-                            ViewBag.Message = GlobalRes.incorrectPassword;
-                            return View("Index");
+                            //Check if password match with the user
+
+                            if (GenerateMD5(loginPerson.password_default) == p.password_default)
+                            {
+                                //Define a Session for the user and redirect to the main View
+                                Session["User"] = p;
+                                return RedirectToAction("../Home/Index");
+                            }
+                            else
+                            {
+                                ViewBag.Message = GlobalRes.incorrectPassword;
+                                return View("Index");
+                            }
                         }
                     }
+                    ViewBag.Message = GlobalRes.incorrectUsername;
                 }
+                else
+                    ViewBag.Message = GlobalRes.dbOffline;
             }
-            ViewBag.Message = GlobalRes.incorrectUsername;
             return View("Index");
         }
 

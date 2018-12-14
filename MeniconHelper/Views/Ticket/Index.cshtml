@@ -142,22 +142,29 @@
             </div>
             @if (ViewBag.Authorize)
             {
-            <div class="add-comment">
-                @using (Html.BeginForm("AddComment", "Ticket", FormMethod.Post))
-                {
+                <div class="add-comment">
+                    @using (Html.BeginForm("AddComment", "Ticket", FormMethod.Post))
+                    {
 
-                    <div>
+                        <div>
 
-                        @Html.TextAreaFor(t => t.comment, new { Class = "CommentForm", placeholder = GlobalRes.comments})
+                            @Html.TextAreaFor(t => t.comment, new { Class = "CommentForm", placeholder = GlobalRes.comments })
 
-                    </div>
+                        </div>
 
-                    <button type="submit" class="btn btn-outline-dark btn-block">@GlobalRes.addComment</button>
+                        <button type="submit" class="btn btn-outline-dark btn-block">@GlobalRes.addComment</button>
 
-                }
-            </div>
+                    }
+                </div>
             }
         </div>
     </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            alert("@Html.Raw(ViewBag.Message)");
+        </script>
+    }
 </body>
 </html>

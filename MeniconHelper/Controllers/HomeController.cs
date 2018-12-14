@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using MeniconHelper.Models;
+using MeniconHelper.App_LocalResources;
 
 namespace MeniconHelper.Controllers
 {
@@ -107,43 +108,48 @@ namespace MeniconHelper.Controllers
             //Connect to the db using EntityFramework.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //List all incident in the db
-                foreach (incident i in meniconHelperEntities.incident)
+                if (meniconHelperEntities.Database.Exists())
                 {
-                    ListIncident listIncident = new ListIncident();
-
-                    //List of URL. Each incident can have up to 3 images.
-                    List<document> images = new List<document>();
-                    images.Add(i.document.First());
-
-                    //This part list all the supervisor of this incident.
-                    List<person> listPerson = new List<person>();
-
-                    type_incident type = meniconHelperEntities.type_incident.Where(x=>x.id_type_anomaly==i.id_type_anomaly).First();
-                    foreach (var r in type.role)
+                    //List all incident in the db
+                    foreach (incident i in meniconHelperEntities.incident)
                     {
-                        if(r.id_role != 0)
+                        ListIncident listIncident = new ListIncident();
+
+                        //List of URL. Each incident can have up to 3 images.
+                        List<document> images = new List<document>();
+                        images.Add(i.document.First());
+
+                        //This part list all the supervisor of this incident.
+                        List<person> listPerson = new List<person>();
+
+                        type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                        foreach (var r in type.role)
                         {
-                            foreach (var p in r.person)
+                            if (r.id_role != 0)
                             {
-                                listPerson.Add(p);
+                                foreach (var p in r.person)
+                                {
+                                    listPerson.Add(p);
+                                }
                             }
                         }
+                        //
+
+                        listIncident.Reference = i.incident_code;
+                        listIncident.Image = images;
+                        listIncident.Description = i.description;
+                        listIncident.Supervisor = listPerson;
+                        listIncident.Date = i.date_create;
+                        listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
+                        listIncident.Type = i.statut.label;
+                        listIncident.Area = i.area.name;
+                        listIncident.Engine = i.engine.name;
+
+                        list.Add(listIncident);
                     }
-                    //
-
-                    listIncident.Reference = i.incident_code;
-                    listIncident.Image = images;
-                    listIncident.Description = i.description;
-                    listIncident.Supervisor = listPerson;
-                    listIncident.Date = i.date_create;
-                    listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
-                    listIncident.Type = i.statut.label;
-                    listIncident.Area = i.area.name;
-                    listIncident.Engine = i.engine.name;
-
-                    list.Add(listIncident);
                 }
+                else
+                    ViewBag.Message = GlobalRes.dbOffline;
             } 
             return list;
                 
@@ -158,49 +164,54 @@ namespace MeniconHelper.Controllers
             //Connect to the db using EntityFramework - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //List all incident in the db
-                foreach (incident i in meniconHelperEntities.incident)
+                if (meniconHelperEntities.Database.Exists())
                 {
-                    ListIncident listIncident = new ListIncident();
-                    person p = (person)(Session["User"]);
-                    List<int> listId = new List<int>();
-
-                    //List of URL. Each incident can have up to 3 images.
-                    List<document> images = new List<document>();
-                    images.Add(i.document.First());
-
-                    //This part list all the supervisor of this incident.
-                    List<person> listPerson = new List<person>();
-                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var r in type.role)
+                    //List all incident in the db
+                    foreach (incident i in meniconHelperEntities.incident)
                     {
-                        if(r.id_role!=0)
+                        ListIncident listIncident = new ListIncident();
+                        person p = (person)(Session["User"]);
+                        List<int> listId = new List<int>();
+
+                        //List of URL. Each incident can have up to 3 images.
+                        List<document> images = new List<document>();
+                        images.Add(i.document.First());
+
+                        //This part list all the supervisor of this incident.
+                        List<person> listPerson = new List<person>();
+                        type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                        foreach (var r in type.role)
                         {
-                            foreach (var per in r.person)
+                            if (r.id_role != 0)
                             {
-                                listPerson.Add(per);
-                                listId.Add(per.id_person);
+                                foreach (var per in r.person)
+                                {
+                                    listPerson.Add(per);
+                                    listId.Add(per.id_person);
+                                }
                             }
                         }
-                    }
-                    //
+                        //
 
-                    //Only add to the list of ticket if the user supervise the ticket
-                    if (listId.Contains(p.id_person))
-                    {
-                        listIncident.Reference = i.incident_code;
-                        listIncident.Image = images;
-                        listIncident.Description = i.description;
-                        listIncident.Supervisor = listPerson;
-                        listIncident.Date = i.date_create;
-                        listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
-                        listIncident.Type = i.statut.label;
-                        listIncident.Area = i.area.name;
-                        listIncident.Engine = i.engine.name;
+                        //Only add to the list of ticket if the user supervise the ticket
+                        if (listId.Contains(p.id_person))
+                        {
+                            listIncident.Reference = i.incident_code;
+                            listIncident.Image = images;
+                            listIncident.Description = i.description;
+                            listIncident.Supervisor = listPerson;
+                            listIncident.Date = i.date_create;
+                            listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
+                            listIncident.Type = i.statut.label;
+                            listIncident.Area = i.area.name;
+                            listIncident.Engine = i.engine.name;
 
-                        list.Add(listIncident);
+                            list.Add(listIncident);
+                        }
                     }
                 }
+                else
+                    ViewBag.Message = GlobalRes.dbOffline;
             }
             return list;
 
@@ -214,47 +225,52 @@ namespace MeniconHelper.Controllers
             //Connect to the bdd using EntityFramework - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //List all incident in the db
-                foreach (incident i in meniconHelperEntities.incident)
+                if (meniconHelperEntities.Database.Exists())
                 {
-                    ListIncident listIncident = new ListIncident();
-                    person p = (person)(Session["User"]);
-
-                    //List of URL. Each incident can have up to 3 images.
-                    List<document> images = new List<document>();
-                    images.Add(i.document.First());
-
-                    //This part list all the supervisor of this incident.
-                    List<person> listPerson = new List<person>();
-                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var r in type.role)
+                    //List all incident in the db
+                    foreach (incident i in meniconHelperEntities.incident)
                     {
-                        if(r.id_role!=0)
+                        ListIncident listIncident = new ListIncident();
+                        person p = (person)(Session["User"]);
+
+                        //List of URL. Each incident can have up to 3 images.
+                        List<document> images = new List<document>();
+                        images.Add(i.document.First());
+
+                        //This part list all the supervisor of this incident.
+                        List<person> listPerson = new List<person>();
+                        type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                        foreach (var r in type.role)
                         {
-                            foreach (var per in r.person)
+                            if (r.id_role != 0)
                             {
-                                listPerson.Add(per);
+                                foreach (var per in r.person)
+                                {
+                                    listPerson.Add(per);
+                                }
                             }
                         }
-                    }
-                    //
+                        //
 
-                    //Only add the ticket if the user created the ticket.
-                    if (i.person.id_person == p.id_person)
-                    {
-                        listIncident.Reference = i.incident_code;
-                        listIncident.Image = images;
-                        listIncident.Description = i.description;
-                        listIncident.Supervisor = listPerson;
-                        listIncident.Date = i.date_create;
-                        listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
-                        listIncident.Type = i.statut.label;
-                        listIncident.Area = i.area.name;
-                        listIncident.Engine = i.engine.name;
+                        //Only add the ticket if the user created the ticket.
+                        if (i.person.id_person == p.id_person)
+                        {
+                            listIncident.Reference = i.incident_code;
+                            listIncident.Image = images;
+                            listIncident.Description = i.description;
+                            listIncident.Supervisor = listPerson;
+                            listIncident.Date = i.date_create;
+                            listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
+                            listIncident.Type = i.statut.label;
+                            listIncident.Area = i.area.name;
+                            listIncident.Engine = i.engine.name;
 
-                        list.Add(listIncident);
+                            list.Add(listIncident);
+                        }
                     }
                 }
+                else
+                    ViewBag.Message = GlobalRes.dbOffline;
             }
             return list;
         }
