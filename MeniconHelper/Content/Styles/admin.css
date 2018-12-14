@@ -41,6 +41,10 @@ button:focus {
     outline: 0;
 }
 
+.btn-success:focus {
+    box-shadow: none;
+}
+
 button {
     width: 90%;
     height: 50px;
@@ -82,5 +86,7 @@ form {
 
 .newPass {
     display: none;
+    opacity: 0;
+    transition: all 1s;
     width: 100%;
 }

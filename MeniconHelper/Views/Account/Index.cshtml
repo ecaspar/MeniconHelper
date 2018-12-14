@@ -30,7 +30,14 @@
                 }
             });
             $('.changePassword').click(function () {
-                $('.newPass').css({ 'display': 'initial' });
+                if ($('.newPass').css('display') == 'none') {
+                    $('.newPass').css({ 'display': 'initial', 'opacity': 1 });
+                    $('.changePassword').html('Réduire la fenêtre de modification');
+                } else {
+                    $('.newPass').css({ 'display': 'none', 'opacity': 0 });
+                    $('.changePassword').html('Modifier le mot de passe');
+                }
+                
             });
         });
     </script>
