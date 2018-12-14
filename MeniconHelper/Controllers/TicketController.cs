@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MeniconHelper.Models;
+using MeniconHelper.App_LocalResources;
 
 namespace MeniconHelper.Controllers
 {
@@ -85,32 +86,37 @@ namespace MeniconHelper.Controllers
                 //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
                 using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
                 {
-                    //Get the incident which correspond to the reference
-                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
-
-                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                    foreach (var r in type.role)
+                    if (meniconHelperEntities.Database.Exists())
                     {
-                        if(r.id_role!=0)
+                        //Get the incident which correspond to the reference
+                        incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+
+                        type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                        foreach (var r in type.role)
                         {
-                            foreach (var per in r.person)
+                            if (r.id_role != 0)
                             {
-                                listPerson.Add(per.id_person);
+                                foreach (var per in r.person)
+                                {
+                                    listPerson.Add(per.id_person);
+                                }
                             }
                         }
-                    }
-                    //Second check if the user can add a task/comment.
-                    if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
-                    {
-                        newTask.date_create = DateTime.Now;
-                        newTask.id_person = p.id_person;
-                        newTask.id_anomaly = i.id_anomaly;
-                        newTask.date_close = DateTime.Now;
+                        //Second check if the user can add a task/comment.
+                        if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
+                        {
+                            newTask.date_create = DateTime.Now;
+                            newTask.id_person = p.id_person;
+                            newTask.id_anomaly = i.id_anomaly;
+                            newTask.date_close = DateTime.Now;
 
-                        meniconHelperEntities.task.Add(newTask);
+                            meniconHelperEntities.task.Add(newTask);
 
-                        meniconHelperEntities.SaveChanges();
+                            meniconHelperEntities.SaveChanges();
+                        }
                     }
+                    else
+                        ViewBag.Message = GlobalRes.dbOffline;
                 }
 
             }
@@ -128,39 +134,44 @@ namespace MeniconHelper.Controllers
             //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //Get the reference of the ticket.
-                string code = Request.QueryString["id"];
-
-                //Get the incident which correspond to the reference
-                incident i = meniconHelperEntities.incident.Where(x=>x.incident_code == code).First();
-                List<document> images = new List<document>();
-
-                foreach(var image in i.document)
+                if (meniconHelperEntities.Database.Exists())
                 {
-                    images.Add(image);
-                }
-                List<person> listPerson = new List<person>();
-                type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
-                foreach (var r in type.role)
-                {
-                    if(r.id_role!=0)
+                    //Get the reference of the ticket.
+                    string code = Request.QueryString["id"];
+
+                    //Get the incident which correspond to the reference
+                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+                    List<document> images = new List<document>();
+
+                    foreach (var image in i.document)
                     {
-                        foreach (var p in r.person)
+                        images.Add(image);
+                    }
+                    List<person> listPerson = new List<person>();
+                    type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
+                    foreach (var r in type.role)
+                    {
+                        if (r.id_role != 0)
                         {
-                            listPerson.Add(p);
+                            foreach (var p in r.person)
+                            {
+                                listPerson.Add(p);
+                            }
                         }
                     }
-                }
 
-                listIncident.Reference = i.incident_code;
-                listIncident.Image = images;
-                listIncident.Description = i.description;
-                listIncident.Supervisor = listPerson;
-                listIncident.Date = i.date_create;
-                listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
-                listIncident.Type = i.statut.label;
-                listIncident.Area = i.area.name;
-                listIncident.Engine = i.engine.name;
+                    listIncident.Reference = i.incident_code;
+                    listIncident.Image = images;
+                    listIncident.Description = i.description;
+                    listIncident.Supervisor = listPerson;
+                    listIncident.Date = i.date_create;
+                    listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
+                    listIncident.Type = i.statut.label;
+                    listIncident.Area = i.area.name;
+                    listIncident.Engine = i.engine.name;
+                }
+                else
+                    return ViewBag.Message = GlobalRes.dbOffline;
             }
 
             return listIncident;
@@ -176,22 +187,27 @@ namespace MeniconHelper.Controllers
             //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                //Get the reference of the ticket.
-                string reference = Request.QueryString["id"];
-                //Get the incident which correspond to the reference
-                int idTicket = meniconHelperEntities.incident.First(x => x.incident_code == reference).id_anomaly;
-
-                //Load all the tasks/comments from the db linked to the id_anomaly
-                foreach (task t in meniconHelperEntities.task.Where(x => x.id_anomaly == idTicket))
+                if (meniconHelperEntities.Database.Exists())
                 {
-                    ListTask listTask = new ListTask();
+                    //Get the reference of the ticket.
+                    string reference = Request.QueryString["id"];
+                    //Get the incident which correspond to the reference
+                    int idTicket = meniconHelperEntities.incident.First(x => x.incident_code == reference).id_anomaly;
 
-                    listTask.Comment = t.comment;
-                    listTask.CreateDate = t.date_create;
-                    listTask.CloseDate = t.date_close;
-                    listTask.PersonComment = t.person;
-                    list.Add(listTask);
+                    //Load all the tasks/comments from the db linked to the id_anomaly
+                    foreach (task t in meniconHelperEntities.task.Where(x => x.id_anomaly == idTicket))
+                    {
+                        ListTask listTask = new ListTask();
+
+                        listTask.Comment = t.comment;
+                        listTask.CreateDate = t.date_create;
+                        listTask.CloseDate = t.date_close;
+                        listTask.PersonComment = t.person;
+                        list.Add(listTask);
+                    }
                 }
+                else
+                    ViewBag.Message = GlobalRes.dbOffline;
 
             }
 

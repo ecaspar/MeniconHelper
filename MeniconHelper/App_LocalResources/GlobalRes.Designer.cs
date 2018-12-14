@@ -115,6 +115,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connection failed.
+        /// </summary>
+        public static string dbOffline {
+            get {
+                return ResourceManager.GetString("dbOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Declarant.
         /// </summary>
         public static string declarant {
