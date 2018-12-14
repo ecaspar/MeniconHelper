@@ -178,6 +178,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Password doesn&apos;t match.
+        /// </summary>
+        public static string incorrectConfirm {
+            get {
+                return ResourceManager.GetString("incorrectConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à You entered an incorrect password.
         /// </summary>
         public static string incorrectPassword {

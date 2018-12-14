@@ -156,6 +156,9 @@
   <data name="home" xml:space="preserve">
     <value>Accueil</value>
   </data>
+  <data name="incorrectConfirm" xml:space="preserve">
+    <value>Les mots de passe ne correspondent pas</value>
+  </data>
   <data name="incorrectPassword" xml:space="preserve">
     <value>Votre mot de passe est incorrect.</value>
   </data>

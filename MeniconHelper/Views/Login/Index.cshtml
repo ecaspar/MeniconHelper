@@ -40,14 +40,14 @@
 
                     <div class="form-group">
 
-                        @Html.TextBoxFor(p => p.username, new { Class = "LoginForm", placeholder = GlobalRes.username })
+                        @Html.TextBoxFor(p => p.username, new { Class = "LoginForm", placeholder = GlobalRes.username, required = "Required" })
 
 
                     </div>
 
                     <div class="form-group">
 
-                        @Html.TextBoxFor(p => p.password_default, new { Class = "LoginForm", placeholder = GlobalRes.password, Type = "Password" })
+                        @Html.TextBoxFor(p => p.password_default, new { Class = "LoginForm", placeholder = GlobalRes.password, Type = "Password", required = "Required" })
 
                     </div>
 

@@ -49,7 +49,32 @@ namespace MeniconHelper.Controllers
                                 pswPerson.password_default = GenerateMD5(confirmPassword);
                                 meniconHelperEntities.SaveChanges();
                             }
+                            else
+                            {
+                                ViewBag.Message = GlobalRes.incorrectConfirm;
+                                person per = (person)(Session["User"]);
+                                ViewBag.name = per.first_name + " " + per.last_name;
+                                ViewBag.person = per;
+                                if (p.id_role == 0)
+                                    ViewBag.Admin = true;
+                                else
+                                    ViewBag.Admin = false;
+                                return View("../Account/Index");
+                            }
                         }
+                        else
+                        {
+                            ViewBag.Message = GlobalRes.incorrectPassword;
+                            person per = (person)(Session["User"]);
+                            ViewBag.name = per.first_name + " " + per.last_name;
+                            ViewBag.person = per;
+                            if (p.id_role == 0)
+                                ViewBag.Admin = true;
+                            else
+                                ViewBag.Admin = false;
+                            return View("../Account/Index");
+                        }
+
                     }
                     else
                         ViewBag.Message = GlobalRes.dbOffline;
