@@ -18,8 +18,17 @@ namespace MeniconHelper.Controllers
                 //Get which user is logged.
                 person p = (person)(Session["User"]);
                 ViewBag.name = p.first_name + " " + p.last_name;
+                using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+                {
+                    List<role> list = new List<role>();
+                    foreach (var r in meniconHelperEntities.role)
+                    {
+                        list.Add(r);
+                    }
+                    ViewBag.roles = list;
+                }
 
-                if (p.id_role == 0)
+                    if (p.id_role == 0)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -30,7 +39,7 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
-        public ActionResult AddRole(role role)
+        public ActionResult AddRole(Models.ListModel role)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
@@ -39,16 +48,16 @@ namespace MeniconHelper.Controllers
                 {
                     list.Add(r.label);
                 }
-                if(role.label != null && !list.Contains(role.label))
+                if(role.Roles.label != null && !list.Contains(role.Roles.label))
                 {
-                    meniconHelperEntities.role.Add(role);
+                    meniconHelperEntities.role.Add(role.Roles);
                     meniconHelperEntities.SaveChanges();
                 }
             }
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult AddUser(person person)
+        public ActionResult AddUser(Models.ListModel person)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
@@ -59,12 +68,12 @@ namespace MeniconHelper.Controllers
                     list.Add(p.username);
                     list.Add(p.phone);
                 }
-                if (!list.Contains(person.username) && !list.Contains(person.email) && !list.Contains(person.phone))
+                if (!list.Contains(person.Persons.username) && !list.Contains(person.Persons.email) && !list.Contains(person.Persons.phone))
                 {
-                    if(person.email != null && person.username != null && person.first_name != null && person.last_name != null && person.password_default != null && person.phone != null && person.password_scan != null)
+                    if(person.Persons.email != null && person.Persons.username != null && person.Persons.first_name != null && person.Persons.last_name != null && person.Persons.password_default != null && person.Persons.phone != null && person.Persons.password_scan != null)
                     {
-                        person.password_default = GenerateMD5(person.password_default);
-                        meniconHelperEntities.person.Add(person);
+                        person.Persons.password_default = GenerateMD5(person.Persons.password_default);
+                        meniconHelperEntities.person.Add(person.Persons);
                         meniconHelperEntities.SaveChanges();
                     }
                 }
