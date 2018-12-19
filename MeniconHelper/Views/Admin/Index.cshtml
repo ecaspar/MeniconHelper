@@ -1,19 +1,122 @@
-﻿
-@{
-    Layout = null;
-}
-
+﻿@model MeniconHelper.Models.ListModel
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Administration</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @Styles.Render("~/Content/Styles/header.css")
+    @Styles.Render("~/Content/Styles/admin.css")
+    <script>
+        $(document).ready(function () {
+            $('.button-menu img').click(function () {
+                if ($('.menu').css('display') == 'none') {
+                    $('.menu').css({ 'display': 'flex' });
+                    $('.button-menu img').css({ 'transform': 'rotate(-90deg)' });
+                } else {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    <div>
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div class="title"><h1>Menicon Helper</h1></div>
+        <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
+        <div class="menu">
+            <ul>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>@GlobalRes.home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myTicket</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myDeclaration</li></a>
+                <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
+                @if (ViewBag.Admin)
+                {
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-toolbox"></i><li>@GlobalRes.administration</li></a>
+                }
+                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-sm-8 admin-container">
+                <h2>Administration</h2>
+                <div class="separation"></div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                        @using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                <span><i class="fas fa-suitcase-rolling"></i></span>
+                                @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", placeholder = "Rôle", required = "Required", Type = "Text" })
+                            </div>
+                            <button type="submit" class="btn btn-success add">Ajouter le rôle</button>
+                        }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <div class="small-field-one">
+                                        <span><i class="fas fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.first_name, new { Class = "first_name form-control", placeholder = "Prénom", required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="small-field-two">
+                                        <span><i class="far fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.last_name, new { Class = "last_name form-control", placeholder = "Nom", required = "Required", Type = "Text" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="far fa-envelope"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.email, new { Class = "email form-control", placeholder = "Email", required = "Required", Type = "Mail" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-phone"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.phone, new { Class = "phone form-control", placeholder = "Téléphone", required = "Required", Type = "Phone" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-key"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.password_default, new { Class = "password form-control", placeholder = "Mot de passe", required = "Required", Type = "Password" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-lock"></i></span>
+                                    <input class="form-control" type="password" id="confirm" name="confirm" placeholder="Confirmation" />
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-key"></i></span>
+                                    <select class="form-control">
+                                        @foreach (var role in ViewBag.roles)
+                                        {
+                                            <option>@role.label</option>
+                                        }
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success">Ajouter l'utilisateur</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
     @if (ViewBag.Message != null)
     {
         <script type="text/javascript">

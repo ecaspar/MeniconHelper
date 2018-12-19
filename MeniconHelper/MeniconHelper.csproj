@@ -203,6 +203,7 @@
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ListIncident.cs" />
+    <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ListTask.cs" />
     <Compile Include="person.cs">
       <DependentUpon>MeniconHelperBDD.tt</DependentUpon>

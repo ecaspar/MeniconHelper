@@ -45,17 +45,38 @@ button:focus {
     box-shadow: none;
 }
 
+.btn, button {
+    border-radius: 0px;
+}
+
 button {
     width: 90%;
     height: 50px;
     border-radius: 0.25rem;
 }
 
+.add {
+    margin-bottom: 1rem;
+}
+
+.small-field-one, .small-field-two {
+    display: flex;
+    flex-direction: row;
+}
+
+.small-field-one {
+    margin-right: 1%;
+}
+
+.small-field-two {
+    margin-left: 1%;
+}
+
 span {
     background: #28a745;
     color: #FFFFFF;
     height: 50px;
-    width: 20%;
+    width: 54px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,4 +110,16 @@ form {
     opacity: 0;
     transition: all 1s;
     width: 100%;
+}
+
+.form-control {
+    border: 0;
+    height: 50px;
+    outline: 1px solid #28a745;
+    border-radius: 0px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    outline: 1px solid #28a745;
 }
