@@ -60,7 +60,7 @@ namespace MeniconHelper.Controllers
         }
 
         //Controller for the view Views/Home/MyDeclarations
-        public ActionResult MyDeclarations()
+        public ActionResult MyDeclarations() 
         {
             //Someone who isn't logged can't access to this view.
             if (Session["User"] != null)
