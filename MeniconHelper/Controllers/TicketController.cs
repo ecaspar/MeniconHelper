@@ -133,6 +133,7 @@ namespace MeniconHelper.Controllers
 
         }
 
+        [HttpPost]
         public ActionResult CloseTicket()
         {
             string code = Session["Ticket"].ToString();

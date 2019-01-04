@@ -123,6 +123,16 @@
                     </div>
                 }
             </div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-10">
+                        @using (Html.BeginForm("CloseTicket", "Ticket", FormMethod.Post))
+                        {
+                            <button type="submit" class="btn btn-dark add">Fermer le ticket</button>
+                        }
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="right-panel">
             <div class="list-comment">
