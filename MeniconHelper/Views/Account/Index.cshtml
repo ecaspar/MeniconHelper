@@ -75,7 +75,7 @@
                     <span><i class="fas fa-mobile-alt"></i></span>
                     <input class="phone_number" type="tel" placeholder="@ViewBag.person.phone" disabled="disabled" />
                 </div>
-                <button class="btn btn-success changePassword">Modifier le mot de passe</button>
+                <button class="btn btn-dark changePassword">Modifier le mot de passe</button>
                 <div class="newPass">
                     @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
                     {
@@ -91,7 +91,7 @@
                             <span><i class="fas fa-key"></i></span>
                             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation du mot de passe" required="required" />
                         </div>
-                        <button type="submit" class="btn btn-success">Valider</button>
+                        <button type="submit" class="btn btn-dark">Valider</button>
                     }
                 </div>
             </div>

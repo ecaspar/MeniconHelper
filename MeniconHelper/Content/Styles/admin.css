@@ -10,6 +10,10 @@
     padding-bottom: 20px;
 }
 
+.container {
+    padding-top: 1rem;
+}
+
 .form-group {
     display: flex;
     align-items: center;
@@ -73,7 +77,7 @@ button {
 }
 
 span {
-    background: #28a745;
+    background: #343a40;
     color: #FFFFFF;
     height: 50px;
     width: 54px;
@@ -81,12 +85,12 @@ span {
     justify-content: center;
     align-items: center;
     padding: 1px;
-    outline: 1px solid #28a745;
+    outline: 1px solid #343a40;
 }
 
 input {
     background: #F7F7F7;
-    outline: 1px solid #28a745;
+    outline: 1px solid #343a40;
     border: 0;
     height: 50px;
     width: 100%;
@@ -115,11 +119,12 @@ form {
 .form-control {
     border: 0;
     height: 50px;
-    outline: 1px solid #28a745;
+    outline: 1px solid #343a40;
     border-radius: 0px;
 }
 
 .form-control:focus {
     box-shadow: none;
-    outline: 1px solid #28a745;
+    outline: 1px solid #343a40;
 }
+

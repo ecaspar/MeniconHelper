@@ -9,5 +9,8 @@ namespace MeniconHelper.Models
     {
         public MeniconHelper.person Persons { get; set; }
         public MeniconHelper.role Roles { get; set; }
+        public MeniconHelper.area Areas { get; set; }
+        public MeniconHelper.engine Engines { get; set; }
+        public MeniconHelper.type_incident TypeIncidents { get; set; }
     }
 }

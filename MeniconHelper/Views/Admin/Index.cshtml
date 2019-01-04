@@ -58,14 +58,14 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-10">
-                        @using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
-                        {
-                            <div class="form-group">
-                                <span><i class="fas fa-suitcase-rolling"></i></span>
-                                @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", placeholder = "Rôle", required = "Required", Type = "Text" })
-                            </div>
-                            <button type="submit" class="btn btn-success add">Ajouter le rôle</button>
-                        }
+                            @using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-suitcase-rolling"></i></span>
+                                    @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", placeholder = "Rôle", required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Ajouter le rôle</button>
+                            }
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,53 @@
                                         }
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-success">Ajouter l'utilisateur</button>
+                                <button type="submit" class="btn btn-dark add">Ajouter l'utilisateur</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddArea", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-warehouse"></i></span>
+                                    @Html.TextBoxFor(a => a.Areas.name, new { Class = "area form-control", placeholder = "Zone", required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Ajouter la zone</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddEngine", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-wrench"></i></span>
+                                    @Html.TextBoxFor(e => e.Engines.name, new { Class = "engine form-control", placeholder = "Machine", required = "Required", Type = "Text" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-list-ol"></i></span>
+                                    @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "engine form-control", placeholder = "Numéro de série", required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Ajouter la machine</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddTypeIncident", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-indent"></i></span>
+                                    @Html.TextBoxFor(ti => ti.TypeIncidents.label, new { Class = "type-incident form-control", placeholder = "Type d'incident", required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Ajouter le type</button>
                             }
                         </div>
                     </div>
