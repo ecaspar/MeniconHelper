@@ -186,6 +186,9 @@
   <data name="signOut" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
   <data name="supervisor" xml:space="preserve">
     <value>Superviseur</value>
   </data>

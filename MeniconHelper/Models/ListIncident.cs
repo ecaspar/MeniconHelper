@@ -12,6 +12,7 @@ namespace MeniconHelper.Models
         public DateTime Date { get; set; }
         public string Declarant { get; set; }
         public string Type { get; set; }
+        public string Status { get; set; }
         public string Area { get; set; }
         public string Engine { get; set; }
 

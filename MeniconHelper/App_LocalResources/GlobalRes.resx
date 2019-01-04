@@ -186,6 +186,9 @@
   <data name="signOut" xml:space="preserve">
     <value>Sign out</value>
   </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="supervisor" xml:space="preserve">
     <value>Supervisor</value>
   </data>

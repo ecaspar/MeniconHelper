@@ -92,19 +92,24 @@
             <tbody>
                 @foreach (var x in ViewBag.DeclarantIncident)
                 {
-                    <tr>
-                        <td class="reference">
-                            <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
-                        </td>
-                        <td class="image"><img src="@x.Image[0].name" /></td>
-                        <td class="description">@x.Description</td>
-                        <td class="supervisor">@x.Supervisor[0].first_name</td>
-                        <td class="date">@x.Date</td>
-                        <td class="declarant">@x.Declarant</td>
-                        <td class="type">@x.Type</td>
-                        <td class="area">@x.Area</td>
-                        <td class="engine">@x.Engine</td>
-                    </tr>
+                <tr>
+                    <td class="reference">
+                        <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
+                    </td>
+                    <td class="image"><img src="@x.Image[0].name" /></td>
+                    <td class="description">@x.Description</td>
+                    <td class="supervisor">
+                        @foreach (var y in x.Supervisor)
+                        {
+                            <div>@y.first_name @y.last_name</div>
+                        }
+                    </td>
+                    <td class="date">@x.Date</td>
+                    <td class="declarant">@x.Declarant</td>
+                    <td class="type">@x.Type</td>
+                    <td class="area">@x.Area</td>
+                    <td class="engine">@x.Engine</td>
+                </tr>
                 }
             </tbody>
         </table>

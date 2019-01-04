@@ -32,14 +32,14 @@ namespace MeniconHelper.Controllers
                 //Get the reference of the ticket choose using the URL
                 string code = Request.QueryString["id"];
                 Session["Ticket"] = code;
-
+                
                 //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
                 using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
                 {
                     //Get the incident which correspond to the reference
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
                     List<int> listPerson = new List<int>();
-
+                    /*
                     //Allow the logged user to add a task/comment only if he's supervisor/creator of the ticket
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                     foreach (var r in type.role)
@@ -57,6 +57,7 @@ namespace MeniconHelper.Controllers
                     else
                         ViewBag.Authorize = false;
                     //
+                    */
                     if (p.id_role == 0)
                         ViewBag.Admin = true;
                     else
@@ -103,17 +104,17 @@ namespace MeniconHelper.Controllers
                             }
                         }
                         //Second check if the user can add a task/comment.
-                        if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
-                        {
-                            newTask.date_create = DateTime.Now;
-                            newTask.id_person = p.id_person;
-                            newTask.id_anomaly = i.id_anomaly;
-                            newTask.date_close = DateTime.Now;
+                        //if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
+                        //{
+                        newTask.date_create = DateTime.Now;
+                        newTask.id_person = p.id_person;
+                        newTask.id_anomaly = i.id_anomaly;
+                        newTask.date_close = DateTime.Now;
 
-                            meniconHelperEntities.task.Add(newTask);
+                        meniconHelperEntities.task.Add(newTask);
 
-                            meniconHelperEntities.SaveChanges();
-                        }
+                        meniconHelperEntities.SaveChanges();
+                        //}
                     }
                     else
                         ViewBag.Message = GlobalRes.dbOffline;
@@ -166,7 +167,8 @@ namespace MeniconHelper.Controllers
                     listIncident.Supervisor = listPerson;
                     listIncident.Date = i.date_create;
                     listIncident.Declarant = i.person.first_name + " " + i.person.last_name;
-                    listIncident.Type = i.statut.label;
+                    listIncident.Type = i.type_incident.label;
+                    listIncident.Status = i.statut.label;
                     listIncident.Area = i.area.name;
                     listIncident.Engine = i.engine.name;
                 }
