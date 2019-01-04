@@ -38,6 +38,12 @@ namespace MeniconHelper.Controllers
                 {
                     //Get the incident which correspond to the reference
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+                    if(i.date_create == i.date_processing)
+                    {
+                        i.date_processing = DateTime.Now;
+                        i.id_statut = 3;
+                        meniconHelperEntities.SaveChanges();
+                    }
                     List<int> listPerson = new List<int>();
                     /*
                     //Allow the logged user to add a task/comment only if he's supervisor/creator of the ticket
@@ -112,6 +118,7 @@ namespace MeniconHelper.Controllers
                         newTask.date_close = DateTime.Now;
 
                         meniconHelperEntities.task.Add(newTask);
+                        i.date_update = DateTime.Now;
 
                         meniconHelperEntities.SaveChanges();
                         //}
@@ -124,6 +131,25 @@ namespace MeniconHelper.Controllers
 
             return RedirectToAction("../Ticket/Index", new { id = code });
 
+        }
+
+        public ActionResult CloseTicket()
+        {
+            string code = Session["Ticket"].ToString();
+            //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                if (meniconHelperEntities.Database.Exists())
+                {
+                    //Get the incident which correspond to the reference
+                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+                    i.date_close = DateTime.Now;
+                    i.id_statut = 4;
+
+                    meniconHelperEntities.SaveChanges();
+                }
+            }
+            return RedirectToAction("../Ticket/Index", new { id = code });
         }
 
         //Load the ticket selected by the user
