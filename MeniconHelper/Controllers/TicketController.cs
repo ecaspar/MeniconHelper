@@ -45,7 +45,7 @@ namespace MeniconHelper.Controllers
                         meniconHelperEntities.SaveChanges();
                     }
                     List<int> listPerson = new List<int>();
-                    /*
+                    
                     //Allow the logged user to add a task/comment only if he's supervisor/creator of the ticket
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                     foreach (var r in type.role)
@@ -63,11 +63,18 @@ namespace MeniconHelper.Controllers
                     else
                         ViewBag.Authorize = false;
                     //
-                    */
+                    
                     if (p.id_role == 0)
                         ViewBag.Admin = true;
                     else
                         ViewBag.Admin = false;
+
+                    //
+
+                    if (i.id_statut == 4)
+                        ViewBag.Close = false;
+                    else
+                        ViewBag.Close = true;
                 }
                 return View();
             }
@@ -112,6 +119,7 @@ namespace MeniconHelper.Controllers
                         //Second check if the user can add a task/comment.
                         //if (i.person.id_person == p.id_person || listPerson.Contains(p.id_person))
                         //{
+
                         newTask.date_create = DateTime.Now;
                         newTask.id_person = p.id_person;
                         newTask.id_anomaly = i.id_anomaly;
@@ -119,7 +127,6 @@ namespace MeniconHelper.Controllers
 
                         meniconHelperEntities.task.Add(newTask);
                         i.date_update = DateTime.Now;
-
                         meniconHelperEntities.SaveChanges();
                         //}
                     }
@@ -146,6 +153,24 @@ namespace MeniconHelper.Controllers
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
                     i.date_close = DateTime.Now;
                     i.id_statut = 4;
+
+                    meniconHelperEntities.SaveChanges();
+                }
+            }
+            return RedirectToAction("../Ticket/Index", new { id = code });
+        }
+
+        public ActionResult OpenTicket()
+        {
+            string code = Session["Ticket"].ToString();
+            //Connect to the db using EntityFramework  - MeniconHelperBDD.edmx to get the diagram.
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                if (meniconHelperEntities.Database.Exists())
+                {
+                    //Get the incident which correspond to the reference
+                    incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
+                    i.id_statut = 3;
 
                     meniconHelperEntities.SaveChanges();
                 }
