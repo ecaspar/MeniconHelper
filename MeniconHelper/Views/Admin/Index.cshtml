@@ -170,12 +170,19 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-10">
-                            <div class="form-group">
-                                <span><i class="fas fa-suitcase-rolling"></i></span>
-                                @Html.DropDownListFor(r => r.Roles, new SelectList(ViewBag.roles, "id_role", "label"), "Choisir...", new { Class = "form-control role-list" })
-                            </div>
-                            <button type="submit" class="btn btn-dark modify-role">Modifier le rôle</button>
-                            @Html.TextBoxFor(r => r.Roles.label, new { Class = "role-label form-control", Type = "Text" })
+                            @using (Html.BeginForm("DisplayRole", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-suitcase-rolling"></i></span>
+                                    @Html.DropDownListFor(r => r.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), "Choisir...", new { Class = "form-control" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Modifier le rôle</button>
+                            }
+
+                            @if (ViewBag.ChangeRole != null)
+                            {
+                                @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", Placeholder = ViewBag.ChangeRole.label, Type = "Text" })
+                            }
                         </div>
                     </div>
                 </div>
