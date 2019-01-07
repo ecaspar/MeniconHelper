@@ -146,16 +146,6 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult DisplayRole(Models.ListModel role)
-        {
-            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
-            {
-                ViewBag.RoleID = new SelectList(meniconHelperEntities.role.OrderBy(r => r.label), "id_role", "label");
-                var roles = meniconHelperEntities.role.Where(i => i.id_role == role.Roles.id_role);
-                return View(roles);
-            }
-        }
-
         public ActionResult UpdateRole(role role)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
