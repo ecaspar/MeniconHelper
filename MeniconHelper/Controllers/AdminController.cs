@@ -141,6 +141,8 @@ namespace MeniconHelper.Controllers
 
                 Session["ChangeRole"] = roles;
 
+                ViewBag.RoleButton = "Valider la modification";
+
                 return View("../Admin/Index");
             }
         }
@@ -165,6 +167,7 @@ namespace MeniconHelper.Controllers
                 }
                 Session["ChangeRole"] = null;
             }
+
             return RedirectToAction("../Admin/Index");
         }
 
@@ -181,6 +184,8 @@ namespace MeniconHelper.Controllers
                 ViewBag.ChangePerson = persons;
 
                 Session["ChangePerson"] = persons;
+
+                ViewBag.UserButton = "Valider la modification";
 
                 return View("../Admin/Index");
             }
@@ -229,6 +234,8 @@ namespace MeniconHelper.Controllers
 
                 Session["ChangeArea"] = areas;
 
+                ViewBag.AreaButton = "Valider la modification";
+
                 return View("../Admin/Index");
             }
         }
@@ -268,6 +275,8 @@ namespace MeniconHelper.Controllers
                 ViewBag.ChangeEngine = engines;
 
                 Session["ChangeEngine"] = engines;
+
+                ViewBag.EngineButton = "Valider la modification";
 
                 return View("../Admin/Index");
             }
@@ -311,6 +320,8 @@ namespace MeniconHelper.Controllers
 
                 Session["ChangeTypeIncident"] = type_incidents;
 
+                ViewBag.TypeButton = "Valider la modification";
+
                 return View("../Admin/Index");
             }
         }
@@ -348,6 +359,11 @@ namespace MeniconHelper.Controllers
             //Get which user is logged.
             person p = (person)(Session["User"]);
             ViewBag.name = p.first_name + " " + p.last_name;
+            ViewBag.RoleButton = "Modifier le rôle";
+            ViewBag.UserButton = "Modifier l'utilisateur";
+            ViewBag.AreaButton = "Modifier la zone";
+            ViewBag.EngineButton = "Modifier la machine";
+            ViewBag.TypeButton = "Modifier le type d'incident";
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
                 List<role> listRole = new List<role>();
