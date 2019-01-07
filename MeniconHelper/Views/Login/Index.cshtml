@@ -36,22 +36,22 @@
 
                 <div class="col-sm-6">
 
-                    <div id="space"></div>
+                    <div class="logo"><img src="../Content/Images/Logo_big.png" /></div>
 
                     <div class="form-group">
 
-                        @Html.TextBoxFor(p => p.username, new { Class = "LoginForm", placeholder = GlobalRes.username, required = "Required" })
+                        @Html.TextBoxFor(p => p.username, new { Class = "form-control", placeholder = GlobalRes.username, required = "Required" })
 
 
                     </div>
 
                     <div class="form-group">
 
-                        @Html.TextBoxFor(p => p.password_default, new { Class = "LoginForm", placeholder = GlobalRes.password, Type = "Password", required = "Required" })
+                        @Html.TextBoxFor(p => p.password_default, new { Class = "form-control", placeholder = GlobalRes.password, Type = "Password", required = "Required" })
 
                     </div>
 
-                    <button type="submit" class="btn btn-outline-success btn-block">@GlobalRes.connection</button>
+                    <button type="submit" class="btn btn-dark btn-block">@GlobalRes.connection</button>
 
 
                 </div>
