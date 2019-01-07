@@ -83,9 +83,9 @@
                     <tbody>
                         <tr>
                             <td>
-                                @foreach (var p in ViewBag.Ticket.Supervisor)
+                                @foreach (var y in ViewBag.Ticket.Supervisor)
                                 {
-                                    @p.first_name
+                                    <div>@y.first_name @y.last_name</div>
                                 }
                             </td>
                             <td>@ViewBag.Ticket.Declarant</td>
@@ -158,13 +158,20 @@
                 <h2>@GlobalRes.comments</h2>
                 <nav>
                     <ul class="list-group">
+
+                        <li class="list-group-item">
+                            @ViewBag.Ticket.Date @ViewBag.Ticket.Declarant
+                            <br />
+                            @ViewBag.Ticket.Description
+                        </li>
+
                         @foreach (var x in ViewBag.Task)
                         {
-                            <li class="list-group-item">
-                                @x.CreateDate @x.PersonComment.last_name
-                                <br />
-                                @x.Comment
-                            </li>
+                        <li class="list-group-item">
+                            @x.CreateDate @x.PersonComment.first_name @x.PersonComment.last_name
+                            <br />
+                            @x.Comment
+                        </li>
                         }
                     </ul>
                 </nav>
