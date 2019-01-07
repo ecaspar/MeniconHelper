@@ -34,7 +34,7 @@ namespace MeniconHelper.Controllers
                     ViewBag.persons = listPerson;
                 }
 
-                    if (p.id_role == 0)
+                if (p.id_role == 0)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -146,13 +146,28 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        [HttpPost]
         public ActionResult DisplayRole(Models.ListModel role)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                ViewBag.RoleID = new SelectList(meniconHelperEntities.role.OrderBy(r => r.label), "id_role", "label");
-                var roles = meniconHelperEntities.role.Where(i => i.id_role == role.Roles.id_role);
-                return View(roles);
+                role roles = meniconHelperEntities.role.First(i => i.id_role == role.Roles.id_role);
+
+                person p = (person)(Session["User"]);
+                if (p.id_role == 0)
+                    ViewBag.Admin = true;
+                else
+                    ViewBag.Admin = false;
+                List<role> listRole = new List<role>();
+                foreach (var r in meniconHelperEntities.role)
+                {
+                    listRole.Add(r);
+                }
+                ViewBag.roles = listRole;
+
+                ViewBag.ChangeRole = roles;
+
+                return View("../Admin/Index");
             }
         }
 
