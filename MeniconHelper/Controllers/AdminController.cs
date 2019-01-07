@@ -22,6 +22,7 @@ namespace MeniconHelper.Controllers
                 return View("../Login/Index");
         }
 
+        [HttpPost]
         public ActionResult AddRole(Models.ListModel role)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -40,6 +41,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        [HttpPost]
         public ActionResult AddUser(Models.ListModel person)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -66,6 +68,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        [HttpPost]
         public ActionResult AddArea(Models.ListModel area)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -85,6 +88,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        [HttpPost]
         public ActionResult AddEngine(Models.ListModel engine)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -105,6 +109,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        [HttpPost]
         public ActionResult AddTypeIncident(Models.ListModel type_Incident)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
@@ -134,114 +139,202 @@ namespace MeniconHelper.Controllers
 
                 ViewBag.ChangeRole = roles;
 
+                Session["ChangeRole"] = roles;
+
                 return View("../Admin/Index");
             }
         }
 
-        public ActionResult UpdateRole(role role)
+        [HttpPost]
+        public ActionResult UpdateRole(Models.ListModel role)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                role CurrentRole = (role)Session["ChangeRole"];
+
                 List<string> list = new List<string>();
                 foreach (var r in meniconHelperEntities.role)
                 {
                     list.Add(r.label);
                 }
-                if (role.label != null && !list.Contains(role.label))
+                if (role.Roles.label != null && !list.Contains(role.Roles.label))
                 {
-                    role r = meniconHelperEntities.role.Single(x => x.label == role.label);
-                    r.label = role.label;
+                    role r = meniconHelperEntities.role.Single(x => x.id_role == CurrentRole.id_role);
+                    r.label = role.Roles.label;
                     meniconHelperEntities.SaveChanges();
                 }
+                Session["ChangeRole"] = null;
             }
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult UpdateUser(person person)
+
+        [HttpPost]
+        public ActionResult DisplayUser(Models.ListModel person)
+        {
+            LoadBag();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                person persons = meniconHelperEntities.person.First(i => i.id_person == person.Persons.id_person);
+
+                ViewBag.ChangePerson = persons;
+
+                Session["ChangePerson"] = persons;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateUser(Models.ListModel person)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                person CurrentPerson = (person)Session["ChangePerson"];
+
                 List<string> list = new List<string>();
                 foreach (var p in meniconHelperEntities.person)
                 {
-                    list.Add(p.email);
                     list.Add(p.username);
-                    list.Add(p.phone);
                 }
-                if (!list.Contains(person.username) && !list.Contains(person.email) && !list.Contains(person.phone))
+                if (!list.Contains(person.Persons.username) || CurrentPerson.username == person.Persons.username)
                 {
-                    if (person.email != null && person.username != null && person.first_name != null && person.last_name != null && person.password_default != null && person.phone != null && person.password_scan != null)
+                    if (person.Persons.email != null && person.Persons.username != null && person.Persons.first_name != null && person.Persons.last_name != null && person.Persons.phone != null)
                     {
-                        person p = meniconHelperEntities.person.Single(x => x.username == person.username);
-                        person.password_default = GenerateMD5(person.password_default);
-                        p.email = person.email;
-                        p.username = person.username;
-                        p.first_name = person.first_name;
-                        p.last_name = person.last_name;
-                        p.password_default = person.password_default;
-                        p.phone = person.password_default;
+                        person p = meniconHelperEntities.person.Single(x => x.id_person == CurrentPerson.id_person);
+                        p.email = person.Persons.email;
+                        p.username = person.Persons.username;
+                        p.first_name = person.Persons.first_name;
+                        p.last_name = person.Persons.last_name;
+                        p.phone = person.Persons.phone;
                         meniconHelperEntities.SaveChanges();
                     }
                 }
             }
+            Session["ChangePerson"] = null;
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult UpdateArea(area area)
+        [HttpPost]
+        public ActionResult DisplayArea(Models.ListModel area)
+        {
+            LoadBag();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                area areas = meniconHelperEntities.area.First(i => i.id_area == area.Areas.id_area);
+
+                ViewBag.ChangeArea = areas;
+
+                Session["ChangeArea"] = areas;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateArea(Models.ListModel area)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                area CurrentArea = (area)Session["ChangeArea"];
+
                 List<string> list = new List<string>();
                 foreach (var a in meniconHelperEntities.area)
                 {
                     list.Add(a.name);
                 }
-                if (area.name != null && !list.Contains(area.name))
+                if (area.Areas.name != null && !list.Contains(area.Areas.name))
                 {
-                    area a = meniconHelperEntities.area.Single(x => x.name == area.name);
-                    a.name = area.name;
+                    area a = meniconHelperEntities.area.Single(x => x.id_area == CurrentArea.id_area);
+                    a.name = area.Areas.name;
                     meniconHelperEntities.SaveChanges();
                 }
             }
+            Session["ChangeArea"] = null;
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult UpdateEngine(engine engine)
+        [HttpPost]
+        public ActionResult DisplayEngine(Models.ListModel engine)
+        {
+            LoadBag();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                engine engines = meniconHelperEntities.engine.First(i => i.id_engine == engine.Engines.id_engine);
+
+                ViewBag.ChangeEngine = engines;
+
+                Session["ChangeEngine"] = engines;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateEngine(Models.ListModel engine)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+
+                engine CurrentEngine = (engine)Session["ChangeEngine"];
+
                 List<string> list = new List<string>();
                 foreach (var e in meniconHelperEntities.engine)
                 {
-                    list.Add(e.name);
                     list.Add(e.serial_number);
                 }
-                if (engine.name != null && engine.serial_number != null && !list.Contains(engine.name) && !list.Contains(engine.serial_number))
+                if (!list.Contains(engine.Engines.serial_number) || engine.Engines.serial_number == CurrentEngine.serial_number)
                 {
-                    engine e = meniconHelperEntities.engine.Single(x => x.name == engine.name);
-                    e.name = engine.name;
+                    engine e = meniconHelperEntities.engine.Single(x => x.id_engine == CurrentEngine.id_engine);
+                    e.name = engine.Engines.name;
+                    e.serial_number = engine.Engines.serial_number;
                     meniconHelperEntities.SaveChanges();
                 }
             }
+            Session["ChangeEngine"] = null;
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult UpdateTypeIncident(type_incident type_Incident)
+        [HttpPost]
+        public ActionResult DisplayTypeIncident(Models.ListModel type_Incident)
+        {
+            LoadBag();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                type_incident type_incidents = meniconHelperEntities.type_incident.First(i => i.id_type_anomaly == type_Incident.TypeIncidents.id_type_anomaly);
+
+                ViewBag.ChangeTypeIncident = type_incidents;
+
+                Session["ChangeTypeIncident"] = type_incidents;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTypeIncident(Models.ListModel type_Incident)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
+                type_incident CurrentTypeIncident = (type_incident)Session["ChangeTypeIncident"];
+
                 List<string> list = new List<string>();
                 foreach (var i in meniconHelperEntities.type_incident)
                 {
                     list.Add(i.label);
                 }
-                if (type_Incident.label != null && !list.Contains(type_Incident.label))
+                if (type_Incident.TypeIncidents.label != null && !list.Contains(type_Incident.TypeIncidents.label))
                 {
-                    type_incident i = meniconHelperEntities.type_incident.Single(x => x.label == type_Incident.label);
-                    i.label = type_Incident.label;
+                    type_incident i = meniconHelperEntities.type_incident.Single(x => x.label == CurrentTypeIncident.label);
+                    i.label = type_Incident.TypeIncidents.label;
                     meniconHelperEntities.SaveChanges();
                 }
             }
+            Session["ChangeTypeIncident"] = null;
             return RedirectToAction("../Admin/Index");
         }
 
@@ -269,6 +362,24 @@ namespace MeniconHelper.Controllers
                     listPerson.Add(pe);
                 }
                 ViewBag.persons = listPerson;
+                List<area> listArea = new List<area>();
+                foreach (var ar in meniconHelperEntities.area)
+                {
+                    listArea.Add(ar);
+                }
+                ViewBag.areas = listArea;
+                List<engine> listEngine = new List<engine>();
+                foreach (var en in meniconHelperEntities.engine)
+                {
+                    listEngine.Add(en);
+                }
+                ViewBag.engines = listEngine;
+                List<type_incident> listTypeIncident = new List<type_incident>();
+                foreach (var ti in meniconHelperEntities.type_incident)
+                {
+                    listTypeIncident.Add(ti);
+                }
+                ViewBag.type_incidents = listTypeIncident;
             }
 
             if (p.id_role == 0)
