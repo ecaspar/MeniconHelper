@@ -15,30 +15,7 @@ namespace MeniconHelper.Controllers
             //Someone who isn't logged can't access to this view.
             if (Session["User"] != null)
             {
-                //Get which user is logged.
-                person p = (person)(Session["User"]);
-                ViewBag.name = p.first_name + " " + p.last_name;
-                using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
-                {
-                    List<role> listRole = new List<role>();
-                    foreach (var r in meniconHelperEntities.role)
-                    {
-                        listRole.Add(r);
-                    }
-                    ViewBag.roles = listRole;
-                    List<person> listPerson = new List<person>();
-                    foreach (var pe in meniconHelperEntities.person)
-                    {
-                        listPerson.Add(pe);
-                    }
-                    ViewBag.persons = listPerson;
-                }
-
-                if (p.id_role == 0)
-                    ViewBag.Admin = true;
-                else
-                    ViewBag.Admin = false;
-
+                LoadBag();
                 return View();
             }
             else
@@ -149,21 +126,11 @@ namespace MeniconHelper.Controllers
         [HttpPost]
         public ActionResult DisplayRole(Models.ListModel role)
         {
+            LoadBag();
+
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
                 role roles = meniconHelperEntities.role.First(i => i.id_role == role.Roles.id_role);
-
-                person p = (person)(Session["User"]);
-                if (p.id_role == 0)
-                    ViewBag.Admin = true;
-                else
-                    ViewBag.Admin = false;
-                List<role> listRole = new List<role>();
-                foreach (var r in meniconHelperEntities.role)
-                {
-                    listRole.Add(r);
-                }
-                ViewBag.roles = listRole;
 
                 ViewBag.ChangeRole = roles;
 
@@ -281,6 +248,34 @@ namespace MeniconHelper.Controllers
         public string GenerateMD5(string rawString)
         {
             return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(rawString)).Select(s => s.ToString("x2")));
+        }
+
+        public void LoadBag()
+        {
+            //Get which user is logged.
+            person p = (person)(Session["User"]);
+            ViewBag.name = p.first_name + " " + p.last_name;
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                List<role> listRole = new List<role>();
+                foreach (var r in meniconHelperEntities.role)
+                {
+                    listRole.Add(r);
+                }
+                ViewBag.roles = listRole;
+                List<person> listPerson = new List<person>();
+                foreach (var pe in meniconHelperEntities.person)
+                {
+                    listPerson.Add(pe);
+                }
+                ViewBag.persons = listPerson;
+            }
+
+            if (p.id_role == 0)
+                ViewBag.Admin = true;
+            else
+                ViewBag.Admin = false;
+
         }
     }
 
