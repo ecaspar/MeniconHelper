@@ -126,6 +126,9 @@
   <data name="area" xml:space="preserve">
     <value>Ligne</value>
   </data>
+  <data name="category" xml:space="preserve">
+    <value>Catégorie</value>
+  </data>
   <data name="comments" xml:space="preserve">
     <value>Commentaires</value>
   </data>

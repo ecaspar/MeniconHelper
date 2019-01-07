@@ -42,3 +42,9 @@ input.tablesorter-filter {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    table tbody td img {
+        max-width: 100px !important;
+    }
+}

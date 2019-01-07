@@ -77,6 +77,10 @@ ul::-webkit-scrollbar-thumb {
     transform: scale(4);
 }
 
+.modal-content {
+    width: 1px;
+}
+
 .table {
     width: 60% !important;
     margin-top: 32px;

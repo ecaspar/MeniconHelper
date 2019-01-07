@@ -51,9 +51,9 @@
         </div>
     </header>
     <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-8 admin-container">
-                <h2>Administration</h2>
+        <div class="row">
+            <div class="col-sm-6 left">
+                <h2>Ajout</h2>
                 <div class="separation"></div>
                 <div class="container">
                     <div class="row justify-content-md-center">
@@ -85,6 +85,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <span><i class="fas fa-user-tag"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.username, new { Class = "username form-control", placeholder = "Nom d'utilisateur", required = "Required", Type = "Text" })
+                                </div>
+                                <div class="form-group">
                                     <span><i class="far fa-envelope"></i></span>
                                     @Html.TextBoxFor(p => p.Persons.email, new { Class = "email form-control", placeholder = "Email", required = "Required", Type = "Mail" })
                                 </div>
@@ -102,12 +106,7 @@
                                 </div>
                                 <div class="form-group">
                                     <span><i class="fas fa-key"></i></span>
-                                    <select class="form-control">
-                                        @foreach (var role in ViewBag.roles)
-                                        {
-                                            <option>@role.label</option>
-                                        }
-                                    </select>
+                                    @Html.DropDownListFor(p => p.Persons.id_role, new SelectList(ViewBag.roles, "id_role", "label"), "Choisir...", new { Class = "form-control" })
                                 </div>
                                 <button type="submit" class="btn btn-dark add">Ajouter l'utilisateur</button>
                             }
@@ -149,7 +148,7 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-10">
-                            @using (Html.BeginForm("AddTypeIncident", "Admin", FormMethod.Post))
+                            @using (Html.BeginForm("AddTypeIncident", "Admin"))
                             {
                                 <div class="form-group">
                                     <span><i class="fas fa-indent"></i></span>
@@ -157,6 +156,25 @@
                                 </div>
                                 <button type="submit" class="btn btn-dark add">Ajouter le type</button>
                             }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h2>Modification</h2>
+                <div class="separation"></div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayRole", "Admin"))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-suitcase-rolling"></i></span>
+                                    @Html.DropDownListFor(r => r.Roles, new SelectList(ViewBag.roles, "id_role", "label"), "Choisir...", new { Class = "form-control" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">Modifier le rôle</button>
+                            }
+                            @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", placeholder = Html.DisplayFor(model => model.Roles.label), Type = "Text" })
                         </div>
                     </div>
                 </div>

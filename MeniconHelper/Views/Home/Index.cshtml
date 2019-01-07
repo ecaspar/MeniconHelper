@@ -50,7 +50,9 @@
             $('.tablesorter').tablesorter({
                 theme: 'blue',
                 widgets: ["zebra", "filter", "pager"],
-                ignoreCase: false
+                ignoreCase: false,
+                dateFormat: 'ddmmyyyy',
+                sortList: [[4, 1]]
             }).tablesorterPager(pagerOptions);
         });
     </script>
@@ -82,9 +84,9 @@
                     <th scope="col" class="filter-false">@GlobalRes.picture</th>
                     <th scope="col" class="filter-false">@GlobalRes.description</th>
                     <th scope="col" class="filter-match">@GlobalRes.supervisor</th>
-                    <th scope="col" class="filter-false">@GlobalRes.date</th>
+                    <th scope="col" class="filter-match">@GlobalRes.date</th>
                     <th scope="col" class="filter-match">@GlobalRes.declarant</th>
-                    <th scope="col" class="filter-false">@GlobalRes.type</th>
+                    <th scope="col" class="filter-false">@GlobalRes.category</th>
                     <th scope="col" class="filter-false">@GlobalRes.status</th>
                     <th scope="col" class="filter-match">@GlobalRes.area</th>
                     <th scope="col" class="filter-match">@GlobalRes.engine</th>

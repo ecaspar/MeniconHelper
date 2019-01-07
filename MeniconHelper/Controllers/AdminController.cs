@@ -20,12 +20,18 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
                 using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
                 {
-                    List<role> list = new List<role>();
+                    List<role> listRole = new List<role>();
                     foreach (var r in meniconHelperEntities.role)
                     {
-                        list.Add(r);
+                        listRole.Add(r);
                     }
-                    ViewBag.roles = list;
+                    ViewBag.roles = listRole;
+                    List<person> listPerson = new List<person>();
+                    foreach (var pe in meniconHelperEntities.person)
+                    {
+                        listPerson.Add(pe);
+                    }
+                    ViewBag.persons = listPerson;
                 }
 
                     if (p.id_role == 0)
@@ -70,8 +76,10 @@ namespace MeniconHelper.Controllers
                 }
                 if (!list.Contains(person.Persons.username) && !list.Contains(person.Persons.email) && !list.Contains(person.Persons.phone))
                 {
+                    person.Persons.password_scan = person.Persons.username;
                     if(person.Persons.email != null && person.Persons.username != null && person.Persons.first_name != null && person.Persons.last_name != null && person.Persons.password_default != null && person.Persons.phone != null && person.Persons.password_scan != null)
                     {
+                        person.Persons.language = "Fr";
                         person.Persons.password_default = GenerateMD5(person.Persons.password_default);
                         meniconHelperEntities.person.Add(person.Persons);
                         meniconHelperEntities.SaveChanges();
@@ -81,7 +89,7 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult AddArea(area area)
+        public ActionResult AddArea(Models.ListModel area)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
@@ -90,16 +98,17 @@ namespace MeniconHelper.Controllers
                 {
                     list.Add(a.name);
                 }
-                if (area.name != null && !list.Contains(area.name))
+                if (area.Areas.name != null && !list.Contains(area.Areas.name))
                 {
-                    meniconHelperEntities.area.Add(area);
+                    area.Areas.date_create = DateTime.Now;
+                    meniconHelperEntities.area.Add(area.Areas);
                     meniconHelperEntities.SaveChanges();
                 }
             }
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult AddEngine(engine engine)
+        public ActionResult AddEngine(Models.ListModel engine)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
@@ -109,16 +118,17 @@ namespace MeniconHelper.Controllers
                     list.Add(e.name);
                     list.Add(e.serial_number);
                 }
-                if (engine.name != null && engine.serial_number != null && !list.Contains(engine.name) && !list.Contains(engine.serial_number))
+                if (engine.Engines.name != null && engine.Engines.serial_number != null && !list.Contains(engine.Engines.name) && !list.Contains(engine.Engines.serial_number))
                 {
-                    meniconHelperEntities.engine.Add(engine);
+                    engine.Engines.date_create = DateTime.Now;
+                    meniconHelperEntities.engine.Add(engine.Engines);
                     meniconHelperEntities.SaveChanges();
                 }
             }
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult AddTypeIncident(type_incident type_Incident)
+        public ActionResult AddTypeIncident(Models.ListModel type_Incident)
         {
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
@@ -127,13 +137,23 @@ namespace MeniconHelper.Controllers
                 {
                     list.Add(i.label);
                 }
-                if (type_Incident.label != null && !list.Contains(type_Incident.label))
+                if (type_Incident.TypeIncidents.label != null && !list.Contains(type_Incident.TypeIncidents.label))
                 {
-                    meniconHelperEntities.type_incident.Add(type_Incident);
+                    meniconHelperEntities.type_incident.Add(type_Incident.TypeIncidents);
                     meniconHelperEntities.SaveChanges();
                 }
             }
             return RedirectToAction("../Admin/Index");
+        }
+
+        public ActionResult DisplayRole(Models.ListModel role)
+        {
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                ViewBag.RoleID = new SelectList(meniconHelperEntities.role.OrderBy(r => r.label), "id_role", "label");
+                var roles = meniconHelperEntities.role.Where(i => i.id_role == role.Roles.id_role);
+                return View(roles);
+            }
         }
 
         public ActionResult UpdateRole(role role)
