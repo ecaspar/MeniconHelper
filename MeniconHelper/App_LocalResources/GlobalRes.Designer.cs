@@ -538,6 +538,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unlink role.
+        /// </summary>
+        public static string unlinkRole {
+            get {
+                return ResourceManager.GetString("unlinkRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Username.
         /// </summary>
         public static string username {

@@ -285,4 +285,7 @@
   <data name="validateModification" xml:space="preserve">
     <value>Validate modification</value>
   </data>
+  <data name="unlinkRole" xml:space="preserve">
+    <value>Unlink role</value>
+  </data>
 </root>

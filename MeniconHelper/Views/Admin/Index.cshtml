@@ -379,7 +379,7 @@
                                         <span><i class="fas fa-indent"></i></span>
                                         @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
                                 }
                             }
                         </div>
@@ -398,7 +398,7 @@
                                         @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
                                     </div>
 
-                                    <button type="submit" class="btn btn-dark add">Délier un role</button>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.unlinkRole</button>
                                 }
                                 else
                                 {
