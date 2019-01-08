@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 admin-container">
-                <h2>Mon compte</h2>
+                <h2>@GlobalRes.myAccount</h2>
                 <h4>@ViewBag.name</h4>
                 <div class="separation"></div>
                 <div class="form-group">
@@ -75,23 +75,23 @@
                     <span><i class="fas fa-mobile-alt"></i></span>
                     <input class="phone_number" type="tel" placeholder="@ViewBag.person.phone" disabled="disabled" />
                 </div>
-                <button class="btn btn-dark changePassword">Modifier le mot de passe</button>
+                <button class="btn btn-dark changePassword">@GlobalRes.modifyPassword</button>
                 <div class="newPass">
                     @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
                     {
                         <div class="form-group">
                             <span><i class="fas fa-lock-open"></i></span>
-                            @Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = "Ancien mot de passe", required = "Required", Type = "Password" })
+                            @Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = GlobalRes.oldPassword, required = "Required", Type = "Password" })
                         </div>
                         <div class="form-group">
                             <span><i class="fas fa-unlock"></i></span>
-                            <input type="password" id="newPassword" name="newPassword" placeholder="Nouveau mot de passe" required="required" />
+                            <input type="password" id="newPassword" name="newPassword" placeholder="@GlobalRes.newPassword" required="required" />
                         </div>
                         <div class="form-group">
                             <span><i class="fas fa-key"></i></span>
-                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmation du mot de passe" required="required" />
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="@GlobalRes.confirmPassword" required="required" />
                         </div>
-                        <button type="submit" class="btn btn-dark">Valider</button>
+                        <button type="submit" class="btn btn-dark">@GlobalRes.validate</button>
                     }
                 </div>
             </div>

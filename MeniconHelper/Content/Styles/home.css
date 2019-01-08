@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.table td, .table th {
+    padding: 0.25rem !important;
+}
+
 table thead th {
     text-align: center;
     background: #353535;
