@@ -338,17 +338,92 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
-        public ActionResult LinkRole(Models.ListModel role)
+        [HttpPost]
+        public ActionResult DisplayLinkedIncident(Models.ListModel type_Incident)
         {
-           
-  
+            LoadBag();
+
             using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
             {
-                type_incident CurrentTypeIncident = (type_incident)Session["ChangeTypeIncident"];
+                type_incident type_incidents = meniconHelperEntities.type_incident.First(i => i.id_type_anomaly == type_Incident.TypeIncidents.id_type_anomaly);
+
+                ViewBag.LinkedTypeIncident = type_incidents;
+
+                List<role> listRole = new List<role>();
+                foreach (var r in meniconHelperEntities.role)
+                {
+                    if(!type_incidents.role.Contains(r))
+                    {
+                        listRole.Add(r);
+                    }
+
+                }
+                ViewBag.roles = listRole;
+
+                Session["LinkedTypeIncident"] = type_incidents;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult LinkRole(Models.ListModel role)
+        {
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                type_incident CurrentTypeIncident = (type_incident)Session["LinkedTypeIncident"];
 
                 role r = meniconHelperEntities.role.Single(x => x.id_role == role.Roles.id_role);
                 type_incident  t  = meniconHelperEntities.type_incident.Single(x => x.id_type_anomaly == CurrentTypeIncident.id_type_anomaly);
                 t.role.Add(r);
+
+                meniconHelperEntities.SaveChanges();
+            }
+
+            return RedirectToAction("../Admin/Index");
+        }
+
+        [HttpPost]
+        public ActionResult DisplayLinkedIncidentRemove(Models.ListModel type_Incident)
+        {
+            LoadBag();
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                type_incident type_incidents = meniconHelperEntities.type_incident.First(i => i.id_type_anomaly == type_Incident.TypeIncidents.id_type_anomaly);
+
+                ViewBag.LinkedTypeIncidentRemove = type_incidents;
+
+                List<role> listRole = new List<role>();
+                foreach (var r in meniconHelperEntities.role)
+                {
+                    if (type_incidents.role.Contains(r))
+                    {
+                        listRole.Add(r);
+                    }
+                }
+                ViewBag.roles = listRole;
+
+                Session["LinkedTypeIncident"] = type_incidents;
+
+                return View("../Admin/Index");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UnlinkRole(Models.ListModel role)
+        {
+
+
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                type_incident CurrentTypeIncident = (type_incident)Session["LinkedTypeIncident"];
+
+                role r = meniconHelperEntities.role.Single(x => x.id_role == role.Roles.id_role);
+                type_incident t = meniconHelperEntities.type_incident.Single(x => x.id_type_anomaly == CurrentTypeIncident.id_type_anomaly);
+                if(t.role.Contains(r))
+                    t.role.Remove(r);
 
                 meniconHelperEntities.SaveChanges();
             }

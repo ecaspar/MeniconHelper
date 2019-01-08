@@ -350,9 +350,9 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-10">
-                            @using (Html.BeginForm("DisplayTypeIncident", "Admin", FormMethod.Post))
+                            @using (Html.BeginForm("DisplayLinkedIncident", "Admin", FormMethod.Post))
                             {
-                                if (ViewBag.ChangeTypeIncident == null)
+                                if (ViewBag.LinkedTypeIncident == null)
                                 {
                                     <div class="form-group">
                                         <span><i class="fas fa-indent"></i></span>
@@ -365,19 +365,58 @@
                                 {
                                     <div class="form-group">
                                         <span><i class="fas fa-indent"></i></span>
-                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled"})
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled" })
                                     </div>
                                 }
                             }
 
-                            @if (ViewBag.ChangeTypeIncident != null)
+                            @if (ViewBag.LinkedTypeIncident != null)
                             {
 
                                 using (Html.BeginForm("LinkRole", "Admin"))
                                 {
                                     <div class="form-group">
                                         <span><i class="fas fa-indent"></i></span>
-                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control"})
+                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayLinkedIncidentRemove", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.LinkedTypeIncidentRemove == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">Délier un role</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled" })
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.LinkedTypeIncidentRemove != null)
+                            {
+
+                                using (Html.BeginForm("UnlinkRole", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
                                     </div>
                                     <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
