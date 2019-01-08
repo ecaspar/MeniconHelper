@@ -106,6 +106,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm the password.
+        /// </summary>
+        public static string confirmPassword {
+            get {
+                return ResourceManager.GetString("confirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connection.
         /// </summary>
         public static string connection {
@@ -214,6 +223,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Change the password.
+        /// </summary>
+        public static string modifyPassword {
+            get {
+                return ResourceManager.GetString("modifyPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à My account.
         /// </summary>
         public static string myAccount {
@@ -237,6 +255,24 @@ namespace MeniconHelper.App_LocalResources {
         public static string myTicket {
             get {
                 return ResourceManager.GetString("myTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New password.
+        /// </summary>
+        public static string newPassword {
+            get {
+                return ResourceManager.GetString("newPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Last password.
+        /// </summary>
+        public static string oldPassword {
+            get {
+                return ResourceManager.GetString("oldPassword", resourceCulture);
             }
         }
         
@@ -318,6 +354,15 @@ namespace MeniconHelper.App_LocalResources {
         public static string username {
             get {
                 return ResourceManager.GetString("username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Validate.
+        /// </summary>
+        public static string validate {
+            get {
+                return ResourceManager.GetString("validate", resourceCulture);
             }
         }
     }

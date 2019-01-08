@@ -132,6 +132,9 @@
   <data name="comments" xml:space="preserve">
     <value>Comments</value>
   </data>
+  <data name="confirmPassword" xml:space="preserve">
+    <value>Confirm the password</value>
+  </data>
   <data name="connection" xml:space="preserve">
     <value>Connection</value>
   </data>
@@ -168,6 +171,9 @@
   <data name="incorrectUsername" xml:space="preserve">
     <value>You entered an incorrect username</value>
   </data>
+  <data name="modifyPassword" xml:space="preserve">
+    <value>Change the password</value>
+  </data>
   <data name="myAccount" xml:space="preserve">
     <value>My account</value>
   </data>
@@ -176,6 +182,12 @@
   </data>
   <data name="myTicket" xml:space="preserve">
     <value>My tickets</value>
+  </data>
+  <data name="newPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="oldPassword" xml:space="preserve">
+    <value>Last password</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
@@ -203,5 +215,8 @@
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="validate" xml:space="preserve">
+    <value>Validate</value>
   </data>
 </root>
