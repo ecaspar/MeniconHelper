@@ -142,6 +142,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Assign role.
+        /// </summary>
+        public static string assignRole {
+            get {
+                return ResourceManager.GetString("assignRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Category.
         /// </summary>
         public static string category {

@@ -288,4 +288,7 @@
   <data name="unlinkRole" xml:space="preserve">
     <value>Délier un rôle</value>
   </data>
+  <data name="assignRole" xml:space="preserve">
+    <value>Assigner un rôle</value>
+  </data>
 </root>
