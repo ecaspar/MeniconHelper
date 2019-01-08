@@ -68,7 +68,7 @@
                 <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
                 @if (ViewBag.Admin)
                 {
-                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.administration</li></a>
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-toolbox"></i><li>@GlobalRes.administration</li></a>
                 }
                 <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
             </ul>
@@ -82,7 +82,7 @@
                     <th scope="col" class="filter-false">@GlobalRes.picture</th>
                     <th scope="col" class="filter-false">@GlobalRes.description</th>
                     <th scope="col" class="filter-match">@GlobalRes.supervisor</th>
-                    <th scope="col" class="filter-false">@GlobalRes.date</th>
+                    <th scope="col" class="filter-match">@GlobalRes.date</th>
                     <th scope="col" class="filter-match">@GlobalRes.declarant</th>
                     <th scope="col" class="filter-match">@GlobalRes.category</th>
                     <th scope="col" class="filter-match">@GlobalRes.status</th>

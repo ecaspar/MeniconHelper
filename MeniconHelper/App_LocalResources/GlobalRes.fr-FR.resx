@@ -117,20 +117,44 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="addArea" xml:space="preserve">
+    <value>Ajouter une zone</value>
+  </data>
   <data name="addComment" xml:space="preserve">
     <value>Ajouter un commentaire</value>
+  </data>
+  <data name="addEngine" xml:space="preserve">
+    <value>Ajouter une machine</value>
+  </data>
+  <data name="adding" xml:space="preserve">
+    <value>Ajout</value>
+  </data>
+  <data name="addRole" xml:space="preserve">
+    <value>Ajouter le rôle</value>
+  </data>
+  <data name="addType" xml:space="preserve">
+    <value>Ajouter un type</value>
+  </data>
+  <data name="addUser" xml:space="preserve">
+    <value>Ajouter un utilisateur</value>
   </data>
   <data name="administration" xml:space="preserve">
     <value>Administration</value>
   </data>
   <data name="area" xml:space="preserve">
-    <value>Ligne</value>
+    <value>Zone</value>
   </data>
   <data name="category" xml:space="preserve">
     <value>Catégorie</value>
   </data>
+  <data name="choose" xml:space="preserve">
+    <value>Choisir</value>
+  </data>
   <data name="comments" xml:space="preserve">
     <value>Commentaires</value>
+  </data>
+  <data name="confirm" xml:space="preserve">
+    <value>Confirmation</value>
   </data>
   <data name="confirmPassword" xml:space="preserve">
     <value>Confirmation du mot de passe</value>
@@ -150,17 +174,26 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="engine" xml:space="preserve">
     <value>Machine</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="firstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
   <data name="history" xml:space="preserve">
     <value>Historique</value>
   </data>
   <data name="home" xml:space="preserve">
     <value>Accueil</value>
+  </data>
+  <data name="incidentType" xml:space="preserve">
+    <value>Type d'incident</value>
   </data>
   <data name="incorrectConfirm" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas</value>
@@ -171,8 +204,29 @@
   <data name="incorrectUsername" xml:space="preserve">
     <value>Votre nom d'utilisateur est incorrect.</value>
   </data>
+  <data name="lastName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="modification" xml:space="preserve">
+    <value>Modification</value>
+  </data>
+  <data name="modifyArea" xml:space="preserve">
+    <value>Modifier une zone</value>
+  </data>
+  <data name="modifyEngine" xml:space="preserve">
+    <value>Modifier une machine</value>
+  </data>
   <data name="modifyPassword" xml:space="preserve">
     <value>Modifier le mot de passe</value>
+  </data>
+  <data name="modifyRole" xml:space="preserve">
+    <value>Modifier un rôle</value>
+  </data>
+  <data name="modifyType" xml:space="preserve">
+    <value>Modifier le type d'incident</value>
+  </data>
+  <data name="modifyUser" xml:space="preserve">
+    <value>Modifier un utilisateur</value>
   </data>
   <data name="myAccount" xml:space="preserve">
     <value>Mon compte</value>
@@ -192,11 +246,20 @@
   <data name="password" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
   <data name="picture" xml:space="preserve">
     <value>Photo</value>
   </data>
   <data name="reference" xml:space="preserve">
     <value>Référence</value>
+  </data>
+  <data name="role" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="serialNumber" xml:space="preserve">
+    <value>Numéro de série</value>
   </data>
   <data name="signOut" xml:space="preserve">
     <value>Déconnexion</value>
@@ -218,5 +281,8 @@
   </data>
   <data name="validate" xml:space="preserve">
     <value>Valider</value>
+  </data>
+  <data name="validateModification" xml:space="preserve">
+    <value>Valider la modification</value>
   </data>
 </root>
