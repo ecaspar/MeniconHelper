@@ -6,6 +6,10 @@
     padding: 0.25rem !important;
 }
 
+.table td input[data-column = "6"], .table td input[data-column = "9"] {
+    width: 90px;
+}
+
 table thead th {
     text-align: center;
     background: #353535;
