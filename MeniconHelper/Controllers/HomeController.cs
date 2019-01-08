@@ -27,7 +27,7 @@ namespace MeniconHelper.Controllers
                 //Call the function which load all ticket.
                 ViewBag.Incident = LoadIncident();
 
-                if (p.id_role == 0)
+                if (p.id_role == 7)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -49,7 +49,7 @@ namespace MeniconHelper.Controllers
 
                 ViewBag.SuperviseIncident = LoadSuperviseIncident();
 
-                if (p.id_role == 0)
+                if (p.id_role ==7)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -70,7 +70,7 @@ namespace MeniconHelper.Controllers
 
                 ViewBag.DeclarantIncident = LoadDeclarantIncident();
 
-                if (p.id_role == 0)
+                if (p.id_role == 7)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -125,7 +125,7 @@ namespace MeniconHelper.Controllers
                         type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                         foreach (var r in type.role)
                         {
-                            if (r.id_role != 0)
+                            if (r.id_role != 7)
                             {
                                 foreach (var p in r.person)
                                 {
@@ -183,7 +183,7 @@ namespace MeniconHelper.Controllers
                         type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                         foreach (var r in type.role)
                         {
-                            if (r.id_role != 0)
+                            if (r.id_role != 7)
                             {
                                 foreach (var per in r.person)
                                 {
@@ -244,7 +244,7 @@ namespace MeniconHelper.Controllers
                         type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                         foreach (var r in type.role)
                         {
-                            if (r.id_role != 0)
+                            if (r.id_role != 7)
                             {
                                 foreach (var per in r.person)
                                 {

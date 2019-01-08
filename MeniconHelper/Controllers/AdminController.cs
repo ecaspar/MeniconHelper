@@ -53,7 +53,7 @@ namespace MeniconHelper.Controllers
                     list.Add(p.username);
                     list.Add(p.phone);
                 }
-                if (!list.Contains(person.Persons.username) && !list.Contains(person.Persons.email) && !list.Contains(person.Persons.phone))
+                if (!list.Contains(person.Persons.username))
                 {
                     person.Persons.password_scan = person.Persons.username;
                     if(person.Persons.email != null && person.Persons.username != null && person.Persons.first_name != null && person.Persons.last_name != null && person.Persons.password_default != null && person.Persons.phone != null && person.Persons.password_scan != null)
@@ -475,7 +475,7 @@ namespace MeniconHelper.Controllers
                 ViewBag.type_incidents = listTypeIncident;
             }
 
-            if (p.id_role == 0)
+            if (p.id_role == 7)
                 ViewBag.Admin = true;
             else
                 ViewBag.Admin = false;

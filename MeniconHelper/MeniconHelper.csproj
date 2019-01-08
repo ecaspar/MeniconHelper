@@ -255,6 +255,7 @@
     <Content Include="MeniconHelperBDD.edmx.diagram">
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\MeniconHelper - Web Deploy.pubxml" />
     <Content Include="MeniconHelperBDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -266,7 +267,9 @@
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
       <LastGenOutput>MeniconHelperBDD.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

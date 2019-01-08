@@ -19,7 +19,7 @@ namespace MeniconHelper.Controllers
                 ViewBag.name = p.first_name + " " + p.last_name;
                 ViewBag.person = p;
 
-                if (p.id_role == 0)
+                if (p.id_role == 7)
                     ViewBag.Admin = true;
                 else
                     ViewBag.Admin = false;
@@ -55,7 +55,7 @@ namespace MeniconHelper.Controllers
                                 person per = (person)(Session["User"]);
                                 ViewBag.name = per.first_name + " " + per.last_name;
                                 ViewBag.person = per;
-                                if (p.id_role == 0)
+                                if (p.id_role == 7)
                                     ViewBag.Admin = true;
                                 else
                                     ViewBag.Admin = false;
@@ -68,7 +68,7 @@ namespace MeniconHelper.Controllers
                             person per = (person)(Session["User"]);
                             ViewBag.name = per.first_name + " " + per.last_name;
                             ViewBag.person = per;
-                            if (p.id_role == 0)
+                            if (p.id_role == 7)
                                 ViewBag.Admin = true;
                             else
                                 ViewBag.Admin = false;

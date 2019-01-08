@@ -41,7 +41,7 @@ namespace MeniconHelper.Controllers
                     if(i.date_create == i.date_processing)
                     {
                         i.date_processing = DateTime.Now;
-                        i.id_statut = 3;
+                        i.id_statut = 6;
                         meniconHelperEntities.SaveChanges();
                     }
                     List<int> listPerson = new List<int>();
@@ -64,14 +64,14 @@ namespace MeniconHelper.Controllers
                         ViewBag.Authorize = false;
                     //
                     
-                    if (p.id_role == 0)
+                    if (p.id_role == 7)
                         ViewBag.Admin = true;
                     else
                         ViewBag.Admin = false;
 
                     //
 
-                    if (i.id_statut == 4)
+                    if (i.id_statut == 7)
                         ViewBag.Close = false;
                     else
                         ViewBag.Close = true;
@@ -108,7 +108,7 @@ namespace MeniconHelper.Controllers
                         type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                         foreach (var r in type.role)
                         {
-                            if (r.id_role != 0)
+                            if (r.id_role != 7)
                             {
                                 foreach (var per in r.person)
                                 {
@@ -152,7 +152,7 @@ namespace MeniconHelper.Controllers
                     //Get the incident which correspond to the reference
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
                     i.date_close = DateTime.Now;
-                    i.id_statut = 4;
+                    i.id_statut = 7;
 
                     meniconHelperEntities.SaveChanges();
                 }
@@ -170,7 +170,7 @@ namespace MeniconHelper.Controllers
                 {
                     //Get the incident which correspond to the reference
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
-                    i.id_statut = 3;
+                    i.id_statut = 6;
 
                     meniconHelperEntities.SaveChanges();
                 }
@@ -204,7 +204,7 @@ namespace MeniconHelper.Controllers
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
                     foreach (var r in type.role)
                     {
-                        if (r.id_role != 0)
+                        if (r.id_role != 7)
                         {
                             foreach (var p in r.person)
                             {
