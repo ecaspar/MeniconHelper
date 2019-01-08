@@ -338,6 +338,24 @@ namespace MeniconHelper.Controllers
             return RedirectToAction("../Admin/Index");
         }
 
+        public ActionResult LinkRole(Models.ListModel role)
+        {
+           
+  
+            using (MeniconHelperEntities meniconHelperEntities = new MeniconHelperEntities())
+            {
+                type_incident CurrentTypeIncident = (type_incident)Session["ChangeTypeIncident"];
+
+                role r = meniconHelperEntities.role.Single(x => x.id_role == role.Roles.id_role);
+                type_incident  t  = meniconHelperEntities.type_incident.Single(x => x.id_type_anomaly == CurrentTypeIncident.id_type_anomaly);
+                t.role.Add(r);
+
+                meniconHelperEntities.SaveChanges();
+            }
+
+            return RedirectToAction("../Admin/Index");
+        }
+
         public string GenerateMD5(string rawString)
         {
             return string.Join("", MD5.Create().ComputeHash(Encoding.ASCII.GetBytes(rawString)).Select(s => s.ToString("x2")));

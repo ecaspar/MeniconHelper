@@ -178,7 +178,7 @@
                                         <span><i class="fas fa-suitcase-rolling"></i></span>
                                         @Html.DropDownListFor(r => r.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.RoleButton</button>
+                                    <button type="submit" class="btn btn-dark add">Modifier le role</button>
                                 }
                             }
 
@@ -191,7 +191,7 @@
                                         <span><i class="fas fa-indent"></i></span>
                                         @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", @Value = ViewBag.ChangeRole.label, required = "Required", Type = "Text" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.RoleButton</button>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
                             }
                         </div>
@@ -209,8 +209,8 @@
                                         <span><i class="fas fa-user"></i></span>
                                         @Html.DropDownListFor(p => p.Persons.id_person, new SelectList(ViewBag.persons, "id_person", "first_name", "last_name"), new { Class = "form-control" })
                                     </div>
-                                
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.UserButton</button>
+
+                                    <button type="submit" class="btn btn-dark add">Modifier l'utilisateur</button>
                                 }
                             }
 
@@ -239,7 +239,7 @@
                                         <span><i class="fas fa-phone"></i></span>
                                         @Html.TextBoxFor(p => p.Persons.phone, new { Class = "role form-control", @Value = ViewBag.ChangePerson.phone, required = "Required", Type = "Text" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.UserButton</button>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
                             }
                         </div>
@@ -258,7 +258,7 @@
                                         @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control" })
                                     </div>
 
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.AreaButton</button>
+                                    <button type="submit" class="btn btn-dark add">Modifier  la zone</button>
                                 }
                             }
 
@@ -271,7 +271,7 @@
                                         <span><i class="fas fa-warehouse"></i></span>
                                         @Html.TextBoxFor(a => a.Areas.name, new { Class = "role form-control", @Value = ViewBag.ChangeArea.name, required = "Required", Type = "Text" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.AreaButton</button>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
                             }
                         </div>
@@ -290,7 +290,7 @@
                                         @Html.DropDownListFor(e => e.Engines.id_engine, new SelectList(ViewBag.engines, "id_engine", "name"), new { Class = "form-control" })
                                     </div>
 
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.EngineButton</button>
+                                    <button type="submit" class="btn btn-dark add">Modifier la machine</button>
                                 }
                             }
 
@@ -307,7 +307,7 @@
                                         <span><i class="fas fa-list-ol"></i></span>
                                         @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "role form-control", @Value = ViewBag.ChangeEngine.serial_number, required = "Required", Type = "Text" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.EngineButton</button>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
                             }
                         </div>
@@ -327,7 +327,7 @@
                                         @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
                                     </div>
 
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.TypeButton</button>
+                                    <button type="submit" class="btn btn-dark add">Modifier le type d'incident</button>
                                 }
                             }
 
@@ -340,7 +340,46 @@
                                         <span><i class="fas fa-indent"></i></span>
                                         @Html.TextBoxFor(i => i.TypeIncidents.label, new { Class = "role form-control", @Value = ViewBag.ChangeTypeIncident.label, required = "Required", Type = "Text" })
                                     </div>
-                                    <button type="submit" class="btn btn-dark add">@ViewBag.TypeButton</button>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayTypeIncident", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeTypeIncident == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">Ajouter un role</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled"})
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.ChangeTypeIncident != null)
+                            {
+
+                                using (Html.BeginForm("LinkRole", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control"})
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">Valider la modification</button>
                                 }
                             }
                         </div>
