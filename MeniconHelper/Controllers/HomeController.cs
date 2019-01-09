@@ -117,7 +117,10 @@ namespace MeniconHelper.Controllers
 
                         //List of URL. Each incident can have up to 3 images.
                         List<document> images = new List<document>();
-                        images.Add(i.document.First());
+                        if(i.document.Count != 0)
+                        {
+                            images.Add(i.document.First());
+                        }
 
                         //This part list all the supervisor of this incident.
                         List<person> listPerson = new List<person>();
@@ -136,7 +139,8 @@ namespace MeniconHelper.Controllers
                         //
 
                         listIncident.Reference = i.incident_code;
-                        listIncident.Image = images;
+                        if (i.document.Count != 0)
+                            listIncident.Image = images;
                         listIncident.Description = i.description;
                         listIncident.Supervisor = listPerson;
                         listIncident.Date = i.date_create;
@@ -176,7 +180,10 @@ namespace MeniconHelper.Controllers
 
                         //List of URL. Each incident can have up to 3 images.
                         List<document> images = new List<document>();
-                        images.Add(i.document.First());
+                        if (i.document.Count != 0)
+                        {
+                            images.Add(i.document.First());
+                        }
 
                         //This part list all the supervisor of this incident.
                         List<person> listPerson = new List<person>();
@@ -198,7 +205,8 @@ namespace MeniconHelper.Controllers
                         if (listId.Contains(p.id_person))
                         {
                             listIncident.Reference = i.incident_code;
-                            listIncident.Image = images;
+                            if (i.document.Count != 0)
+                                listIncident.Image = images;
                             listIncident.Description = i.description;
                             listIncident.Supervisor = listPerson;
                             listIncident.Date = i.date_create;
@@ -237,7 +245,11 @@ namespace MeniconHelper.Controllers
 
                         //List of URL. Each incident can have up to 3 images.
                         List<document> images = new List<document>();
-                        images.Add(i.document.First());
+                        if (i.document.Count != 0)
+                        {
+                            images.Add(i.document.First());
+                        }
+                            
 
                         //This part list all the supervisor of this incident.
                         List<person> listPerson = new List<person>();
@@ -258,7 +270,8 @@ namespace MeniconHelper.Controllers
                         if (i.person.id_person == p.id_person)
                         {
                             listIncident.Reference = i.incident_code;
-                            listIncident.Image = images;
+                            if (i.document.Count != 0)
+                                listIncident.Image = images;
                             listIncident.Description = i.description;
                             listIncident.Supervisor = listPerson;
                             listIncident.Date = i.date_create;

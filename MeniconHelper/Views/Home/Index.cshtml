@@ -99,7 +99,14 @@
                     <td class="reference">
                         <a href="@Url.Action("Select", "Home", new { reference = x.Reference })">@x.Reference</a>
                     </td>
-                    <td class="image"><img src="@x.Image[0].name" /></td>
+                    @if (x.Image != null)
+                    {
+                        <td class="image"><img src="@x.Image[0].name" /></td>
+                    }
+                    else
+                    {
+                        <td class="image"><img src="" /></td>
+                    }
                     <td class="description">@x.Description</td>
                     <td class="supervisor">
                         @foreach (var y in x.Supervisor)

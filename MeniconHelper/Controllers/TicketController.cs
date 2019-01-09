@@ -195,10 +195,12 @@ namespace MeniconHelper.Controllers
                     //Get the incident which correspond to the reference
                     incident i = meniconHelperEntities.incident.Where(x => x.incident_code == code).First();
                     List<document> images = new List<document>();
-
-                    foreach (var image in i.document)
+                    if (i.document.Count != 0)
                     {
-                        images.Add(image);
+                        foreach (var image in i.document)
+                        {
+                            images.Add(image);
+                        }
                     }
                     List<person> listPerson = new List<person>();
                     type_incident type = meniconHelperEntities.type_incident.Where(x => x.id_type_anomaly == i.id_type_anomaly).First();
