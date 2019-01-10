@@ -32,6 +32,7 @@
           <Property Name="serial_number" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="date_create" Type="datetime" Nullable="false" />
           <Property Name="enable" Type="bit" Nullable="false" />
+          <Property Name="id_area" Type="int" />
         </EntityType>
         <EntityType Name="incident">
           <Key>
@@ -137,6 +138,18 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
             </Principal>
             <Dependent Role="document">
               <PropertyRef Name="id_anomaly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="engine_area_FK">
+          <End Role="area" Type="Self.area" Multiplicity="0..1" />
+          <End Role="engine" Type="Self.engine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="id_area" />
+            </Principal>
+            <Dependent Role="engine">
+              <PropertyRef Name="id_area" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -285,6 +298,10 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
             <End Role="incident" EntitySet="incident" />
             <End Role="document" EntitySet="document" />
           </AssociationSet>
+          <AssociationSet Name="engine_area_FK" Association="Self.engine_area_FK">
+            <End Role="area" EntitySet="area" />
+            <End Role="engine" EntitySet="engine" />
+          </AssociationSet>
           <AssociationSet Name="FK__task__id_person__6E01572D" Association="Self.FK__task__id_person__6E01572D">
             <End Role="person" EntitySet="person" />
             <End Role="task" EntitySet="task" />
@@ -339,6 +356,7 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.incident_area3_FK" FromRole="area" ToRole="incident" />
+          <NavigationProperty Name="engine" Relationship="MeniconHelperModel.engine_area_FK" FromRole="area" ToRole="engine" />
         </EntityType>
         <EntityType Name="document">
           <Key>
@@ -360,6 +378,8 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.incident_engine2_FK" FromRole="engine" ToRole="incident" />
+          <Property Name="id_area" Type="Int32" />
+          <NavigationProperty Name="area" Relationship="MeniconHelperModel.engine_area_FK" FromRole="engine" ToRole="area" />
         </EntityType>
         <EntityType Name="incident">
           <Key>
@@ -594,6 +614,10 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
             <End Role="type_incident" EntitySet="type_incident" />
           </AssociationSet>
           <EntitySet Name="database_firewall_rules" EntityType="MeniconHelperModel.database_firewall_rules" />
+          <AssociationSet Name="engine_area_FK" Association="MeniconHelperModel.engine_area_FK">
+            <End Role="area" EntitySet="area" />
+            <End Role="engine" EntitySet="engine" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK__task__id_person__6E01572D">
           <End Type="MeniconHelperModel.person" Role="person" Multiplicity="0..1" />
@@ -627,6 +651,18 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <Association Name="engine_area_FK">
+          <End Type="MeniconHelperModel.area" Role="area" Multiplicity="0..1" />
+          <End Type="MeniconHelperModel.engine" Role="engine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="id_area" />
+            </Principal>
+            <Dependent Role="engine">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -656,6 +692,7 @@ avertissement 6002: La table/vue 'MeniconHelper.sys.database_firewall_rules' n'a
           <EntitySetMapping Name="engine">
             <EntityTypeMapping TypeName="MeniconHelperModel.engine">
               <MappingFragment StoreEntitySet="engine">
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
                 <ScalarProperty Name="id_engine" ColumnName="id_engine" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="serial_number" ColumnName="serial_number" />
