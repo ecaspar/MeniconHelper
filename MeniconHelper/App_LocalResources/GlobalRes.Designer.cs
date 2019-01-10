@@ -61,7 +61,7 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add area.
+        ///   Recherche une chaîne localisée semblable à Add room.
         /// </summary>
         public static string addArea {
             get {
@@ -133,7 +133,7 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Area.
+        ///   Recherche une chaîne localisée semblable à Room.
         /// </summary>
         public static string area {
             get {
@@ -349,7 +349,7 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Modify an area.
+        ///   Recherche une chaîne localisée semblable à Modify a room.
         /// </summary>
         public static string modifyArea {
             get {

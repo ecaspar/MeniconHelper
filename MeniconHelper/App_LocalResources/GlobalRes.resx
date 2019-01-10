@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="addArea" xml:space="preserve">
-    <value>Add area</value>
+    <value>Add room</value>
   </data>
   <data name="addComment" xml:space="preserve">
     <value>Add comment</value>
@@ -142,7 +142,7 @@
     <value>Administration</value>
   </data>
   <data name="area" xml:space="preserve">
-    <value>Area</value>
+    <value>Room</value>
   </data>
   <data name="category" xml:space="preserve">
     <value>Category</value>
@@ -211,7 +211,7 @@
     <value>Modification</value>
   </data>
   <data name="modifyArea" xml:space="preserve">
-    <value>Modify an area</value>
+    <value>Modify a room</value>
   </data>
   <data name="modifyEngine" xml:space="preserve">
     <value>Modify an engine</value>
