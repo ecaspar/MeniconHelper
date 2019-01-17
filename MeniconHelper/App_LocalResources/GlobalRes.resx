@@ -291,4 +291,7 @@
   <data name="assignRole" xml:space="preserve">
     <value>Assign role</value>
   </data>
+  <data name="criticity" xml:space="preserve">
+    <value>Criticity</value>
+  </data>
 </root>

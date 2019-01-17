@@ -205,6 +205,15 @@ namespace MeniconHelper.App_LocalResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Criticity.
+        /// </summary>
+        public static string criticity {
+            get {
+                return ResourceManager.GetString("criticity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Date.
         /// </summary>
         public static string date {
