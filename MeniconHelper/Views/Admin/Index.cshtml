@@ -308,10 +308,16 @@
                             {
                                 if (ViewBag.ChangeEngine == null)
                                 {
-                                    <div class="form-group">
-                                        <span><i class="fas fa-wrench"></i></span>
-                                        @Html.DropDownListFor(e => e.Engines.id_engine, new SelectList(ViewBag.engines, "id_engine", "name"), new { Class = "form-control" })
-                                    </div>
+                            <div class="form-group">
+                                <span><i class="fas fa-wrench"></i></span>
+                                <select  class = "form-control" name="Engines.id_engine">
+                                    @foreach (var engine in ViewBag.engines)
+                                    {
+                                        <option value="@engine.id_engine">@engine.name - @engine.area.name</option>
+                                    }
+                                </select>
+
+                            </div>
 
                                     <button type="submit" class="btn btn-dark add">@GlobalRes.modifyEngine</button>
                                 }
