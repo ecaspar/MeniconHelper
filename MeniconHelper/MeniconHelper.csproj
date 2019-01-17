@@ -172,6 +172,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
+    <Compile Include="criticity.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="document.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="engine.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

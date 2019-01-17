@@ -134,17 +134,40 @@
                 <div class="container">
                     <div class="row justify-content-md-center">
                         <div class="col-sm-10">
+
+                            @using (Html.BeginForm("DisplayAreaEngine", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeAreaEngine == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.addEngine</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control", disabled = "disabled" })
+                                    </div>
+                                }
+                            }
                             @using (Html.BeginForm("AddEngine", "Admin", FormMethod.Post))
                             {
-                                <div class="form-group">
-                                    <span><i class="fas fa-wrench"></i></span>
-                                    @Html.TextBoxFor(e => e.Engines.name, new { Class = "engine form-control", placeholder = GlobalRes.engine, required = "Required", Type = "Text" })
-                                </div>
-                                <div class="form-group">
-                                    <span><i class="fas fa-list-ol"></i></span>
-                                    @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "engine form-control", placeholder = GlobalRes.serialNumber, required = "Required", Type = "Text" })
-                                </div>
-                                <button type="submit" class="btn btn-dark add">@GlobalRes.addEngine</button>
+                                if (ViewBag.ChangeAreaEngine != null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-wrench"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.name, new { Class = "engine form-control", placeholder = GlobalRes.engine, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-list-ol"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "engine form-control", placeholder = GlobalRes.serialNumber, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.addEngine</button>
+                                }
                             }
                         </div>
                     </div>
