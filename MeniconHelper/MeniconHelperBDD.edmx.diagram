@@ -25,8 +25,9 @@
         <AssociationConnector Association="MeniconHelperModel.FK__task__id_person__6E01572D" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="MeniconHelperModel.supervise1" />
-        <EntityTypeShape EntityType="MeniconHelperModel.database_firewall_rules" Width="1.5" PointX="5.375" PointY="0.75" IsExpanded="false" />
         <AssociationConnector Association="MeniconHelperModel.engine_area_FK" />
+        <EntityTypeShape EntityType="MeniconHelperModel.criticity" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="MeniconHelperModel.incident_criticity_FK" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

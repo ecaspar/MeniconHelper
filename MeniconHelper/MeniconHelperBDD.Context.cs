@@ -34,6 +34,6 @@ namespace MeniconHelper
         public virtual DbSet<statut> statut { get; set; }
         public virtual DbSet<task> task { get; set; }
         public virtual DbSet<type_incident> type_incident { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
+        public virtual DbSet<criticity> criticity { get; set; }
     }
 }

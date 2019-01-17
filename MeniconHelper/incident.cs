@@ -34,6 +34,7 @@ namespace MeniconHelper
         public int id_statut { get; set; }
         public Nullable<int> id_engine { get; set; }
         public int id_area { get; set; }
+        public Nullable<int> id_crititity { get; set; }
     
         public virtual area area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,5 +45,6 @@ namespace MeniconHelper
         public virtual type_incident type_incident { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<task> task { get; set; }
+        public virtual criticity criticity { get; set; }
     }
 }
