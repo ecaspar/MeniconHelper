@@ -149,6 +149,7 @@ namespace MeniconHelper.Controllers
                         listIncident.Status = i.statut.label;
                         listIncident.Area = i.area.name;
                         listIncident.Engine = i.engine.name;
+                        listIncident.Criticity = i.criticity.name;
 
                         list.Add(listIncident);
                     }
@@ -215,6 +216,7 @@ namespace MeniconHelper.Controllers
                             listIncident.Status = i.statut.label;
                             listIncident.Area = i.area.name;
                             listIncident.Engine = i.engine.name;
+                            listIncident.Criticity = i.criticity.name;
 
                             list.Add(listIncident);
                         }
@@ -280,6 +282,7 @@ namespace MeniconHelper.Controllers
                             listIncident.Status = i.statut.label;
                             listIncident.Area = i.area.name;
                             listIncident.Engine = i.engine.name;
+                            listIncident.Criticity = i.criticity.name;
 
                             list.Add(listIncident);
                         }

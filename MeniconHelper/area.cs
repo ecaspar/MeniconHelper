@@ -17,8 +17,8 @@ namespace MeniconHelper
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public area()
         {
-            this.incident = new HashSet<incident>();
             this.engine = new HashSet<engine>();
+            this.incident = new HashSet<incident>();
         }
     
         public int id_area { get; set; }
@@ -27,8 +27,8 @@ namespace MeniconHelper
         public bool enable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<incident> incident { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<engine> engine { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<incident> incident { get; set; }
     }
 }

@@ -30,6 +30,7 @@
           <Property Name="name" Type="text" />
           <Property Name="date_create" Type="datetime" Nullable="false" />
           <Property Name="id_anomaly" Type="int" Nullable="false" />
+          <Property Name="image_base" Type="text" />
         </EntityType>
         <EntityType Name="engine">
           <Key>
@@ -59,7 +60,7 @@
           <Property Name="id_statut" Type="int" Nullable="false" />
           <Property Name="id_engine" Type="int" />
           <Property Name="id_area" Type="int" Nullable="false" />
-          <Property Name="id_crititity" Type="int" />
+          <Property Name="id_criticity" Type="int" />
         </EntityType>
         <EntityType Name="person">
           <Key>
@@ -176,7 +177,7 @@
               <PropertyRef Name="id_criticity" />
             </Principal>
             <Dependent Role="incident">
-              <PropertyRef Name="id_crititity" />
+              <PropertyRef Name="id_criticity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,16 +346,85 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MeniconHelperModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MeniconHelperEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="area" EntityType="MeniconHelperModel.area" />
+          <EntitySet Name="criticity" EntityType="MeniconHelperModel.criticity" />
+          <EntitySet Name="document" EntityType="MeniconHelperModel.document" />
+          <EntitySet Name="engine" EntityType="MeniconHelperModel.engine" />
+          <EntitySet Name="incident" EntityType="MeniconHelperModel.incident" />
+          <EntitySet Name="person" EntityType="MeniconHelperModel.person" />
+          <EntitySet Name="role" EntityType="MeniconHelperModel.role" />
+          <EntitySet Name="statut" EntityType="MeniconHelperModel.statut" />
+          <EntitySet Name="task" EntityType="MeniconHelperModel.task" />
+          <EntitySet Name="type_incident" EntityType="MeniconHelperModel.type_incident" />
+          <AssociationSet Name="engine_area_FK" Association="MeniconHelperModel.engine_area_FK">
+            <End Role="area" EntitySet="area" />
+            <End Role="engine" EntitySet="engine" />
+          </AssociationSet>
+          <AssociationSet Name="incident_area3_FK" Association="MeniconHelperModel.incident_area3_FK">
+            <End Role="area" EntitySet="area" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="incident_criticity_FK" Association="MeniconHelperModel.incident_criticity_FK">
+            <End Role="criticity" EntitySet="criticity" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="document_incident_FK" Association="MeniconHelperModel.document_incident_FK">
+            <End Role="incident" EntitySet="incident" />
+            <End Role="document" EntitySet="document" />
+          </AssociationSet>
+          <AssociationSet Name="incident_engine2_FK" Association="MeniconHelperModel.incident_engine2_FK">
+            <End Role="engine" EntitySet="engine" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="incident_person_FK" Association="MeniconHelperModel.incident_person_FK">
+            <End Role="person" EntitySet="person" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="incident_statut1_FK" Association="MeniconHelperModel.incident_statut1_FK">
+            <End Role="statut" EntitySet="statut" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="incident_type_incident0_FK" Association="MeniconHelperModel.incident_type_incident0_FK">
+            <End Role="type_incident" EntitySet="type_incident" />
+            <End Role="incident" EntitySet="incident" />
+          </AssociationSet>
+          <AssociationSet Name="task_incident_FK" Association="MeniconHelperModel.task_incident_FK">
+            <End Role="incident" EntitySet="incident" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__task__id_person__6E01572D" Association="MeniconHelperModel.FK__task__id_person__6E01572D">
+            <End Role="person" EntitySet="person" />
+            <End Role="task" EntitySet="task" />
+          </AssociationSet>
+          <AssociationSet Name="person_role_FK" Association="MeniconHelperModel.person_role_FK">
+            <End Role="role" EntitySet="role" />
+            <End Role="person" EntitySet="person" />
+          </AssociationSet>
+          <AssociationSet Name="supervise" Association="MeniconHelperModel.supervise">
+            <End Role="role" EntitySet="role" />
+            <End Role="type_incident" EntitySet="type_incident" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="area">
           <Key>
             <PropertyRef Name="id_area" />
           </Key>
           <Property Name="id_area" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.incident_area3_FK" FromRole="area" ToRole="incident" />
           <NavigationProperty Name="engine" Relationship="MeniconHelperModel.engine_area_FK" FromRole="area" ToRole="engine" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_area3_FK" FromRole="area" ToRole="incident" />
+        </EntityType>
+        <EntityType Name="criticity">
+          <Key>
+            <PropertyRef Name="id_criticity" />
+          </Key>
+          <Property Name="id_criticity" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="enable" Type="Boolean" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_criticity_FK" FromRole="criticity" ToRole="incident" />
         </EntityType>
         <EntityType Name="document">
           <Key>
@@ -364,20 +434,21 @@
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_anomaly" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.document_incident_FK" FromRole="document" ToRole="incident" />
+          <Property Name="image_base" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.document_incident_FK" FromRole="document" ToRole="incident" />
         </EntityType>
         <EntityType Name="engine">
           <Key>
             <PropertyRef Name="id_engine" />
           </Key>
           <Property Name="id_engine" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="serial_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="serial_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.incident_engine2_FK" FromRole="engine" ToRole="incident" />
           <Property Name="id_area" Type="Int32" />
           <NavigationProperty Name="area" Relationship="MeniconHelperModel.engine_area_FK" FromRole="engine" ToRole="area" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_engine2_FK" FromRole="engine" ToRole="incident" />
         </EntityType>
         <EntityType Name="incident">
           <Key>
@@ -396,53 +467,53 @@
           <Property Name="id_statut" Type="Int32" Nullable="false" />
           <Property Name="id_engine" Type="Int32" />
           <Property Name="id_area" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="area" Relationship="Self.incident_area3_FK" FromRole="incident" ToRole="area" />
-          <NavigationProperty Name="document" Relationship="Self.document_incident_FK" FromRole="incident" ToRole="document" />
-          <NavigationProperty Name="engine" Relationship="Self.incident_engine2_FK" FromRole="incident" ToRole="engine" />
-          <NavigationProperty Name="person" Relationship="Self.incident_person_FK" FromRole="incident" ToRole="person" />
-          <NavigationProperty Name="statut" Relationship="Self.incident_statut1_FK" FromRole="incident" ToRole="statut" />
-          <NavigationProperty Name="type_incident" Relationship="Self.incident_type_incident0_FK" FromRole="incident" ToRole="type_incident" />
-          <NavigationProperty Name="task" Relationship="Self.task_incident_FK" FromRole="incident" ToRole="task" />
-          <Property Name="id_crititity" Type="Int32" />
+          <Property Name="id_criticity" Type="Int32" />
+          <NavigationProperty Name="area" Relationship="MeniconHelperModel.incident_area3_FK" FromRole="incident" ToRole="area" />
           <NavigationProperty Name="criticity" Relationship="MeniconHelperModel.incident_criticity_FK" FromRole="incident" ToRole="criticity" />
+          <NavigationProperty Name="document" Relationship="MeniconHelperModel.document_incident_FK" FromRole="incident" ToRole="document" />
+          <NavigationProperty Name="engine" Relationship="MeniconHelperModel.incident_engine2_FK" FromRole="incident" ToRole="engine" />
+          <NavigationProperty Name="person" Relationship="MeniconHelperModel.incident_person_FK" FromRole="incident" ToRole="person" />
+          <NavigationProperty Name="statut" Relationship="MeniconHelperModel.incident_statut1_FK" FromRole="incident" ToRole="statut" />
+          <NavigationProperty Name="type_incident" Relationship="MeniconHelperModel.incident_type_incident0_FK" FromRole="incident" ToRole="type_incident" />
+          <NavigationProperty Name="task" Relationship="MeniconHelperModel.task_incident_FK" FromRole="incident" ToRole="task" />
         </EntityType>
         <EntityType Name="person">
           <Key>
             <PropertyRef Name="id_person" />
           </Key>
           <Property Name="id_person" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="first_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password_scan" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password_default" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password_scan" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password_default" Type="String" Nullable="false" MaxLength="130" FixedLength="false" Unicode="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
           <Property Name="id_role" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.incident_person_FK" FromRole="person" ToRole="incident" />
-          <NavigationProperty Name="role" Relationship="Self.person_role_FK" FromRole="person" ToRole="role" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_person_FK" FromRole="person" ToRole="incident" />
           <NavigationProperty Name="task" Relationship="MeniconHelperModel.FK__task__id_person__6E01572D" FromRole="person" ToRole="task" />
+          <NavigationProperty Name="role" Relationship="MeniconHelperModel.person_role_FK" FromRole="person" ToRole="role" />
         </EntityType>
         <EntityType Name="role">
           <Key>
             <PropertyRef Name="id_role" />
           </Key>
           <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="person" Relationship="Self.person_role_FK" FromRole="role" ToRole="person" />
-          <NavigationProperty Name="type_incident" Relationship="MeniconHelperModel.supervise1" FromRole="role" ToRole="type_incident" />
+          <NavigationProperty Name="person" Relationship="MeniconHelperModel.person_role_FK" FromRole="role" ToRole="person" />
+          <NavigationProperty Name="type_incident" Relationship="MeniconHelperModel.supervise" FromRole="role" ToRole="type_incident" />
         </EntityType>
         <EntityType Name="statut">
           <Key>
             <PropertyRef Name="id_statut" />
           </Key>
           <Property Name="id_statut" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.incident_statut1_FK" FromRole="statut" ToRole="incident" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_statut1_FK" FromRole="statut" ToRole="incident" />
         </EntityType>
         <EntityType Name="task">
           <Key>
@@ -453,8 +524,8 @@
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="date_close" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_anomaly" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.task_incident_FK" FromRole="task" ToRole="incident" />
           <Property Name="id_person" Type="Int32" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.task_incident_FK" FromRole="task" ToRole="incident" />
           <NavigationProperty Name="person" Relationship="MeniconHelperModel.FK__task__id_person__6E01572D" FromRole="task" ToRole="person" />
         </EntityType>
         <EntityType Name="type_incident">
@@ -462,183 +533,11 @@
             <PropertyRef Name="id_type_anomaly" />
           </Key>
           <Property Name="id_type_anomaly" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="label" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="enable" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="incident" Relationship="Self.incident_type_incident0_FK" FromRole="type_incident" ToRole="incident" />
-          <NavigationProperty Name="role" Relationship="MeniconHelperModel.supervise1" FromRole="type_incident" ToRole="role" />
+          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_type_incident0_FK" FromRole="type_incident" ToRole="incident" />
+          <NavigationProperty Name="role" Relationship="MeniconHelperModel.supervise" FromRole="type_incident" ToRole="role" />
         </EntityType>
-        <Association Name="incident_area3_FK">
-          <End Role="area" Type="Self.area" Multiplicity="1" />
-          <End Role="incident" Type="Self.incident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="area">
-              <PropertyRef Name="id_area" />
-            </Principal>
-            <Dependent Role="incident">
-              <PropertyRef Name="id_area" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="document_incident_FK">
-          <End Role="incident" Type="Self.incident" Multiplicity="1" />
-          <End Role="document" Type="Self.document" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="incident">
-              <PropertyRef Name="id_anomaly" />
-            </Principal>
-            <Dependent Role="document">
-              <PropertyRef Name="id_anomaly" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="incident_engine2_FK">
-          <End Role="engine" Type="Self.engine" Multiplicity="0..1" />
-          <End Role="incident" Type="Self.incident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="engine">
-              <PropertyRef Name="id_engine" />
-            </Principal>
-            <Dependent Role="incident">
-              <PropertyRef Name="id_engine" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="incident_person_FK">
-          <End Role="person" Type="Self.person" Multiplicity="1" />
-          <End Role="incident" Type="Self.incident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="person">
-              <PropertyRef Name="id_person" />
-            </Principal>
-            <Dependent Role="incident">
-              <PropertyRef Name="id_person" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="incident_statut1_FK">
-          <End Role="statut" Type="Self.statut" Multiplicity="1" />
-          <End Role="incident" Type="Self.incident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="statut">
-              <PropertyRef Name="id_statut" />
-            </Principal>
-            <Dependent Role="incident">
-              <PropertyRef Name="id_statut" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="incident_type_incident0_FK">
-          <End Role="type_incident" Type="Self.type_incident" Multiplicity="1" />
-          <End Role="incident" Type="Self.incident" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="type_incident">
-              <PropertyRef Name="id_type_anomaly" />
-            </Principal>
-            <Dependent Role="incident">
-              <PropertyRef Name="id_type_anomaly" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="task_incident_FK">
-          <End Role="incident" Type="Self.incident" Multiplicity="1" />
-          <End Role="task" Type="Self.task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="incident">
-              <PropertyRef Name="id_anomaly" />
-            </Principal>
-            <Dependent Role="task">
-              <PropertyRef Name="id_anomaly" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="person_role_FK">
-          <End Role="role" Type="Self.role" Multiplicity="1" />
-          <End Role="person" Type="Self.person" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="id_role" />
-            </Principal>
-            <Dependent Role="person">
-              <PropertyRef Name="id_role" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="MeniconHelperEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="area" EntityType="Self.area" />
-          <EntitySet Name="document" EntityType="Self.document" />
-          <EntitySet Name="engine" EntityType="Self.engine" />
-          <EntitySet Name="incident" EntityType="Self.incident" />
-          <EntitySet Name="person" EntityType="Self.person" />
-          <EntitySet Name="role" EntityType="Self.role" />
-          <EntitySet Name="statut" EntityType="Self.statut" />
-          <EntitySet Name="task" EntityType="Self.task" />
-          <EntitySet Name="type_incident" EntityType="Self.type_incident" />
-          <AssociationSet Name="incident_area3_FK" Association="Self.incident_area3_FK">
-            <End Role="area" EntitySet="area" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-          <AssociationSet Name="document_incident_FK" Association="Self.document_incident_FK">
-            <End Role="incident" EntitySet="incident" />
-            <End Role="document" EntitySet="document" />
-          </AssociationSet>
-          <AssociationSet Name="incident_engine2_FK" Association="Self.incident_engine2_FK">
-            <End Role="engine" EntitySet="engine" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-          <AssociationSet Name="incident_person_FK" Association="Self.incident_person_FK">
-            <End Role="person" EntitySet="person" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-          <AssociationSet Name="incident_statut1_FK" Association="Self.incident_statut1_FK">
-            <End Role="statut" EntitySet="statut" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-          <AssociationSet Name="incident_type_incident0_FK" Association="Self.incident_type_incident0_FK">
-            <End Role="type_incident" EntitySet="type_incident" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-          <AssociationSet Name="task_incident_FK" Association="Self.task_incident_FK">
-            <End Role="incident" EntitySet="incident" />
-            <End Role="task" EntitySet="task" />
-          </AssociationSet>
-          <AssociationSet Name="person_role_FK" Association="Self.person_role_FK">
-            <End Role="role" EntitySet="role" />
-            <End Role="person" EntitySet="person" />
-          </AssociationSet>
-          <AssociationSet Name="FK__task__id_person__6E01572D" Association="MeniconHelperModel.FK__task__id_person__6E01572D">
-            <End Role="person" EntitySet="person" />
-            <End Role="task" EntitySet="task" />
-          </AssociationSet>
-          <AssociationSet Name="supervise1" Association="MeniconHelperModel.supervise1">
-            <End Role="role" EntitySet="role" />
-            <End Role="type_incident" EntitySet="type_incident" />
-          </AssociationSet>
-          <AssociationSet Name="engine_area_FK" Association="MeniconHelperModel.engine_area_FK">
-            <End Role="area" EntitySet="area" />
-            <End Role="engine" EntitySet="engine" />
-          </AssociationSet>
-          <EntitySet Name="criticity" EntityType="MeniconHelperModel.criticity" />
-          <AssociationSet Name="incident_criticity_FK" Association="MeniconHelperModel.incident_criticity_FK">
-            <End Role="criticity" EntitySet="criticity" />
-            <End Role="incident" EntitySet="incident" />
-          </AssociationSet>
-        </EntityContainer>
-        <Association Name="FK__task__id_person__6E01572D">
-          <End Type="MeniconHelperModel.person" Role="person" Multiplicity="0..1" />
-          <End Type="MeniconHelperModel.task" Role="task" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="person">
-              <PropertyRef Name="id_person" />
-            </Principal>
-            <Dependent Role="task">
-              <PropertyRef Name="id_person" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="supervise1">
-          <End Type="MeniconHelperModel.role" Role="role" Multiplicity="*" />
-          <End Type="MeniconHelperModel.type_incident" Role="type_incident" Multiplicity="*" />
-        </Association>
         <Association Name="engine_area_FK">
           <End Type="MeniconHelperModel.area" Role="area" Multiplicity="0..1" />
           <End Type="MeniconHelperModel.engine" Role="engine" Multiplicity="*" />
@@ -651,15 +550,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="criticity">
-          <Key>
-            <PropertyRef Name="id_criticity" />
-          </Key>
-          <Property Name="id_criticity" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="enable" Type="Boolean" />
-          <NavigationProperty Name="incident" Relationship="MeniconHelperModel.incident_criticity_FK" FromRole="criticity" ToRole="incident" />
-        </EntityType>
+        <Association Name="incident_area3_FK">
+          <End Type="MeniconHelperModel.area" Role="area" Multiplicity="1" />
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="id_area" />
+            </Principal>
+            <Dependent Role="incident">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="incident_criticity_FK">
           <End Type="MeniconHelperModel.criticity" Role="criticity" Multiplicity="0..1" />
           <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
@@ -668,9 +570,109 @@
               <PropertyRef Name="id_criticity" />
             </Principal>
             <Dependent Role="incident">
-              <PropertyRef Name="id_crititity" />
+              <PropertyRef Name="id_criticity" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="document_incident_FK">
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="1" />
+          <End Type="MeniconHelperModel.document" Role="document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="incident">
+              <PropertyRef Name="id_anomaly" />
+            </Principal>
+            <Dependent Role="document">
+              <PropertyRef Name="id_anomaly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="incident_engine2_FK">
+          <End Type="MeniconHelperModel.engine" Role="engine" Multiplicity="0..1" />
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="engine">
+              <PropertyRef Name="id_engine" />
+            </Principal>
+            <Dependent Role="incident">
+              <PropertyRef Name="id_engine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="incident_person_FK">
+          <End Type="MeniconHelperModel.person" Role="person" Multiplicity="1" />
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="incident">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="incident_statut1_FK">
+          <End Type="MeniconHelperModel.statut" Role="statut" Multiplicity="1" />
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="statut">
+              <PropertyRef Name="id_statut" />
+            </Principal>
+            <Dependent Role="incident">
+              <PropertyRef Name="id_statut" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="incident_type_incident0_FK">
+          <End Type="MeniconHelperModel.type_incident" Role="type_incident" Multiplicity="1" />
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type_incident">
+              <PropertyRef Name="id_type_anomaly" />
+            </Principal>
+            <Dependent Role="incident">
+              <PropertyRef Name="id_type_anomaly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="task_incident_FK">
+          <End Type="MeniconHelperModel.incident" Role="incident" Multiplicity="1" />
+          <End Type="MeniconHelperModel.task" Role="task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="incident">
+              <PropertyRef Name="id_anomaly" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_anomaly" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__task__id_person__6E01572D">
+          <End Type="MeniconHelperModel.person" Role="person" Multiplicity="0..1" />
+          <End Type="MeniconHelperModel.task" Role="task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person">
+              <PropertyRef Name="id_person" />
+            </Principal>
+            <Dependent Role="task">
+              <PropertyRef Name="id_person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="person_role_FK">
+          <End Type="MeniconHelperModel.role" Role="role" Multiplicity="1" />
+          <End Type="MeniconHelperModel.person" Role="person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="person">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="supervise">
+          <End Type="MeniconHelperModel.role" Role="role" Multiplicity="*" />
+          <End Type="MeniconHelperModel.type_incident" Role="type_incident" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -681,119 +683,13 @@
           <EntitySetMapping Name="area">
             <EntityTypeMapping TypeName="MeniconHelperModel.area">
               <MappingFragment StoreEntitySet="area">
-                <ScalarProperty Name="id_area" ColumnName="id_area" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="date_create" ColumnName="date_create" />
                 <ScalarProperty Name="enable" ColumnName="enable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="document">
-            <EntityTypeMapping TypeName="MeniconHelperModel.document">
-              <MappingFragment StoreEntitySet="document">
-                <ScalarProperty Name="id_document" ColumnName="id_document" />
+                <ScalarProperty Name="date_create" ColumnName="date_create" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="date_create" ColumnName="date_create" />
-                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="engine">
-            <EntityTypeMapping TypeName="MeniconHelperModel.engine">
-              <MappingFragment StoreEntitySet="engine">
-                <ScalarProperty Name="id_area" ColumnName="id_area" />
-                <ScalarProperty Name="id_engine" ColumnName="id_engine" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
-                <ScalarProperty Name="date_create" ColumnName="date_create" />
-                <ScalarProperty Name="enable" ColumnName="enable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="incident">
-            <EntityTypeMapping TypeName="MeniconHelperModel.incident">
-              <MappingFragment StoreEntitySet="incident">
-                <ScalarProperty Name="id_crititity" ColumnName="id_crititity" />
-                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
-                <ScalarProperty Name="incident_code" ColumnName="incident_code" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="lot_number" ColumnName="lot_number" />
-                <ScalarProperty Name="date_create" ColumnName="date_create" />
-                <ScalarProperty Name="date_processing" ColumnName="date_processing" />
-                <ScalarProperty Name="date_update" ColumnName="date_update" />
-                <ScalarProperty Name="date_close" ColumnName="date_close" />
-                <ScalarProperty Name="id_person" ColumnName="id_person" />
-                <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
-                <ScalarProperty Name="id_statut" ColumnName="id_statut" />
-                <ScalarProperty Name="id_engine" ColumnName="id_engine" />
                 <ScalarProperty Name="id_area" ColumnName="id_area" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="person">
-            <EntityTypeMapping TypeName="MeniconHelperModel.person">
-              <MappingFragment StoreEntitySet="person">
-                <ScalarProperty Name="id_person" ColumnName="id_person" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="language" ColumnName="language" />
-                <ScalarProperty Name="password_scan" ColumnName="password_scan" />
-                <ScalarProperty Name="password_default" ColumnName="password_default" />
-                <ScalarProperty Name="enable" ColumnName="enable" />
-                <ScalarProperty Name="id_role" ColumnName="id_role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="role">
-            <EntityTypeMapping TypeName="MeniconHelperModel.role">
-              <MappingFragment StoreEntitySet="role">
-                <ScalarProperty Name="id_role" ColumnName="id_role" />
-                <ScalarProperty Name="label" ColumnName="label" />
-                <ScalarProperty Name="enable" ColumnName="enable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="statut">
-            <EntityTypeMapping TypeName="MeniconHelperModel.statut">
-              <MappingFragment StoreEntitySet="statut">
-                <ScalarProperty Name="id_statut" ColumnName="id_statut" />
-                <ScalarProperty Name="label" ColumnName="label" />
-                <ScalarProperty Name="enable" ColumnName="enable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="task">
-            <EntityTypeMapping TypeName="MeniconHelperModel.task">
-              <MappingFragment StoreEntitySet="task">
-                <ScalarProperty Name="id_person" ColumnName="id_person" />
-                <ScalarProperty Name="id_task" ColumnName="id_task" />
-                <ScalarProperty Name="comment" ColumnName="comment" />
-                <ScalarProperty Name="date_create" ColumnName="date_create" />
-                <ScalarProperty Name="date_close" ColumnName="date_close" />
-                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="type_incident">
-            <EntityTypeMapping TypeName="MeniconHelperModel.type_incident">
-              <MappingFragment StoreEntitySet="type_incident">
-                <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
-                <ScalarProperty Name="label" ColumnName="label" />
-                <ScalarProperty Name="enable" ColumnName="enable" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="supervise1" TypeName="MeniconHelperModel.supervise1" StoreEntitySet="supervise">
-            <EndProperty Name="type_incident">
-              <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
-            </EndProperty>
-            <EndProperty Name="role">
-              <ScalarProperty Name="id_role" ColumnName="id_role" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="criticity">
             <EntityTypeMapping TypeName="MeniconHelperModel.criticity">
               <MappingFragment StoreEntitySet="criticity">
@@ -803,6 +699,113 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="document">
+            <EntityTypeMapping TypeName="MeniconHelperModel.document">
+              <MappingFragment StoreEntitySet="document">
+                <ScalarProperty Name="image_base" ColumnName="image_base" />
+                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
+                <ScalarProperty Name="date_create" ColumnName="date_create" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_document" ColumnName="id_document" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="engine">
+            <EntityTypeMapping TypeName="MeniconHelperModel.engine">
+              <MappingFragment StoreEntitySet="engine">
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
+                <ScalarProperty Name="enable" ColumnName="enable" />
+                <ScalarProperty Name="date_create" ColumnName="date_create" />
+                <ScalarProperty Name="serial_number" ColumnName="serial_number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_engine" ColumnName="id_engine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="incident">
+            <EntityTypeMapping TypeName="MeniconHelperModel.incident">
+              <MappingFragment StoreEntitySet="incident">
+                <ScalarProperty Name="id_criticity" ColumnName="id_criticity" />
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
+                <ScalarProperty Name="id_engine" ColumnName="id_engine" />
+                <ScalarProperty Name="id_statut" ColumnName="id_statut" />
+                <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="date_close" ColumnName="date_close" />
+                <ScalarProperty Name="date_update" ColumnName="date_update" />
+                <ScalarProperty Name="date_processing" ColumnName="date_processing" />
+                <ScalarProperty Name="date_create" ColumnName="date_create" />
+                <ScalarProperty Name="lot_number" ColumnName="lot_number" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="incident_code" ColumnName="incident_code" />
+                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="person">
+            <EntityTypeMapping TypeName="MeniconHelperModel.person">
+              <MappingFragment StoreEntitySet="person">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="enable" ColumnName="enable" />
+                <ScalarProperty Name="password_default" ColumnName="password_default" />
+                <ScalarProperty Name="password_scan" ColumnName="password_scan" />
+                <ScalarProperty Name="language" ColumnName="language" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="MeniconHelperModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="enable" ColumnName="enable" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="statut">
+            <EntityTypeMapping TypeName="MeniconHelperModel.statut">
+              <MappingFragment StoreEntitySet="statut">
+                <ScalarProperty Name="enable" ColumnName="enable" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="id_statut" ColumnName="id_statut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="task">
+            <EntityTypeMapping TypeName="MeniconHelperModel.task">
+              <MappingFragment StoreEntitySet="task">
+                <ScalarProperty Name="id_person" ColumnName="id_person" />
+                <ScalarProperty Name="id_anomaly" ColumnName="id_anomaly" />
+                <ScalarProperty Name="date_close" ColumnName="date_close" />
+                <ScalarProperty Name="date_create" ColumnName="date_create" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="id_task" ColumnName="id_task" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type_incident">
+            <EntityTypeMapping TypeName="MeniconHelperModel.type_incident">
+              <MappingFragment StoreEntitySet="type_incident">
+                <ScalarProperty Name="enable" ColumnName="enable" />
+                <ScalarProperty Name="label" ColumnName="label" />
+                <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="supervise" TypeName="MeniconHelperModel.supervise" StoreEntitySet="supervise">
+            <EndProperty Name="type_incident">
+              <ScalarProperty Name="id_type_anomaly" ColumnName="id_type_anomaly" />
+            </EndProperty>
+            <EndProperty Name="role">
+              <ScalarProperty Name="id_role" ColumnName="id_role" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

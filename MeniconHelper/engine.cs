@@ -27,8 +27,8 @@ namespace MeniconHelper
         public bool enable { get; set; }
         public Nullable<int> id_area { get; set; }
     
+        public virtual area area { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<incident> incident { get; set; }
-        public virtual area area { get; set; }
     }
 }

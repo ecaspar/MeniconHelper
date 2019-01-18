@@ -15,6 +15,7 @@ namespace MeniconHelper.Models
         public string Status { get; set; }
         public string Area { get; set; }
         public string Engine { get; set; }
+        public string Criticity { get; set; }
 
     }
 }

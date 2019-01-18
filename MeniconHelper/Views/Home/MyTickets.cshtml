@@ -100,7 +100,7 @@
                     </td>
                     @if (x.Image != null)
                     {
-                        <td class="image"><img src="@x.Image[0].name" /></td>
+                        <td class="image"><img src="data:image/png;base64, @x.Image[0].image_base" /></td>
                     }
                     else
                     {

@@ -113,12 +113,12 @@
                 {
                     foreach (var i in ViewBag.Ticket.Image)
                     {
-                        <img src="@i.name" data-toggle="modal" data-target="#modal-@i.id_document" />
+                        <img src="data:image/png;base64, @i.image_base" data-toggle="modal" data-target="#modal-@i.id_document" />
                         <div class="modal fade" id="modal-@i.id_document" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <img src="@i.name" />
+                                        <img src="data:image/png;base64, @i.image_base" />
                                     </div>
                                 </div>
                             </div>
