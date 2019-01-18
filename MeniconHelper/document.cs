@@ -18,6 +18,7 @@ namespace MeniconHelper
         public string name { get; set; }
         public System.DateTime date_create { get; set; }
         public int id_anomaly { get; set; }
+        public string image_base { get; set; }
     
         public virtual incident incident { get; set; }
     }

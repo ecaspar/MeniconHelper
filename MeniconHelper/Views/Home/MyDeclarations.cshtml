@@ -50,9 +50,7 @@
             $('.tablesorter').tablesorter({
                 theme: 'blue',
                 widgets: ["zebra", "filter", "pager"],
-                ignoreCase: false,
-                dateFormat: 'ddmmyyyy',
-                sortList: [[4, 1]]
+                ignoreCase: false
             }).tablesorterPager(pagerOptions);
         });
     </script>
@@ -94,7 +92,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var x in ViewBag.Incident)
+                @foreach (var x in ViewBag.DeclarantIncident)
                 {
                 <tr>
                     <td class="reference">
@@ -142,6 +140,7 @@
             </select>
         </form>
     </div>
+
     @if (ViewBag.Message != null)
     {
         <script type="text/javascript">

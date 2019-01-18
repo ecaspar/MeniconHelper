@@ -1,0 +1,130 @@
+﻿.row {
+    margin-top: 10px;
+}
+
+.container {
+    padding-top: 1rem;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.left {
+    border-right: 1px solid black;
+}
+
+h4 {
+    margin: 0px;
+}
+
+.separation {
+    margin: 20px 0px;
+    width: 100%;
+    height: 1px;
+    background: #000000;
+}
+
+button:not([type="submit"]) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    padding: 0 10px 0 10px;
+    margin-bottom: 1rem;
+}
+
+button:focus {
+    border: 0;
+    outline: 0;
+}
+
+.btn-success:focus {
+    box-shadow: none;
+}
+
+.btn, button {
+    border-radius: 0px;
+    width: 100%;
+}
+
+button {
+    width: 90%;
+    height: 50px;
+    border-radius: 0.25rem;
+}
+
+.add {
+    margin-bottom: 1rem;
+}
+
+.small-field-one, .small-field-two {
+    display: flex;
+    flex-direction: row;
+}
+
+.small-field-one {
+    margin-right: 1%;
+}
+
+.small-field-two {
+    margin-left: 1%;
+}
+
+span {
+    background: #343a40;
+    color: #FFFFFF;
+    height: 50px;
+    width: 54px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1px;
+    outline: 1px solid #343a40;
+}
+
+input {
+    background: #F7F7F7;
+    outline: 1px solid #343a40;
+    border: 0;
+    height: 50px;
+    width: 100%;
+    padding-left: 5px;
+}
+
+input:focus {
+    background: #dfe6e9;
+    outline-offset: 0;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.newPass {
+    display: none;
+    opacity: 0;
+    transition: all 1s;
+    width: 100%;
+}
+
+.form-control {
+    border: 0;
+    height: 50px;
+    outline: 1px solid #343a40;
+    border-radius: 0px;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    outline: 1px solid #343a40;
+}
+
+.col-sm-6 {
+    text-align: center;
+}

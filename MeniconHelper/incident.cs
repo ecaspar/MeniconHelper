@@ -34,8 +34,10 @@ namespace MeniconHelper
         public int id_statut { get; set; }
         public Nullable<int> id_engine { get; set; }
         public int id_area { get; set; }
+        public Nullable<int> id_criticity { get; set; }
     
         public virtual area area { get; set; }
+        public virtual criticity criticity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<document> document { get; set; }
         public virtual engine engine { get; set; }

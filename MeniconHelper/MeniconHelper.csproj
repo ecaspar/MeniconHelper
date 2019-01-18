@@ -152,6 +152,36 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="area.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="criticity.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="document.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="engine.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="incident.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="person.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="role.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="statut.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="task.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="type_incident.cs">
+      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
+    </Compile>
     <Content Include="App_Code\GlobalHelper.cs" />
     <Compile Include="App_LocalResources\GlobalRes.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -167,23 +197,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="area.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
-    <Compile Include="document.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="engine.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="incident.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
     </Compile>
     <Compile Include="MeniconHelperBDD.Context.cs">
       <AutoGen>True</AutoGen>
@@ -201,33 +221,27 @@
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ListIncident.cs" />
+    <Compile Include="Models\ListModel.cs" />
     <Compile Include="Models\ListTask.cs" />
-    <Compile Include="person.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="role.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="statut.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="task.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="type_incident.cs">
-      <DependentUpon>MeniconHelperBDD.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\Incident2.jpg" />
     <Content Include="Content\Images\Incident.jpg" />
     <Content Include="Content\Images\Logo.png" />
+    <Content Include="Content\Images\Logo_big.png" />
+    <Content Include="Content\Images\Magnifier.png" />
     <Content Include="Content\Images\Menu.png" />
+    <Content Include="Content\Javascript\bootstrap-select.js" />
     <Content Include="Content\Javascript\jquery.tablesorter.js" />
+    <Content Include="Content\Javascript\jquery.tablesorter.pager.js" />
+    <Content Include="Content\Javascript\jquery.tablesorter.widgets.js" />
+    <Content Include="Content\Javascript\tableHeadFixer.js" />
+    <Content Include="Content\Styles\admin.css" />
     <Content Include="Content\Styles\header.css" />
     <Content Include="Content\Styles\home.css" />
     <Content Include="Content\Styles\login.css" />
+    <Content Include="Content\Styles\mytickets.css" />
     <Content Include="Content\Styles\ticket.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -241,6 +255,7 @@
     <Content Include="MeniconHelperBDD.edmx.diagram">
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\MeniconHelper - Web Deploy.pubxml" />
     <Content Include="MeniconHelperBDD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -252,7 +267,9 @@
       <DependentUpon>MeniconHelperBDD.edmx</DependentUpon>
       <LastGenOutput>MeniconHelperBDD.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -265,6 +282,10 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Ticket\Index.cshtml" />
+    <Content Include="Views\Home\MyTickets.cshtml" />
+    <Content Include="Views\Home\MyDeclarations.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

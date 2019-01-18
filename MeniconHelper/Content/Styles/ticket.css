@@ -10,42 +10,15 @@
 
 .right-panel {
     width: 30%;
-}
-
-.right-panel ul {
-    padding: 0;
-}
-
-.right-panel ul li {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-    height: 50px;
-    border-top: 1px solid black;
-}
-
-table {
-    margin: 0 auto;
-    margin-top: 32px;
-    width: 60%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .informations img {
     margin-top: 45px;
     max-width: 150px;
     max-height: 200px;
-}
-
-thead tr th {
-    background: #4f4f4f;
-    color: #FFFFFF;
-    width: 33.33%;
-    height: 40px;
-}
-
-tbody tr td {
-    height: 50px;
 }
 
 .informations, .right-panel {
@@ -55,4 +28,65 @@ tbody tr td {
 h2 {
     margin: 0;
     padding-top: 20px;
+}
+
+.add-comment {
+    height: 200px;
+    border-top: 1px solid black;
+}
+
+.add-comment textarea, .add-comment button {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.add-comment textarea {
+    transition: all 0s;
+    min-height: 50px;
+    max-height: 130px;
+    margin-top: 5px;
+}
+
+.list-group {
+    margin-top: 20px;
+}
+
+nav ul {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+ul::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+ul::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+ul::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.modal-content img {
+    transform: scale(4);
+}
+
+.modal-content {
+    width: 1px;
+}
+
+.table {
+    width: 60% !important;
+    margin-top: 32px;
+    margin-left: 20%;
+}
+
+.table th {
+    width: 33.33% !important;
 }

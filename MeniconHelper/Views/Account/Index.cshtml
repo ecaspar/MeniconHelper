@@ -1,0 +1,108 @@
+﻿@model MeniconHelper.person
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mon compte</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @Styles.Render("~/Content/Styles/header.css")
+    @Styles.Render("~/Content/Styles/admin.css")
+    <script>
+        $(document).ready(function () {
+            $('.button-menu img').click(function () {
+                if ($('.menu').css('display') == 'none') {
+                    $('.menu').css({ 'display': 'flex' });
+                    $('.button-menu img').css({ 'transform': 'rotate(-90deg)' });
+                } else {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $('.changePassword').click(function () {
+                if ($('.newPass').css('display') == 'none') {
+                    $('.newPass').css({ 'display': 'initial', 'opacity': 1 });
+                    $('.changePassword').html('Réduire la fenêtre de modification');
+                } else {
+                    $('.newPass').css({ 'display': 'none', 'opacity': 0 });
+                    $('.changePassword').html('Modifier le mot de passe');
+                }
+                
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div class="title"><h1>Menicon Helper</h1></div>
+        <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
+        <div class="menu">
+            <ul>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>@GlobalRes.home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myTicket</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myDeclaration</li></a>
+                <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
+                @if (ViewBag.Admin)
+                {
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-toolbox"></i><li>@GlobalRes.administration</li></a>
+                }
+                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 admin-container">
+                <h2>@GlobalRes.myAccount</h2>
+                <h4>@ViewBag.name</h4>
+                <div class="separation"></div>
+                <div class="form-group">
+                    <span><i class="far fa-envelope"></i></span>
+                    <input class="mail_address" type="email" placeholder="@ViewBag.person.email" disabled="disabled" />
+                </div>
+                <div class="form-group">
+                    <span><i class="fas fa-mobile-alt"></i></span>
+                    <input class="phone_number" type="tel" placeholder="@ViewBag.person.phone" disabled="disabled" />
+                </div>
+                <button class="btn btn-dark changePassword">@GlobalRes.modifyPassword</button>
+                <div class="newPass">
+                    @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <span><i class="fas fa-lock-open"></i></span>
+                            @Html.TextBoxFor(p => p.password_default, new { Class = "PasswordForm", placeholder = GlobalRes.oldPassword, required = "Required", Type = "Password" })
+                        </div>
+                        <div class="form-group">
+                            <span><i class="fas fa-unlock"></i></span>
+                            <input type="password" id="newPassword" name="newPassword" placeholder="@GlobalRes.newPassword" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <span><i class="fas fa-key"></i></span>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="@GlobalRes.confirmPassword" required="required" />
+                        </div>
+                        <button type="submit" class="btn btn-dark">@GlobalRes.validate</button>
+                    }
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            alert("@Html.Raw(ViewBag.Message)");
+        </script>
+    }
+</body>
+</html>

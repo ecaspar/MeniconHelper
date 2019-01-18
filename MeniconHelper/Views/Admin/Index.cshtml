@@ -1,0 +1,466 @@
+﻿@model MeniconHelper.Models.ListModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Administration</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    @Styles.Render("~/Content/Styles/header.css")
+    @Styles.Render("~/Content/Styles/admin.css")
+    <script>
+        $(document).ready(function () {
+            $('.button-menu img').click(function () {
+                if ($('.menu').css('display') == 'none') {
+                    $('.menu').css({ 'display': 'flex' });
+                    $('.button-menu img').css({ 'transform': 'rotate(-90deg)' });
+                } else {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $(document).click(function (e) {
+                if ($('.menu').css('display') == 'flex' && $(e.target).closest('.button-menu').length === 0 && $(e.target).closest('.menu').length === 0) {
+                    $('.menu').css({ 'display': 'none' });
+                    $('.button-menu img').css({ 'transform': 'rotate(0deg)' });
+                }
+            });
+            $('.modify-role').click(function () {
+                var roleLabel = $('.role-list').val();
+                alert(ViewBag.roles[roleLabel]);
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="../Content/Images/Logo.png" /></div>
+        <div class="title"><h1>Menicon Helper</h1></div>
+        <div class="button-menu"><img src="../Content/Images/Menu.png" /></div>
+        <div class="menu">
+            <ul>
+                <a href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i><li>@GlobalRes.home</li></a>
+                <a href="@Url.Action("MyTickets", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myTicket</li></a>
+                <a href="@Url.Action("MyDeclarations", "Home")"><i class="fas fa-ticket-alt"></i><li>@GlobalRes.myDeclaration</li></a>
+                <a href="@Url.Action("Index", "Account")"><i class="fas fa-user"></i><li>@GlobalRes.myAccount</li></a>
+                @if (ViewBag.Admin)
+                {
+                    <a href="@Url.Action("Admin", "Home")"><i class="fas fa-toolbox"></i><li>@GlobalRes.administration</li></a>
+                }
+                <a href="@Url.Action("SignOut", "Home")"><i class="fas fa-sign-out-alt"></i><li>@GlobalRes.signOut</li></a>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 left">
+                <h2>@GlobalRes.adding</h2>
+                <div class="separation"></div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddRole", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-suitcase-rolling"></i></span>
+                                    @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", placeholder = GlobalRes.role, required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">@GlobalRes.addRole</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddUser", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <div class="small-field-one">
+                                        <span><i class="fas fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.first_name, new { Class = "first_name form-control", placeholder = GlobalRes.firstName, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="small-field-two">
+                                        <span><i class="far fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.last_name, new { Class = "last_name form-control", placeholder = GlobalRes.lastName, required = "Required", Type = "Text" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-user-tag"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.username, new { Class = "username form-control", placeholder = GlobalRes.username, required = "Required", Type = "Text" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="far fa-envelope"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.email, new { Class = "email form-control", placeholder = GlobalRes.email, required = "Required", Type = "Mail" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-phone"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.phone, new { Class = "phone form-control", placeholder = GlobalRes.phone, required = "Required", Type = "Phone" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-key"></i></span>
+                                    @Html.TextBoxFor(p => p.Persons.password_default, new { Class = "password form-control", placeholder = GlobalRes.password, required = "Required", Type = "Password" })
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-lock"></i></span>
+                                    <input class="form-control" type="password" id="confirm" name="confirm" placeholder="@GlobalRes.confirm" />
+                                </div>
+                                <div class="form-group">
+                                    <span><i class="fas fa-key"></i></span>
+                                    @Html.DropDownListFor(p => p.Persons.id_role, new SelectList(ViewBag.roles, "id_role", "label"), GlobalRes.choose + "...", new { Class = "form-control" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">@GlobalRes.addUser</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddArea", "Admin", FormMethod.Post))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-warehouse"></i></span>
+                                    @Html.TextBoxFor(a => a.Areas.name, new { Class = "area form-control", placeholder = GlobalRes.area, required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">@GlobalRes.addArea</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+
+                            @using (Html.BeginForm("DisplayAreaEngine", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeAreaEngine == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.addEngine</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control", disabled = "disabled" })
+                                    </div>
+                                }
+                            }
+                            @using (Html.BeginForm("AddEngine", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeAreaEngine != null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-wrench"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.name, new { Class = "engine form-control", placeholder = GlobalRes.engine, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-list-ol"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "engine form-control", placeholder = GlobalRes.serialNumber, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.addEngine</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("AddTypeIncident", "Admin"))
+                            {
+                                <div class="form-group">
+                                    <span><i class="fas fa-indent"></i></span>
+                                    @Html.TextBoxFor(ti => ti.TypeIncidents.label, new { Class = "type-incident form-control", placeholder = GlobalRes.incidentType, required = "Required", Type = "Text" })
+                                </div>
+                                <button type="submit" class="btn btn-dark add">@GlobalRes.addType</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <h2>@GlobalRes.modification</h2>
+                <div class="separation"></div>
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayRole", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeRole == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-suitcase-rolling"></i></span>
+                                        @Html.DropDownListFor(r => r.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.modifyRole</button>
+                                }
+                            }
+
+                            @if (ViewBag.ChangeRole != null)
+                            {
+
+                                using (Html.BeginForm("UpdateRole", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.TextBoxFor(r => r.Roles.label, new { Class = "role form-control", @Value = ViewBag.ChangeRole.label, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayUser", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangePerson == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-user"></i></span>
+                                        @Html.DropDownListFor(p => p.Persons.id_person, new SelectList(ViewBag.persons, "id_person", "first_name", "last_name"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.modifyUser</button>
+                                }
+                            }
+
+                            @if (ViewBag.ChangePerson != null)
+                            {
+
+                                using (Html.BeginForm("UpdateUser", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="far fa-envelope"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.email, new { Class = "role form-control", @Value = ViewBag.ChangePerson.email, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-user-tag"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.username, new { Class = "role form-control", @Value = ViewBag.ChangePerson.username, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.first_name, new { Class = "role form-control", @Value = ViewBag.ChangePerson.first_name, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="far fa-user"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.last_name, new { Class = "role form-control", @Value = ViewBag.ChangePerson.last_name, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-phone"></i></span>
+                                        @Html.TextBoxFor(p => p.Persons.phone, new { Class = "role form-control", @Value = ViewBag.ChangePerson.phone, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayArea", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeArea == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.DropDownListFor(a => a.Areas.id_area, new SelectList(ViewBag.areas, "id_area", "name"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.modifyArea</button>
+                                }
+                            }
+
+                            @if (ViewBag.ChangeArea != null)
+                            {
+
+                                using (Html.BeginForm("UpdateArea", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-warehouse"></i></span>
+                                        @Html.TextBoxFor(a => a.Areas.name, new { Class = "role form-control", @Value = ViewBag.ChangeArea.name, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayEngine", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.ChangeEngine == null)
+                                {
+                            <div class="form-group">
+                                <span><i class="fas fa-wrench"></i></span>
+                                <select  class = "form-control" name="Engines.id_engine">
+                                    @foreach (var engine in ViewBag.engines)
+                                    {
+                                        <option value="@engine.id_engine">@engine.name - @engine.area.name</option>
+                                    }
+                                </select>
+
+                            </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.modifyEngine</button>
+                                }
+                            }
+
+                            @if (ViewBag.ChangeEngine != null)
+                            {
+
+                                using (Html.BeginForm("UpdateEngine", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-wrench"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.name, new { Class = "role form-control", @Value = ViewBag.ChangeEngine.name, required = "Required", Type = "Text" })
+                                    </div>
+                                    <div class="form-group">
+                                        <span><i class="fas fa-list-ol"></i></span>
+                                        @Html.TextBoxFor(e => e.Engines.serial_number, new { Class = "role form-control", @Value = ViewBag.ChangeEngine.serial_number, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayTypeIncident", "Admin", FormMethod.Post))
+                            {
+
+                                if (ViewBag.ChangeTypeIncident == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.modifyType</button>
+                                }
+                            }
+
+                            @if (ViewBag.ChangeTypeIncident != null)
+                            {
+
+                                using (Html.BeginForm("UpdateTypeIncident", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.TextBoxFor(i => i.TypeIncidents.label, new { Class = "role form-control", @Value = ViewBag.ChangeTypeIncident.label, required = "Required", Type = "Text" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayLinkedIncident", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.LinkedTypeIncident == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.assignRole</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled" })
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.LinkedTypeIncident != null)
+                            {
+
+                                using (Html.BeginForm("LinkRole", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row justify-content-md-center">
+                        <div class="col-sm-10">
+                            @using (Html.BeginForm("DisplayLinkedIncidentRemove", "Admin", FormMethod.Post))
+                            {
+                                if (ViewBag.LinkedTypeIncidentRemove == null)
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control" })
+                                    </div>
+
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.unlinkRole</button>
+                                }
+                                else
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.TypeIncidents.id_type_anomaly, new SelectList(ViewBag.type_incidents, "id_type_anomaly", "label"), new { Class = "form-control", disabled = "disabled" })
+                                    </div>
+                                }
+                            }
+
+                            @if (ViewBag.LinkedTypeIncidentRemove != null)
+                            {
+
+                                using (Html.BeginForm("UnlinkRole", "Admin"))
+                                {
+                                    <div class="form-group">
+                                        <span><i class="fas fa-indent"></i></span>
+                                        @Html.DropDownListFor(i => i.Roles.id_role, new SelectList(ViewBag.roles, "id_role", "label"), new { Class = "form-control" })
+                                    </div>
+                                    <button type="submit" class="btn btn-dark add">@GlobalRes.validateModification</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            alert("@Html.Raw(ViewBag.Message)");
+        </script>
+    }
+</body>
+</html>

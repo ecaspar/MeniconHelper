@@ -26,6 +26,7 @@ namespace MeniconHelper
         }
     
         public virtual DbSet<area> area { get; set; }
+        public virtual DbSet<criticity> criticity { get; set; }
         public virtual DbSet<document> document { get; set; }
         public virtual DbSet<engine> engine { get; set; }
         public virtual DbSet<incident> incident { get; set; }

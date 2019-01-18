@@ -2,7 +2,16 @@
     width: 100%;
 }
 
+.table td, .table th {
+    padding: 0.25rem !important;
+}
+
+.table td input[data-column = "6"], .table td input[data-column = "9"] {
+    width: 90px;
+}
+
 table thead th {
+    text-align: center;
     background: #353535;
     color: #ffffff;
 }
@@ -12,10 +21,38 @@ table tbody td {
     width: 10%;
 }
 
+table tbody td a {
+    color: #01007e;
+}
+
 table tbody td.description {
     width: 20%;
 }
 
 table tbody td img {
     max-width: 100%;
+}
+
+input.tablesorter-filter.disabled {
+    display: none;
+}
+
+input.tablesorter-filter {
+    background: #EEEEEE;
+    border: 0;
+    padding: 0;
+    padding-left: 23px;
+    background: url("../Images/Magnifier.png") no-repeat scroll;
+}
+
+.pager {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    table tbody td img {
+        max-width: 100px !important;
+    }
 }
