@@ -30,6 +30,7 @@
           <Property Name="name" Type="text" />
           <Property Name="date_create" Type="datetime" Nullable="false" />
           <Property Name="id_anomaly" Type="int" Nullable="false" />
+          <Property Name="image_base" Type="text" />
         </EntityType>
         <EntityType Name="engine">
           <Key>
@@ -365,6 +366,7 @@
           <Property Name="date_create" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_anomaly" Type="Int32" Nullable="false" />
           <NavigationProperty Name="incident" Relationship="Self.document_incident_FK" FromRole="document" ToRole="incident" />
+          <Property Name="image_base" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="engine">
           <Key>
@@ -691,6 +693,7 @@
           <EntitySetMapping Name="document">
             <EntityTypeMapping TypeName="MeniconHelperModel.document">
               <MappingFragment StoreEntitySet="document">
+                <ScalarProperty Name="image_base" ColumnName="image_base" />
                 <ScalarProperty Name="id_document" ColumnName="id_document" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="date_create" ColumnName="date_create" />

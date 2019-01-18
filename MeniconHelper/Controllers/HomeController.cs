@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using MeniconHelper.Models;
 using MeniconHelper.App_LocalResources;
+using System.Drawing;
 
 namespace MeniconHelper.Controllers
 {
@@ -24,7 +25,7 @@ namespace MeniconHelper.Controllers
                 //Get which user is logged.
                 person p = (person)(Session["User"]);
                 ViewBag.name = p.first_name + " " + p.last_name;
-                //Call the function which load all ticket.
+                //Call the function which load all ticket. 
                 ViewBag.Incident = LoadIncident();
 
                 if (p.id_role == 7)
