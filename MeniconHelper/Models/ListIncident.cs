@@ -17,7 +17,5 @@ namespace MeniconHelper.Models
         public string Engine { get; set; }
         public string Criticity { get; set; }
 
-        public string Criticity { get; set; }
-
     }
 }
